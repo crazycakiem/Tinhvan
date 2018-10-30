@@ -13,6 +13,19 @@
               <b-button class="btn-pill" variant="default" size="sm">
                 <i class="icon-magnifier icons"></i> Tìm kiếm
               </b-button>
+              <button id="btnApply" v-if="checked">
+                <i class="fa fa-lock" style="color:red" aria-hidden="true" />
+                <b-tooltip v-if="checked" target="btnApply"  />
+              </button>
+              <button id="btnDenny"  v-if="checked">
+                <i class="fa fa-unlock-alt" aria-hidden="true" />
+                <b-tooltip v-if="checked" target="btnDenny" />
+              </button>
+              <button id="btnDelete"  v-if="checked">
+                <i class="fa fa-close" aria-hidden="true" />
+                <b-tooltip v-if="checked" target="btnDelete" />
+              </button>
+     
             </div>
             <div class="ml-auto">
               <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
@@ -99,7 +112,10 @@
               </div>
 
             </div>
-            <v-client-table :columns="columns" :data="itemsArray" :options="options">
+            <v-client-table :columns="columns" :data="itemsArray" :options="options" ref="tblTitleGroup">
+              <template slot="selected" slot-scope="props">
+                <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
+              </template>
               <template slot="fullname" slot-scope="props">
                 {{props.row.fullname}}
               </template>
@@ -118,15 +134,17 @@
 
 </template>
 
-<script >
+<script>
   import { shuffleArray } from "@/shared/utils";
   import cTable from "./Table.vue";
   import Vue from "vue";
   import { Component, Prop } from "vue-property-decorator";
   import _ from "lodash";
+  import DatePicker from "vue2-datepicker";
   const someData = () =>
     shuffleArray([
       {
+        selected: false,
         id: "1232",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -138,6 +156,7 @@
         _rowVariant: "success"
       },
       {
+        selected:false,
         id: "1233",
         fullname: "Samppa Nori a",
         gender: "Nam",
@@ -148,6 +167,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1234",
         fullname: "Samppa Nori v",
         gender: "Nữ",
@@ -158,6 +178,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1235",
         fullname: "Samppa Nori b",
         gender: "Nam",
@@ -168,6 +189,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1236",
         fullname: "Samppa Nori a",
         gender: "Nữ",
@@ -178,6 +200,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1237",
         fullname: "Samppa Nori s",
         gender: "Nam",
@@ -188,6 +211,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1238",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -198,6 +222,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1239",
         fullname: "Samppa Nori",
         gender: "Nữ",
@@ -208,6 +233,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1231",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -218,6 +244,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1211",
         fullname: "Samppa Nori",
         gender: "Nữ",
@@ -228,6 +255,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1212",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -238,6 +266,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1213",
         fullname: "Samppa Nori",
         gender: "Nữ",
@@ -248,6 +277,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1214",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -258,6 +288,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1216",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -268,6 +299,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1215",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -278,6 +310,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1217",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -288,6 +321,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1218",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -298,6 +332,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1219",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -308,6 +343,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1222",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -318,6 +354,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1221",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -328,6 +365,7 @@
         status: "Đã nghỉ"
       },
       {
+        selected: false,
         id: "1220",
         fullname: "Samppa Nori",
         gender: "Nam",
@@ -339,9 +377,13 @@
       }
     ]);
   @Component({
-    components: {},
+    components: { DatePicker},
     data: () => {
       return {
+        model: [],
+        dateModel: [],
+        content:[],
+        checked:false,
         showbasic: false,
         sortKey: "",
         searchData:[],
@@ -364,14 +406,13 @@
         showadvance:false,
         items: someData,
         itemsArray: someData(),
-        model: [],
         searchbasic: [],
         dataSearchBasic: [
           { value: "employeeCode", text: "employeeCode" },
           { value: "fullName", text: "fullName" },
           { value: "sex", text: "sex" }
         ],
-        columns: ['id', 'fullname', 'sub'],
+        columns: ['selected','id', 'fullname', 'sub'],
         options: {
           headings: {
             id: 'Id',
@@ -383,7 +424,28 @@
         },
       };
     },
-    methods: {},
+    methods: {
+      CheckCheckBox(evt) {
+        debugger;
+        let length = ((this.$refs.tblTitleGroup).tableData).length;
+        console.log(evt);
+        if (!evt.selected) {
+          this.checked = true
+          return;
+        }
+        for (let i = 0; i < length; i++) {
+          let ot = ((this.$refs.tblTitleGroup).tableData[i])
+          if (!_.isEqual(ot.id, evt.id)) {
+            if (ot.selected) {
+              this.checked = true;
+              return;
+            }
+          } else {
+            this.checked = false;
+          }
+        }
+      }
+    },
   })
 
   export default class HosonhanvienComponent extends Vue {
@@ -410,7 +472,9 @@
         });
       }
     }
-  }
+   
 
+
+  }
 </script>
 
