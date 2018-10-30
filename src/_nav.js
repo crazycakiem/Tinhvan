@@ -1,17 +1,15 @@
 export default {
-  items: [
-    {
+  items: [{
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
       class: 'big-item'
     },
     {
-      name: 'Tổ chức',
+      name: 'Tổ chứssc',
       url: 'tochuc',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Thiết lập sơ đồ tổ chức',
           url: 'link1',
           icon: 'icon-doc'
@@ -52,8 +50,7 @@ export default {
       name: 'Hồ sơ',
       url: '/hoso',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Hồ sơ nhân viên',
           url: '/hoso/hosonhanvien',
           icon: 'icon-doc'
@@ -99,8 +96,7 @@ export default {
       name: 'Bảo hiểm',
       url: 'baohiem',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Quản lý thông tin bảo hiểm',
           url: '#',
           icon: 'icon-doc'
@@ -121,8 +117,7 @@ export default {
       name: 'Tính công',
       url: 'tinhcong',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Đăng ký nghỉ',
           url: '#',
           icon: 'icon-doc'
@@ -158,8 +153,7 @@ export default {
       name: 'Tính lương',
       url: 'tinhluong',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Tính lương',
           url: '#',
           icon: 'icon-doc'
@@ -195,8 +189,7 @@ export default {
       name: 'Quản trị hệ thống',
       url: 'quantri',
       icon: 'icon-folder',
-      children: [
-        {
+      children: [{
           name: 'Tham số hệ thống chi tiết',
           url: '#',
           icon: 'icon-doc'
