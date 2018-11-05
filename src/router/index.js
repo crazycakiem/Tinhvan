@@ -70,6 +70,9 @@ const User = () => import('@/views/users/User')
 //System
 const Thamsohethong = () => import('@/views/system/Thamsohethong')
 
+//Organization
+const Themtochuc = () => import('@/views/tochuc/Themtochuc')
+
 Vue.use(Router)
 
 export default new Router({
@@ -87,6 +90,20 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: 'tochuc',
+          name: 'Tổ chức',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: '/tochuc/themtochuc',
+            name: 'Thêm tổ chức',
+            component: Themtochuc
+          }]
         },
         {
           path: 'theme',

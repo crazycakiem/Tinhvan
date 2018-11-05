@@ -11,7 +11,7 @@ export default {
       icon: 'icon-folder',
       children: [{
           name: 'Thiết lập sơ đồ tổ chức',
-          url: 'link1',
+          url: '/tochuc/themtochuc',
           icon: 'icon-doc'
         },
         {

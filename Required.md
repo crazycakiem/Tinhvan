@@ -14,3 +14,8 @@ trong màn hình danh sách hồ sơ nhân viên
 +)có phần search như em demo trên khi click thì ẩn hiện vùng search
 +) vẫn sử dụng vue talbe 2  . 1/3 màn hình hiện tại của em đang sử dụng kiểu insert inline table như thế này
 +) khi search theo tiêu chí nào sẽ hiển thị tiêu đó đó cùng dấu x . trên hộp search . khi click vào dấu x sẽ hủy bỏ tìm kiếm theo tiêu chý ấy . có thể search theo các tiêu chý đc cấu hình trong hộp 
+
+==================== ) phần autocomplete ( khi chọn người quản lý trong thêm tổ chức)
++) anh style cho em cái màn hionhf autocomplete cho đẹp
++) chọn người quản lý có 2 cách chọn qua autocomplete hoặc click vào button chọn người quản lý thì show lên pop up cho việc chọn người quản lý 
+ bên trái là cây sơ đồ tổ chức , bên phải là bảng danh sách nhân viên của phòng ban đó ! trên cùng hỗ trợ lọc theo 1 số tiêu chí đơn giản  như ô text để nhập họ tên, mã nhân viên , chức danh  và 1 nút tìm kiếm để lọc dữ liệu hiển thị qua bảng
