@@ -67,6 +67,8 @@ const Register = () => import('@/views/pages/Register')
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
+//System
+const Thamsohethong = () => import('@/views/system/Thamsohethong')
 
 Vue.use(Router)
 
@@ -106,6 +108,20 @@ export default new Router({
               component: Typography
             }
           ]
+        },
+        {
+          path: 'quantri',
+          name: 'System',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: 'thamsohethong',
+            name: 'Tham số hệ thống',
+            component: Thamsohethong
+          }]
         },
         {
           path: 'charts',

@@ -6,7 +6,7 @@ export default {
       class: 'big-item'
     },
     {
-      name: 'Tổ chứssc',
+      name: 'Tổ chức',
       url: 'tochuc',
       icon: 'icon-folder',
       children: [{
@@ -196,7 +196,7 @@ export default {
         },
         {
           name: 'Tham số hệ thống',
-          url: '#',
+          url: '/quantri/thamsohethong',
           icon: 'icon-doc'
         },
         {
