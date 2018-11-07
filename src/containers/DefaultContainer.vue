@@ -5,7 +5,6 @@
       <div class="top-logo">
         <b-link class="navbar-brand" to="#">
           <span class="navbar-brand-full">TINHVAN System</span>
-          <!-- <span class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo"></span> -->
         </b-link>
         <SidebarToggler class="d-md-down-none ml-auto" display="lg" />
       </div>
@@ -15,6 +14,8 @@
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto mr-4">
+        <AsideToggler class="show-map d-none d-lg-block" />
+        <!--<AsideToggler class="d-lg-none" mobile />-->
         <b-nav-item class="d-md-down-none">
           <i class="fa fa-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
@@ -28,8 +29,6 @@
         </b-nav-item>
         <DefaultHeaderDropdownAccnt/>
       </b-navbar-nav>
-      <!-- <AsideToggler class="d-none d-lg-block" /> -->
-      <!--<AsideToggler class="d-lg-none" mobile />-->
     </AppHeader>
     <div class="app-body">
       <AppSidebar fixed>
@@ -45,6 +44,10 @@
           <router-view></router-view>
         </div>
       </main>
+      <AppAside fixed>
+        <!--aside-->
+        <DefaultAside/>
+      </AppAside>
     </div>
     <TheFooter>
       <!--footer-->
@@ -71,6 +74,7 @@ export default {
     AsideToggler,
     AppHeader,
     AppSidebar,
+    AppAside,
     TheFooter,
     Breadcrumb,
     DefaultAside,

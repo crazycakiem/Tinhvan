@@ -25,10 +25,10 @@
                 <i class="fa fa-close" aria-hidden="true" />
                 <b-tooltip v-if="checked" target="btnDelete" />
               </button>
-     
+
             </div>
             <div class="ml-auto">
-              <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
+              <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
                 Print <i class="cui-print icons"></i>
               </b-button>
               <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
@@ -38,8 +38,8 @@
           </div>
           <div class="tbl-de">
             <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
-            <div>
-              <button @click="showBasic" class="primary">show search Basic</button>
+            <!-- <div class="filter-box">
+              <b-button class="btn-pill ml-1" @click="showBasic">Show Search Basic</b-button>
               <div v-show="showbasic">
                 <select multiple v-model="searchbasic">
                   <option v-for="item in dataSearchBasic" :key="item.value" :value="item.value">{{item.text}}</option>
@@ -50,7 +50,8 @@
                 </div>
               </div>
               <button @click="showAdvance" class="primary">Advance</button>
-            <label> Records :</label>  <select>
+              <label> Records :</label>
+              <select>
                 <option>25</option>
                 <option>50</option>
                 <option>100</option>
@@ -104,14 +105,12 @@
                             <b-btn @click="DeleteTieuChi(item.value)">Xóa</b-btn>
                           </td>
                         </tr>
-
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-
-            </div>
+            </div> -->
             <v-client-table :columns="columns" :data="itemsArray" :options="options" ref="tblTitleGroup">
               <template slot="selected" slot-scope="props">
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
@@ -125,13 +124,9 @@
             </v-client-table>
           </div>
         </b-card>
-
       </b-col>
-
     </b-row><!--/.row-->
-
   </div>
-
 </template>
 
 <script>
@@ -150,6 +145,18 @@
         gender: "Nam",
         groupSub: "BA",
         sub: "BA Staff",
+        dept: "Công nghệ",
+        obj: "Front",
+        status: "Đã nghỉ",
+        _rowVariant: "success"
+      },
+      {
+        selected: true,
+        id: "4444",
+        fullname: "Linh Nguyen",
+        gender: "Nam",
+        groupSub: "Design",
+        sub: "Design Staff",
         dept: "Công nghệ",
         obj: "Front",
         status: "Đã nghỉ",
@@ -472,9 +479,8 @@
         });
       }
     }
-   
+
 
 
   }
 </script>
-
