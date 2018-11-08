@@ -6,12 +6,12 @@ export default {
       class: 'big-item'
     },
     {
-      name: 'Tổ chứssc',
+      name: 'Tổ chức',
       url: 'tochuc',
       icon: 'icon-folder',
       children: [{
           name: 'Thiết lập sơ đồ tổ chức',
-          url: 'link1',
+          url: '/tochuc/thietlapsodotochuc',
           icon: 'icon-doc'
         },
         {

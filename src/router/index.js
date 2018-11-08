@@ -68,6 +68,9 @@ const Register = () => import('@/views/pages/Register')
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
 
+//Organization
+const Organization = () => import('@/views/org/Organization')
+
 Vue.use(Router)
 
 export default new Router({
@@ -85,6 +88,20 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: 'tochuc',
+          name: 'Tổ chức',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: '/tochuc/thietlapsodotochuc',
+            name: 'thiết lập sơ đồ tổ chức',
+            component: Organization
+          }]
         },
         {
           path: 'theme',
