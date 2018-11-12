@@ -708,6 +708,24 @@ html:not([dir="rtl"]) .sidebar {
   }
  }
 }
+.form-search-2{
+ .show-md-info{
+  button{
+   position: absolute;
+   right: 15px;
+   top: 0;
+   background-color: transparent;
+   border: none;
+   box-shadow: none;
+   outline: none;
+   color: #777;
+   transition: all .3s linear;
+   &:hover{
+    color: #111;
+   }
+  }
+ }
+}
 .custom-input-style1{
  height: 34px;
  width: 100%;
@@ -715,4 +733,79 @@ html:not([dir="rtl"]) .sidebar {
  border-bottom: 1px solid #ccc;
  outline: none;
  box-shadow: none;
+}
+.table-custom{
+ &.sml-table{
+  .row{
+   &:first-child{
+    position: relative;
+    left: 0;
+    margin: 0;
+    padding-top: 20px;
+   }
+  }
+  .VueTables__search{
+   float: none;
+   margin-bottom: 0;
+   .VueTables__search-field{
+    display: flex;
+    width: 100%;
+    label{
+     margin-right: 10px;
+     font-weight: 500;
+    }
+    input{
+     height: 34px;
+     width: 100%;
+     border: none;
+     border-bottom: 1px solid #ccc;
+     outline: none;
+     box-shadow: none;
+     border-radius: 0;
+     padding-left: 5px;
+    }
+   }
+  }
+ }
+}
+.tree-default-large{
+ .tree-container-ul{
+  >.tree-node{
+   &.tree-open{
+    &:first-child{
+     >i.tree-icon{
+      height: 32px;
+      border-top: 9px solid #FFF;
+      background-position: -128px -9px;
+     }
+    }
+   }
+   &.tree-closed{
+    &:first-child{
+     >i.tree-icon{
+      height: 32px;
+      border-top: 9px solid #FFF;
+      background-position: -96px -9px;
+     }
+    }
+   }
+  }
+ }
+}
+.more-func{
+ padding-bottom: 10px;
+ margin-bottom: 10px;
+ border-bottom: 1px dashed #eee;
+ margin-top: 11px;
+ >button.btn-sm{
+  height: 30px;
+  width:30px;
+ }
+ .custom-checkbox-style1{
+  border-left: 1px solid #eee;
+  height: 30px;
+  vertical-align: middle;
+  align-items: center;
+  padding-left: 33px;
+ }
 }

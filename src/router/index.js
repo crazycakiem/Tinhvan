@@ -100,11 +100,11 @@ export default new Router({
             }
           },
           children: [{
-            path: '/tochuc/thietlapsodotochuc',
-            name: 'thiết lập sơ đồ tổ chức',
-            component: Organization
-          }],
-          children: [{
+             path: '/tochuc/Organization',
+             name: 'Thiết lập sơ đồ tổ chức',
+             component: Organization
+           },
+           {
             path: '/tochuc/Themtochuc',
             name: 'Thêm mới tổ chức',
             component: Themtochuc

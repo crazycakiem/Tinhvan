@@ -1,6 +1,6 @@
 <template>
     <div class="autocomplete">
-        <input type="text" v-model="search" @keydown.down="onArrowDown" ref="txtautocomplete"
+        <input placeholder="Nhập từ khoá" class="custom-input-style1" type="text" v-model="search" @keydown.down="onArrowDown" ref="txtautocomplete"
                @keydown.up="onArrowUp"
                @keydown.enter="onEnter"
                @input="onChange" />
@@ -25,10 +25,15 @@
 }
 
 .autocomplete-results {
-  padding: 0;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  top: 37px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.12);
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #eee;
   margin: 0;
-  border: 1px solid #eeeeee;
-  height: 120px;
+  max-height: 120px;
   overflow: auto;
   width: 100%;
 }
@@ -36,19 +41,19 @@
 .autocomplete-result {
   list-style: none;
   text-align: left;
-  padding: 4px 2px;
+  padding: 4px 10px;
   cursor: pointer;
 }
 
 .autocomplete-result:hover {
-  background-color: #4aae9b;
-  color: white;
+  background-color: #eee;
+  color: #333;
 }
 
 .autocomplete-result.is-active,
 .autocomplete-result:hover {
-  background-color: #4aae9b;
-  color: white;
+  background-color: #eee;
+  color: #333;
 }
 </style>
 <script>
