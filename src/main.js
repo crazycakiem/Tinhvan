@@ -8,13 +8,16 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
-import { ClientTable, ServerTable } from 'vue-tables-2';
+import {
+  ClientTable,
+  ServerTable
+} from 'vue-tables-2';
 // todo
 // cssVars()
 Vue.use(ServerTable);
 Vue.use(ClientTable);
 Vue.use(BootstrapVue)
-
+export const bus = new Vue();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

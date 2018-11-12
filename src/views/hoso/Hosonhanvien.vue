@@ -7,25 +7,15 @@
           <div class="panel-title-de1">
             <div>
               <h4>Hồ sơ nhân viên</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm">
+              <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default" size="sm">
                 Thêm mới <i class="icon-plus"></i>
               </b-button>
-              <b-button class="btn-pill" variant="default" size="sm">
-                <i class="icon-magnifier icons"></i> Tìm kiếm
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
+                <i class="fa fa-filter"></i> Tìm kiếm
               </b-button>
-              <button id="btnApply" v-if="checked">
-                <i class="fa fa-lock" style="color:red" aria-hidden="true" />
-                <b-tooltip v-if="checked" target="btnApply"  />
-              </button>
-              <button id="btnDenny"  v-if="checked">
-                <i class="fa fa-unlock-alt" aria-hidden="true" />
-                <b-tooltip v-if="checked" target="btnDenny" />
-              </button>
-              <button id="btnDelete"  v-if="checked">
-                <i class="fa fa-close" aria-hidden="true" />
-                <b-tooltip v-if="checked" target="btnDelete" />
-              </button>
-
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showAdvance">
+                <i class="fa fa-filter"></i> Tìm kiếm nâng cao
+              </b-button>
             </div>
             <div class="ml-auto">
               <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
@@ -36,84 +26,149 @@
               </b-button>
             </div>
           </div>
-          <div class="tbl-de">
-            <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
-            <!-- <div class="filter-box">
-              <b-button class="btn-pill ml-1" @click="showBasic">Show Search Basic</b-button>
-              <div v-show="showbasic">
-                <select multiple v-model="searchbasic">
-                  <option v-for="item in dataSearchBasic" :key="item.value" :value="item.value">{{item.text}}</option>
-                </select>
-                <div v-for="(item, index) in dataSearchBasic" :key="item.value" style="display:inline-block">
-                  <label>{{item.text}}</label>
-                  <input type="text" v-model="model[index]" @change="showmodel" />
+          <div class="filter-box show-filter-box">
+            <div v-show="showbasic" class="basic-box">
+             <div class="card">
+              <div class="card-body">
+               <h4 class="title-box">Tìm kiếm cơ bản</h4>
+               <div class="check-items">
+                 <b-form-group>
+                   <b-form-checkbox-group id="exampleChecks">
+                     <b-form-checkbox value="1">Employee code</b-form-checkbox>
+                     <b-form-checkbox value="2">Fullname</b-form-checkbox>
+                     <b-form-checkbox value="3">Gender</b-form-checkbox>
+                   </b-form-checkbox-group>
+                 </b-form-group>
+               </div>
+               <div class="input-list">
+                 <div class="input-item" v-for="(item, index) in dataSearchBasic" :key="item.value">
+                   <!-- <label>{{item.text}}</label> -->
+                   <input placeholder="Employee code" class="custom-input-style1" type="text" v-model="model[index]" @change="showmodel" />
+                 </div>
+               </div>
+               <div>
+                <div class="form-group text-left mt-3">
+                  <button id="btnSearch" class="btn btn-custom btn-success" @click="Search($event)">
+                    <i class="fa fa-search" aria-hidden="true" />
+                    <span>Tìm kiếm</span>
+                  </button>
                 </div>
+               </div>
               </div>
-              <button @click="showAdvance" class="primary">Advance</button>
-              <label> Records :</label>
-              <select>
-                <option>25</option>
-                <option>50</option>
-                <option>100</option>
-                <option>150</option>
-              </select>
-              <div v-show="showadvance">
+             </div>
+            </div>
+            <div v-show="showadvance" class="advanve-box">
+              <div class="card">
+               <div class="card-body">
+                <h4 class="title-box">Tìm kiếm nâng cao</h4>
                 <div class="form-row">
-                  <div class="col-md-2 mb-3">
-                    <label class="label-custom" for="cboTieuChi">Tiêu chí lọc</label>
-                    <select id="cboTieuChi" class="form-control" v-on:change="onChangeTieuChi($event)" v-model="TieuChiLoc">
-                      <option></option>
-                      <option v-for="item in dataTieuChi" :value="item.value" :key="item.value">{{item.value}}</option>
-                    </select>
-                    <div class="form-group text-center mt-3">
-                      <button id="btnSearch" class="btn btn-custom btn-success" @click="Search($event)">
-                        <i class="fa fa-search" aria-hidden="true" />
-                        <span>Search</span>
-                        <b-tooltip target="btnSearch" title="Filter" />
-                      </button>
+                  <div class="col-md-12">
+                    <div class="b-flex mb-2">
+                      <label class="label-custom" for="cboTieuChi">Tiêu chí lọc</label>
+                      <div class="custom-slbox">
+                        <select id="cboTieuChi" class="form-control sl-tv-style1" v-on:change="onChangeTieuChi($event)" v-model="TieuChiLoc" placeholder="Chọn Tiêu Chí">
+                          <option v-for="item in dataTieuChi" :value="item.value" :key="item.value">{{item.value}}</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-10 mb-3">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th v-for="key in dataColumn" :key="key.value"
-                              :class="{ active: sortKey == key }">
-                            {{ key.value  }}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td v-for="(item, index) in dataColumn" :key="item.value">
-                            <select class="form-control" v-on:change="onChange(item.value)" :ref="item.value" v-model="model[index]">
-                              <option :value="item.value" v-for="item in dataSelect" :key="item.value">{{item.text}}</option>
-                            </select>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td v-for="(item) in dataColumn" :key="item.value">
-                            <input type="text" :ref="item.value+'*content'" @change="focusOut(item.value)" v-if="item.type=='string'" />
-                            <date-picker lang="en" @change="datepickerClosedFunction(item.value)" v-model="dateModel[item]"
-                                         :ref="item.value+'*datecontent'" format="DD-MM-YYYY" v-if="item.type=='datetime'" :clearable="false"></date-picker>
-
-                            <input type="checkbox" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" v-if="item.type=='checkbox'" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td v-for="(item) in dataColumn" :key="item.value">
-                            <b-btn @click="DeleteTieuChi(item.value)">Xóa</b-btn>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="col-md-12 mb-3">
+                    <div class="tbl-adv-fil">
+                      <table class="show-fil-col">
+                        <thead>
+                          <tr>
+                            <th v-for="key in dataColumn" :key="key.value"
+                                :class="{ active: sortKey == key }">
+                              {{ key.value  }}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td v-for="(item, index) in dataColumn" :key="item.value">
+                              <div class="custom-slbox">
+                               <select class="form-control sl-tv-style1" v-on:change="onChange(item.value)" :ref="item.value" v-model="model[index]">
+                                 <option :value="item.value" v-for="item in dataSelect" :key="item.value">{{item.text}}</option>
+                               </select>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td v-for="(item) in dataColumn" :key="item.value">
+                              <input placeholder="Nhập tên" class="custom-input-style1" type="text" :ref="item.value+'*content'" @change="focusOut(item.value)" v-if="item.type=='string'" />
+                              <date-picker class="custom-datepicker-style1" lang="en" @change="datepickerClosedFunction(item.value)" v-model="dateModel[item]"
+                                           :ref="item.value+'*datecontent'" format="DD-MM-YYYY" v-if="item.type=='datetime'" :clearable="false"></date-picker>
+                              <b-form-checkbox class="custom-checkbox-style1" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" v-if="item.type=='checkbox'" value="me">Đã nghỉ</b-form-checkbox>
+                              <!-- <input class="custom-checkbox-style1" type="checkbox" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" v-if="item.type=='checkbox'" /> -->
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="right" v-for="(item) in dataColumn" :key="item.value">
+                              <b-btn class="btn-remove" @click="DeleteTieuChi(item.value)"><i class="fa fa-close"></i> Xóa</b-btn>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                   <div class="form-group text-left mt-1">
+                     <button id="btnSearch" class="btn btn-custom btn-success" @click="Search($event)">
+                       <i class="fa fa-search" aria-hidden="true" />
+                       <span>Tìm kiếm</span>
+                     </button>
+                   </div>
                   </div>
                 </div>
+               </div>
               </div>
-            </div> -->
-            <v-client-table :columns="columns" :data="itemsArray" :options="options" ref="tblTitleGroup">
+            </div>
+          </div>
+          <div class="function-list mb-2">
+            <div class="func-t">
+              <ul class="search">
+                  <li v-if="groupId!=null">
+                      <span>Group: {{nameGroup}}</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('group')" />
+                  </li>
+                  <li v-if="typeId!=''">
+                      <span>OtOtherListStyle: {{typeName}}</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('type')" />
+                  <li v-if="Code!=''">
+                      <span>Code: {{Code}}</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')" />
+                  </li>
+                  <li v-if="Name!=''">
+                      <span>{{('Name')}}: {{Name}}</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')" />
+                  </li>
+                  <li v-if="Active!=''">
+                      <span>Actflg: Active</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')" />
+                  </li>
+                  <li v-if="Remark!=''">
+                      <span>Remark: {{Remark}}</span>
+                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('remark')" />
+                  </li>
+              </ul>
+            </div>
+            <div class="func-b">
+              <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <i class="fa fa-lock" aria-hidden="true" /> Khoá
+              </b-button>
+              <b-button id="btnApply" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <i class="fa fa-unlock-alt" aria-hidden="true" /> Mở khoá
+              </b-button>
+              <b-button id="btnApply" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <i class="fa fa-trash" aria-hidden="true" /> Xoá
+              </b-button>
+            </div>
+          </div>
+          <div class="tbl-de">
+            <v-client-table class="table-custom tbl-nosearch" :columns="columns" :data="itemsArray" :options="options" ref="tblTitleGroup">
               <template slot="selected" slot-scope="props">
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
+                <!-- <b-form-checkbox id="chkSelected" v-model="props.row.selected" class="custom-checkbox-style1" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" @click="CheckCheckBox(props.row)" value="me"></b-form-checkbox> -->
               </template>
               <template slot="fullname" slot-scope="props">
                 {{props.row.fullname}}

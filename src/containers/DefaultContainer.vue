@@ -8,13 +8,13 @@
         </b-link>
         <SidebarToggler class="d-md-down-none ml-auto" display="lg" />
       </div>
-      <b-navbar-nav class="d-md-down-none">
+      <!-- <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3">
          <i class="icon-magnifier icons"></i> Tìm kiếm
         </b-nav-item>
-      </b-navbar-nav>
+      </b-navbar-nav> -->
       <b-navbar-nav class="ml-auto mr-4">
-        <AsideToggler class="show-map d-none d-lg-block" />
+        <!-- <AsideToggler class="show-map d-none d-lg-block" /> -->
         <!--<AsideToggler class="d-lg-none" mobile />-->
         <b-nav-item class="d-md-down-none">
           <i class="fa fa-bell"></i>
@@ -44,10 +44,9 @@
           <router-view></router-view>
         </div>
       </main>
-      <AppAside fixed>
-        <!--aside-->
+      <!-- <AppAside fixed>
         <DefaultAside/>
-      </AppAside>
+      </AppAside> -->
     </div>
     <TheFooter>
       <!--footer-->

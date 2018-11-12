@@ -196,7 +196,7 @@ export default {
         },
         {
           name: 'Tham số hệ thống',
-          url: '#',
+          url: '/system/thamsohethong',
           icon: 'icon-doc'
         },
         {

@@ -22,6 +22,7 @@ const Quanlydieuchuyen = () => import('@/views/hoso/Quanlydieuchuyen')
 const Quanlynghiviec = () => import('@/views/hoso/Quanlynghiviec')
 const Danhmucphucap = () => import('@/views/hoso/Danhmucphucap')
 const Danhmuchopdong = () => import('@/views/hoso/Danhmuchopdong')
+const Thamsohethong = () => import('@/views/system/Thamsohethong')
 
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
@@ -70,6 +71,7 @@ const User = () => import('@/views/users/User')
 
 //Organization
 const Organization = () => import('@/views/org/Organization')
+const Themtochuc = () => import('@/views/tochuc/Themtochuc')
 
 Vue.use(Router)
 
@@ -101,6 +103,25 @@ export default new Router({
             path: '/tochuc/thietlapsodotochuc',
             name: 'thiết lập sơ đồ tổ chức',
             component: Organization
+          }],
+          children: [{
+            path: '/tochuc/Themtochuc',
+            name: 'Thêm mới tổ chức',
+            component: Themtochuc
+          }]
+        },
+        {
+          path: 'system',
+          name: 'Hệ thống',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: '/system/thamsohethong',
+            name: 'Tham Số Hệ Thống',
+            component: Thamsohethong
           }]
         },
         {

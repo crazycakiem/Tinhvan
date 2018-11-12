@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label>Name</label>
-                </div>    
+                </div>
                 <div class="col-md-6">
                     <label ref="lbName"></label>
                 </div>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label>Code</label>
-                </div>    
+                </div>
                 <div class="col-md-6">
                     <label ref="lbCode"></label>
                 </div>
@@ -54,7 +54,7 @@
              <div class="row">
                 <div class="col-md-6">
                     <label>Số phòng ban con</label>
-                </div>    
+                </div>
                 <div class="col-md-6">
                     <label ref="lbSumOrgChild"></label>
                 </div>
@@ -69,7 +69,7 @@
         </b-modal>
     </div>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import VJstree from "vue-jstree";
