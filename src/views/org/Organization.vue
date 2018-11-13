@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link to="/tochuc/themtochuc" style="display:inline-block">
-            <a class="nav-link">Add Organization</a>
+            <a class="nav-link">Add Organization </a>
         </router-link>
         <b-button type="button" id="btnMultiAppy" variant="primary" @click="MultiAppy" v-if="checked" ><i class="fa fa-unlock" aria-hidden="true"></i></b-button>
         <b-button type="button" variant="danger" id="btnMultiDenny" @click="MultiDenny" v-if="checked" ><i class="fa fa-lock" aria-hidden="true"></i></b-button>
@@ -26,10 +26,16 @@
                   :size="size"
                   ref="tree">
               <template scope="_">
-         <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl">
-           <i :class="_.vm.themeIconClasses" role="presentation" v-if="!_.model.loading"></i>
-           {{_.model.text}}
-           <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button>
+         <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl" @mouseover="mouseover(_.model)" @mouseout="mouseout" >
+           <i :class="_.vm.themeIconClasses" role="presentation" ></i>
+             <!-- <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
+                        {{_.model.text}}
+                    </div> -->
+                    <span  @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
+                         {{_.model.text}}
+                    </span>
+                       <!-- {{_.model.text}} -->
+           <!-- <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button> -->
          </div>
        </template>
         </v-jstree>
@@ -88,19 +94,21 @@ export default {
           id: 0,
           text: "Same but with checkboxes",
           value: "Same but with checkboxes",
-          icon: "",
+          icon: "default",
           opened: false,
           selected: false,
           disabled: false,
+          status: "A",
           loading: false,
           children: [
             {
               id: 1,
               text: "initially selected",
               value: "initially selected",
-              icon: "",
+              icon: "default",
               opened: false,
               selected: true,
+              status: "I",
               disabled: false,
               loading: false,
               children: []
@@ -109,9 +117,10 @@ export default {
               id: 2,
               text: "custom icon",
               value: "custom icon",
-              icon: "fa fa-warning icon-state-danger",
+              icon: "default",
               opened: false,
               selected: false,
+              status: "A",
               disabled: false,
               loading: false,
               children: []
@@ -120,9 +129,10 @@ export default {
               id: 3,
               text: "initially open",
               value: "initially open",
-              icon: "fa fa-folder icon-state-default",
+              icon: "default",
               opened: true,
               selected: false,
+              status: "A",
               disabled: false,
               loading: false,
               children: [
@@ -130,10 +140,11 @@ export default {
                   id: 4,
                   text: "Another node",
                   value: "Another node",
-                  icon: "",
+                  icon: "default",
                   opened: false,
                   selected: false,
                   disabled: false,
+                  status: "A",
                   loading: false,
                   children: []
                 }
@@ -143,9 +154,10 @@ export default {
               id: 5,
               text: "custom icon",
               value: "custom icon",
-              icon: "fa fa-warning icon-state-warning",
+              icon: "default",
               opened: false,
               selected: false,
+              status: "A",
               disabled: false,
               loading: false,
               children: []
@@ -154,9 +166,10 @@ export default {
               id: 6,
               text: "disabled node",
               value: "disabled node",
-              icon: "fa fa-check icon-state-success",
+              icon: "default",
               opened: false,
               selected: false,
+              status: "A",
               disabled: true,
               loading: false,
               children: []
@@ -167,9 +180,10 @@ export default {
           id: 7,
           text: "Same but with checkboxes",
           value: "Same but with checkboxes",
-          icon: "",
+          icon: "default",
           opened: true,
           selected: false,
+          status: "A",
           disabled: false,
           loading: false,
           children: [
@@ -177,10 +191,11 @@ export default {
               id: 8,
               text: "initially selected",
               value: "initially selected",
-              icon: "",
+              icon: "default",
               opened: false,
               selected: true,
               disabled: false,
+              status: "A",
               loading: false,
               children: []
             },
@@ -188,10 +203,11 @@ export default {
               id: 9,
               text: "custom icon",
               value: "custom icon",
-              icon: "fa fa-warning icon-state-danger",
+              icon: "default",
               opened: false,
               selected: false,
               disabled: false,
+              status: "A",
               loading: false,
               children: []
             },
@@ -199,32 +215,35 @@ export default {
               id: 10,
               text: "initially open",
               value: "initially open",
-              icon: "fa fa-folder icon-state-default",
+              icon: "default",
               opened: true,
               selected: false,
               disabled: false,
               loading: false,
+              status: "A",
               children: []
             },
             {
               id: 12,
               text: "custom icon",
               value: "custom icon",
-              icon: "fa fa-warning icon-state-warning",
+              icon: "default",
               opened: false,
               selected: true,
               disabled: false,
               loading: false,
+              status: "A",
               children: []
             },
             {
               id: 13,
               text: "disabled node",
               value: "disabled node",
-              icon: "fa fa-check icon-state-success",
+              icon: "default",
               opened: false,
               selected: false,
               disabled: true,
+              status: "A",
               loading: false,
               children: []
             }
@@ -234,10 +253,11 @@ export default {
           id: 14,
           text: "And wholerow selection",
           value: "And wholerow selection",
-          icon: "",
+          icon: "default",
           opened: false,
           selected: false,
           disabled: false,
+          status: "A",
           loading: false,
           children: []
         },
@@ -245,10 +265,11 @@ export default {
           id: 15,
           text: "drag disabled",
           value: "drag disabled",
-          icon: "fa fa-warning icon-state-danger",
+          icon: "default",
           opened: false,
           selected: false,
           disabled: false,
+          status: "A",
           loading: false,
           children: [],
           dragDisabled: true
@@ -257,10 +278,11 @@ export default {
           id: 16,
           text: "drop disabled",
           value: "drop disabled",
-          icon: "fa fa-warning icon-state-danger",
+          icon: "default",
           opened: false,
           selected: false,
           disabled: false,
+          status: "A",
           loading: false,
           children: [],
           dropDisabled: true

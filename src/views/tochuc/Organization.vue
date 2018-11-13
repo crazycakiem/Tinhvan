@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link to="/tochuc/themtochuc" style="display:inline-block">
-            <a class="nav-link">Add Organization</a>
+            <a class="nav-link">Add Organization 123</a>
         </router-link>
         <b-button type="button" id="btnMultiAppy" variant="primary" @click="MultiAppy" v-if="checked" ><i class="fa fa-unlock" aria-hidden="true"></i></b-button>
         <b-button type="button" variant="danger" id="btnMultiDenny" @click="MultiDenny" v-if="checked" ><i class="fa fa-lock" aria-hidden="true"></i></b-button>
@@ -26,10 +26,12 @@
                   :size="size"
                   ref="tree">
               <template scope="_">
-         <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl">
+         <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl"  @mouseover="mouseover(_.model)" @mouseout="mouseout">
            <i :class="_.vm.themeIconClasses" role="presentation" v-if="!_.model.loading"></i>
-           {{_.model.text}}
-           <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button>
+            <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
+                        {{_.model.tex23t}}
+                    </div>
+           <!-- <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button> -->
          </div>
        </template>
         </v-jstree>
