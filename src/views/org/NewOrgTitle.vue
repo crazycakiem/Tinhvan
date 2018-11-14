@@ -59,10 +59,9 @@
          <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl" >
            <i :class="_.vm.themeIconClasses" role="presentation" ></i> 
                          {{_.model.text}} 
-         </div>
+    </div>
        </template>
                         </v-jstree>
-
                         <button id="btnSave" class="btn btn-success"  @click="Save"> Save</button>
                 </b-col>
                 <b-col cols="8">

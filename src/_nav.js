@@ -47,6 +47,16 @@ export default {
       ]
     },
     {
+      name: 'Danh mục',
+      url: '/danhmuc',
+      icon: 'icon-folder',
+      children: [{
+        name: 'Danh mục lương',
+        url: '/danhmuc/danhmucluong',
+        icon: 'icon-doc'
+      }]
+    },
+    {
       name: 'Hồ sơ',
       url: '/hoso',
       icon: 'icon-folder',

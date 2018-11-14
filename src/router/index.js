@@ -73,6 +73,9 @@ const User = () => import('@/views/users/User')
 const Organization = () => import('@/views/org/Organization')
 const Themtochuc = () => import('@/views/tochuc/Themtochuc')
 const Chucdanhchodonvi = () => import('@/views/org/Chucdanhchodonvi')
+//category
+const Salary = () => import('@/views/category/Salary')
+
 Vue.use(Router)
 
 export default new Router({
@@ -91,6 +94,21 @@ export default new Router({
           name: 'Dashboard',
           component: Dashboard
         },
+        {
+          path: 'danhmuc',
+          name: 'Danh mục',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: 'danhmucluong',
+            name: 'Danh mục lương',
+            component: Salary
+          }]
+        },
+
         {
           path: 'tochuc',
           name: 'Tổ chức',
