@@ -23,6 +23,46 @@
                </b-button>
              </div>
            </div>
+            <div class="function-list mb-2">
+             <div class="func-t">
+               <ul class="search">
+                   <li v-if="groupId!=null">
+                       <span>Group: {{nameGroup}}</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('group')" />
+                   </li>
+                   <li v-if="typeId!=''">
+                       <span>OtOtherListStyle: {{typeName}}</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('type')" />
+                   <li v-if="Code!=''">
+                       <span>Code: {{Code}}</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')" />
+                   </li>
+                   <li v-if="Name!=''">
+                       <span>{{('Name')}}: {{Name}}</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')" />
+                   </li>
+                   <li v-if="Active!=''">
+                       <span>Actflg: Active</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')" />
+                   </li>
+                   <li v-if="Remark!=''">
+                       <span>Remark: {{Remark}}</span>
+                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('remark')" />
+                   </li>
+               </ul>
+             </div>
+             <div class="func-b">
+               <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                 <i class="fa fa-lock" aria-hidden="true" /> Khoá
+               </b-button>
+               <b-button id="btnApply" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                 <i class="fa fa-unlock-alt" aria-hidden="true" /> Mở khoá
+               </b-button>
+               <b-button id="btnApply" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                 <i class="fa fa-trash" aria-hidden="true" /> Xoá
+               </b-button>
+             </div>
+           </div>
            <b-collapse class="show-filter-box mb-4" id="collapse2" :visible="collapsed">
                <b-card class="mb-2">
                    <div class="form-row">
@@ -68,46 +108,7 @@
                    </div>
                </b-card>
            </b-collapse>
-           <div class="function-list mb-2">
-             <div class="func-t">
-               <ul class="search">
-                   <li v-if="groupId!=null">
-                       <span>Group: {{nameGroup}}</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('group')" />
-                   </li>
-                   <li v-if="typeId!=''">
-                       <span>OtOtherListStyle: {{typeName}}</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('type')" />
-                   <li v-if="Code!=''">
-                       <span>Code: {{Code}}</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')" />
-                   </li>
-                   <li v-if="Name!=''">
-                       <span>{{('Name')}}: {{Name}}</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')" />
-                   </li>
-                   <li v-if="Active!=''">
-                       <span>Actflg: Active</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')" />
-                   </li>
-                   <li v-if="Remark!=''">
-                       <span>Remark: {{Remark}}</span>
-                       <i class="fa fa-times" aria-hidden="true" @click="removeSearch('remark')" />
-                   </li>
-               </ul>
-             </div>
-             <div class="func-b">
-               <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                 <i class="fa fa-lock" aria-hidden="true" /> Khoá
-               </b-button>
-               <b-button id="btnApply" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                 <i class="fa fa-unlock-alt" aria-hidden="true" /> Mở khoá
-               </b-button>
-               <b-button id="btnApply" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                 <i class="fa fa-trash" aria-hidden="true" /> Xoá
-               </b-button>
-             </div>
-           </div>
+          
            <div class="tbl-de">
              <v-client-table class="table-custom tbl-nosearch" ref="tblOtherList" :columns="columns" :options="options" :data="dataTable">
                  <template slot="selected" slot-scope="props">

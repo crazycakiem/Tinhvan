@@ -124,46 +124,6 @@
               </div>
             </div>
           </div>
-          <div class="function-list mb-2">
-            <div class="func-t">
-              <ul class="search">
-                  <li v-if="groupId!=null">
-                      <span>Group: {{nameGroup}}</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('group')" />
-                  </li>
-                  <li v-if="typeId!=''">
-                      <span>OtOtherListStyle: {{typeName}}</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('type')" />
-                  <li v-if="Code!=''">
-                      <span>Code: {{Code}}</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')" />
-                  </li>
-                  <li v-if="Name!=''">
-                      <span>{{('Name')}}: {{Name}}</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')" />
-                  </li>
-                  <li v-if="Active!=''">
-                      <span>Actflg: Active</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')" />
-                  </li>
-                  <li v-if="Remark!=''">
-                      <span>Remark: {{Remark}}</span>
-                      <i class="fa fa-times" aria-hidden="true" @click="removeSearch('remark')" />
-                  </li>
-              </ul>
-            </div>
-            <div class="func-b">
-              <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                <i class="fa fa-lock" aria-hidden="true" /> Khoá
-              </b-button>
-              <b-button id="btnApply" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                <i class="fa fa-unlock-alt" aria-hidden="true" /> Mở khoá
-              </b-button>
-              <b-button id="btnApply" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-                <i class="fa fa-trash" aria-hidden="true" /> Xoá
-              </b-button>
-            </div>
-          </div>
           <div class="tbl-de">
             <v-client-table class="table-custom tbl-nosearch" :columns="columns" :data="itemsArray" :options="options" ref="tblTitleGroup">
               <template slot="selected" slot-scope="props">
@@ -185,357 +145,352 @@
 </template>
 
 <script>
-  import { shuffleArray } from "@/shared/utils";
-  import cTable from "./Table.vue";
-  import Vue from "vue";
-  import { Component, Prop } from "vue-property-decorator";
-  import _ from "lodash";
-  import DatePicker from "vue2-datepicker";
-  const someData = () =>
-    shuffleArray([
-      {
-        selected: false,
-        id: "1232",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ",
-        _rowVariant: "success"
-      },
-      {
-        selected: true,
-        id: "4444",
-        fullname: "Linh Nguyen",
-        gender: "Nam",
-        groupSub: "Design",
-        sub: "Design Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ",
-        _rowVariant: "success"
-      },
-      {
-        selected:false,
-        id: "1233",
-        fullname: "Samppa Nori a",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1234",
-        fullname: "Samppa Nori v",
-        gender: "Nữ",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1235",
-        fullname: "Samppa Nori b",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1236",
-        fullname: "Samppa Nori a",
-        gender: "Nữ",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1237",
-        fullname: "Samppa Nori s",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1238",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1239",
-        fullname: "Samppa Nori",
-        gender: "Nữ",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1231",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1211",
-        fullname: "Samppa Nori",
-        gender: "Nữ",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1212",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1213",
-        fullname: "Samppa Nori",
-        gender: "Nữ",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1214",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1216",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1215",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1217",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1218",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1219",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1222",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1221",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      },
-      {
-        selected: false,
-        id: "1220",
-        fullname: "Samppa Nori",
-        gender: "Nam",
-        groupSub: "BA",
-        sub: "BA Staff",
-        dept: "Công nghệ",
-        obj: "Front",
-        status: "Đã nghỉ"
-      }
-    ]);
-  @Component({
-    components: { DatePicker},
-    data: () => {
-      return {
-        model: [],
-        dateModel: [],
-        content:[],
-        checked:false,
-        showbasic: false,
-        sortKey: "",
-        searchData:[],
-        TieuChiLoc:'',
-        dataColumn:[],
-        dataTieuChi: [
-          { value: "employeeCode", type: "string" },
-          { value: "joinDateState", type: "datetime" },
-          { value: "fullName", type: "string" },
-          { value: "workstatus", type: "checkbox" }
-        ],
-        TieuChiLoc: '',
-        dataSelect:  [
-          { value: '&', text: 'Và' },
-          { value: '||', text: 'Hoặc' },
-          { value: '=', text: 'Bằng' },
-          { value: '>', text: 'Lớn hơn' },
-          { value: '<', text: 'Nhỏ hơn' },
-        ],
-        showadvance:false,
-        items: someData,
-        itemsArray: someData(),
-        searchbasic: [],
-        dataSearchBasic: [
-          { value: "employeeCode", text: "employeeCode" },
-          { value: "fullName", text: "fullName" },
-          { value: "sex", text: "sex" }
-        ],
-        columns: ['selected','id', 'fullname', 'sub'],
-        options: {
-          headings: {
-            id: 'Id',
-            fullname: 'Ho ten',
-            sub: 'chuc vu'
-          },
-          sortable: ['fullname', 'sub'],
-          filterable: ['id', 'fullname']
+import { shuffleArray } from "@/shared/utils";
+import cTable from "./Table.vue";
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+import _ from "lodash";
+import DatePicker from "vue2-datepicker";
+const someData = () =>
+  shuffleArray([
+    {
+      selected: false,
+      id: "1232",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ",
+      _rowVariant: "success"
+    },
+    {
+      selected: true,
+      id: "4444",
+      fullname: "Linh Nguyen",
+      gender: "Nam",
+      groupSub: "Design",
+      sub: "Design Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ",
+      _rowVariant: "success"
+    },
+    {
+      selected: false,
+      id: "1233",
+      fullname: "Samppa Nori a",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1234",
+      fullname: "Samppa Nori v",
+      gender: "Nữ",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1235",
+      fullname: "Samppa Nori b",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1236",
+      fullname: "Samppa Nori a",
+      gender: "Nữ",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1237",
+      fullname: "Samppa Nori s",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1238",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1239",
+      fullname: "Samppa Nori",
+      gender: "Nữ",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1231",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1211",
+      fullname: "Samppa Nori",
+      gender: "Nữ",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1212",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1213",
+      fullname: "Samppa Nori",
+      gender: "Nữ",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1214",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1216",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1215",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1217",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1218",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1219",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1222",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1221",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    },
+    {
+      selected: false,
+      id: "1220",
+      fullname: "Samppa Nori",
+      gender: "Nam",
+      groupSub: "BA",
+      sub: "BA Staff",
+      dept: "Công nghệ",
+      obj: "Front",
+      status: "Đã nghỉ"
+    }
+  ]);
+@Component({
+  components: { DatePicker },
+  data: () => {
+    return {
+      model: [],
+      dateModel: [],
+      content: [],
+      checked: false,
+      showbasic: false,
+      sortKey: "",
+      searchData: [],
+      TieuChiLoc: "",
+      dataColumn: [],
+      dataTieuChi: [
+        { value: "employeeCode", type: "string" },
+        { value: "joinDateState", type: "datetime" },
+        { value: "fullName", type: "string" },
+        { value: "workstatus", type: "checkbox" }
+      ],
+      TieuChiLoc: "",
+      dataSelect: [
+        { value: "&", text: "Và" },
+        { value: "||", text: "Hoặc" },
+        { value: "=", text: "Bằng" },
+        { value: ">", text: "Lớn hơn" },
+        { value: "<", text: "Nhỏ hơn" }
+      ],
+      showadvance: false,
+      items: someData,
+      itemsArray: someData(),
+      searchbasic: [],
+      dataSearchBasic: [
+        { value: "employeeCode", text: "employeeCode" },
+        { value: "fullName", text: "fullName" },
+        { value: "sex", text: "sex" }
+      ],
+      columns: ["selected", "id", "fullname", "sub"],
+      options: {
+        headings: {
+          id: "Id",
+          fullname: "Ho ten",
+          sub: "chuc vu"
         },
-      };
-    },
-    methods: {
-      CheckCheckBox(evt) {
-        debugger;
-        let length = ((this.$refs.tblTitleGroup).tableData).length;
-        console.log(evt);
-        if (!evt.selected) {
-          this.checked = true
-          return;
-        }
-        for (let i = 0; i < length; i++) {
-          let ot = ((this.$refs.tblTitleGroup).tableData[i])
-          if (!_.isEqual(ot.id, evt.id)) {
-            if (ot.selected) {
-              this.checked = true;
-              return;
-            }
-          } else {
-            this.checked = false;
-          }
-        }
+        sortable: ["fullname", "sub"],
+        filterable: ["id", "fullname"]
       }
-    },
-  })
-
-  export default class HosonhanvienComponent extends Vue {
-    showmodel() {
-      console.log(this.model);
-    }
-    showAdvance() {
-      this.showadvance = !this.showadvance;
-      console.log(this.showadvance);
-    }
-    showBasic() {
-      this.showbasic = !this.showbasic;
-    }
-    onChangeTieuChi() {
+    };
+  },
+  methods: {
+    CheckCheckBox(evt) {
       debugger;
-      let tc = this.TieuChiLoc;
-      if (!_.isEqual(tc, '') && !_.isUndefined(tc)) {
-        this.dataTieuChi.forEach((key, index) => {
-          if (_.isEqual(key.value, tc)) {
-            this.dataColumn.push(key);
-            this.searchData.push({ field: tc, condi: '&', content: '' });
-            this.dataTieuChi.splice(index, 1);
+      let length = this.$refs.tblTitleGroup.tableData.length;
+      console.log(evt);
+      if (!evt.selected) {
+        this.checked = true;
+        return;
+      }
+      for (let i = 0; i < length; i++) {
+        let ot = this.$refs.tblTitleGroup.tableData[i];
+        if (!_.isEqual(ot.id, evt.id)) {
+          if (ot.selected) {
+            this.checked = true;
+            return;
           }
-        });
+        } else {
+          this.checked = false;
+        }
       }
     }
-
-
-
   }
+})
+export default class HosonhanvienComponent extends Vue {
+  showmodel() {
+    console.log(this.model);
+  }
+  showAdvance() {
+    this.showadvance = !this.showadvance;
+    console.log(this.showadvance);
+  }
+  showBasic() {
+    this.showbasic = !this.showbasic;
+  }
+  onChangeTieuChi() {
+    let tc = this.TieuChiLoc;
+    if (!_.isEqual(tc, "") && !_.isUndefined(tc)) {
+      this.dataTieuChi.forEach((key, index) => {
+        if (_.isEqual(key.value, tc)) {
+          this.dataColumn.push(key);
+          this.searchData.push({ field: tc, condi: "&", content: "" });
+          this.dataTieuChi.splice(index, 1);
+        }
+      });
+    }
+  }
+}
 </script>

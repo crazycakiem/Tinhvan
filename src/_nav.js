@@ -31,7 +31,7 @@ export default {
         },
         {
           name: 'Thiết lập chức danh cho đơn vị',
-          url: 'link1',
+          url: '/tochuc/thietlapchucdanhchodonvi',
           icon: 'icon-doc'
         },
         {

@@ -72,7 +72,7 @@ const User = () => import('@/views/users/User')
 //Organization
 const Organization = () => import('@/views/org/Organization')
 const Themtochuc = () => import('@/views/tochuc/Themtochuc')
-
+const Chucdanhchodonvi = () => import('@/views/org/Chucdanhchodonvi')
 Vue.use(Router)
 
 export default new Router({
@@ -108,6 +108,11 @@ export default new Router({
               path: '/tochuc/Themtochuc',
               name: 'Thêm mới tổ chức',
               component: Themtochuc
+            },
+            {
+              path: '/tochuc/thietlapchucdanhchodonvi',
+              name: 'Thiết lập chức danh cho đơn vị',
+              component: Chucdanhchodonvi
             }
           ]
         },
