@@ -108,7 +108,6 @@ export default new Router({
             component: Salary
           }]
         },
-
         {
           path: 'tochuc',
           name: 'Tổ chức',
