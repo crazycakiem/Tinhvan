@@ -3,63 +3,7 @@
         <b-form>
             <b-row>
                 <b-col cols="5">
-                    <b-button id="btnAdd" type="button" variant="primary" @click="onAdd">{{    ('Add')}}</b-button>
-                </b-col>
-            </b-row>
-        </b-form>
-        <b-form>
-            <b-row class="mt-3">
-                <b-col cols="1">FullName</b-col>
-                <b-col cols="2">
-                    <input id="txtHoTen" type="text"  />
-                </b-col>
-                <b-col cols="1"> Relationship</b-col>
-                <b-col cols="2">
-                    <select v-model="CreateFamily.relationship">
-                        <option></option>
-                        <option v-for="item in dataRelationshipFamily" :key="item.id" :value="item.id">{{item.name}}</option>
-                    </select>
-                </b-col>
-                <b-col cols="1"> BirthDay</b-col>
-                <b-col cols="2">
-                    <date-picker id="txtEffectDate" lang="en" 
-                                 format="DD-MM-YYYY" :clearable="false" placeholder="Select Day"></date-picker>
-                </b-col>
-
-            </b-row>
-            <b-row class="mt-3">
-                <b-col cols="2">ID</b-col>
-                <b-col cols="2">
-                    <input id="txtCMND" type="text"  />
-                </b-col>
-                <b-col cols="3">Đối tượng giảm trừ <input id="cboGT" type="checkbox"  /></b-col>
-
-            </b-row>
-            <b-row class="mt-3">
-                <b-col cols="2">Ngày đăng ký giảm trừ</b-col>
-                <b-col cols="2">
-                    <date-picker lang="en"
-                                 format="DD-MM-YYYY" :clearable="false" placeholder="Select Day"></date-picker>
-                </b-col>
-
-            </b-row>
-            <b-row class="mt-3">
-                <b-col cols="3">Ngày bắt đầu giảm trừ</b-col>
-                <b-col cols="2">
-                    <date-picker lang="en" 
-                                 format="DD-MM-YYYY" :clearable="false" placeholder="Select Day"></date-picker>
-                </b-col>
-                <b-col cols="3">Ngày kết thúc giảm trừ</b-col>
-                <b-col cols="2">
-                    <date-picker lang="en"
-                                 format="DD-MM-YYYY" :clearable="false" placeholder="Select Day"></date-picker>
-                </b-col>
-            </b-row>
-            <b-row class="mt-3">
-                <b-col cols="1">Ghi chu</b-col>
-                <b-col cols="10">
-                    <textarea id="txtNote" cols="80">
-                                            </textarea>
+                    <b-button id="btnAdd" type="button" variant="primary" @click="AddRow">Add</b-button>
                 </b-col>
             </b-row>
         </b-form>
@@ -132,7 +76,63 @@ export default {
   },
   data: () => {
     return {
-      data: [],
+      data: [
+        {
+          selected: false,
+          fullName: "Phạn Văn Mách",
+          idCardNo: "N0012",
+          relationship: "Bố",
+          birthday: "1/2/1960",
+          isReduction: false,
+          reductionStartDate: "2/3/2008",
+          reductionEndDate: "4/5/2019",
+          remark: "Đánh dấu"
+        },
+        {
+          selected: false,
+          fullName: "Lý Đức",
+          idCardNo: "N0012",
+          relationship: "Bố",
+          birthday: "1/2/1960",
+          isReduction: false,
+          reductionStartDate: "2/3/2008",
+          reductionEndDate: "4/5/2019",
+          remark: "Đánh dấu"
+        },
+        {
+          selected: false,
+          fullName: "Công lý",
+          idCardNo: "N0012",
+          relationship: "Bố",
+          birthday: "1/2/1960",
+          isReduction: false,
+          reductionStartDate: "2/3/2008",
+          reductionEndDate: "4/5/2019",
+          remark: "Đánh dấu"
+        },
+        {
+          selected: false,
+          fullName: "Ngọc Hoàng",
+          idCardNo: "N0012",
+          relationship: "Bố",
+          birthday: "1/2/1960",
+          isReduction: false,
+          reductionStartDate: "2/3/2008",
+          reductionEndDate: "4/5/2019",
+          remark: "Đánh dấu"
+        },
+        {
+          selected: false,
+          fullName: "Phạn Văn Mách",
+          idCardNo: "N0012",
+          relationship: "Bố",
+          birthday: "1/2/1960",
+          isReduction: false,
+          reductionStartDate: "2/3/2008",
+          reductionEndDate: "4/5/2019",
+          remark: "Đánh dấu"
+        }
+      ],
       columnsFamily: [
         "selected",
         "fullName",
@@ -149,7 +149,6 @@ export default {
       optionsFamily: {
         filterable: true,
         sortable: ["fullName", "idCardNo", "relationship", "isReduction"],
-        requestFunction: getFamilies,
         headings: {
           selected: function(h) {
             return h("input", {
@@ -220,22 +219,12 @@ export default {
       return _.isEqual(roe, "add") || _.isEqual(roe, "edit");
     },
     async getFamilyEmployeeInfo(id) {
-      const getRelationShip = new GetOtherLists();
-      getRelationShip.typeCode = Constant.RELATIONSHIP_FAMILY.TYPE_CODE;
-      getRelationShip.actflg = "A";
-      await client.get(getRelationShip).then(res => {
-        this.dataRelationshipFamily = res.items;
-      });
       this.SearchFamilyByEmployeeId();
     },
     SearchFamilyByEmployeeId() {
       const search = this.Id;
-      this.$refs.tblFamily.setFilter(search);
     },
-    onAdd() {
-      console.log(this.CreateFamily);
-      this.CreateFamily.employeeId = this.Id;
-    },
+    onAdd() {},
     showEdit(ot) {
       let length = this.$refs.tblFamily.tableData.length;
       for (let i = 0; i < length; i++) {
@@ -264,13 +253,15 @@ export default {
           return;
       }
       if (_.isEqual(length, 0)) {
-        let t = new Family();
-        t.readOrEdit = "add";
-        t.fullName = "";
-        t.reductionRegisDate = "";
-        t.reductionStartDate = "";
-        t.reductionEndDate = "";
-        this.$refs.tblFamily.data.push(t);
+        this.$refs.tblFamily.data.push({
+          fullName: "",
+          reductionRegisDate: "",
+          reductionStartDate: "",
+          id: "",
+          reductionEndDate: "",
+          idCardNo: "",
+          readOrEdit: "add"
+        });
         this.$refs.tblFamily.count = 1;
       } else {
         this.$refs.tblFamily.tableData.unshift({
@@ -287,12 +278,8 @@ export default {
     async agree(ot) {
       if (_.isEqual(ot.readOrEdit, "add")) {
         this.state = true;
-        const createOt = new CreateFamily();
-        _.assign(createOt, ot);
       } else if (_.isEqual(ot.readOrEdit, "edit")) {
         this.state = true;
-        let updateot = new UpdateFamily();
-        _.assign(updateot, ot);
       }
     }
   }

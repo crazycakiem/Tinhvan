@@ -473,7 +473,7 @@
                                </EmployeeWorkingProcess>     
                             </b-collapse>
                             <b-collapse id="showQTL" v-model="showQTL">
-                                <EmployeeSalaryProcess :Id="Id" v-if="showQTL" :dataAllOrg="dataAllOrg" :dataAllTitle="dataAllTitle" :dataAllowanceList="dataAllowanceList">
+                                <EmployeeSalaryProcess :Id="Id" v-if="showQTL" >
                                 </EmployeeSalaryProcess>
                             </b-collapse>
                             <b-collapse id="showQTHD" v-model="showQTHD">
@@ -492,9 +492,18 @@ import DatePicker from "vue2-datepicker";
 import _ from "lodash";
 import { bus } from "../../main";
 import EmployeeFamily from "./EmployeeFamily";
+import EmployeeWorkingProcess from "./EmployeeWorkingProcess";
+import EmployeeContractProcess from "./EmployeeContractProcess";
+import EmployeeSalaryProcess from "./EmployeeSalaryProcess";
 export default {
   name: "EditEmployee",
-  components: { DatePicker, EmployeeFamily },
+  components: {
+    DatePicker,
+    EmployeeFamily,
+    EmployeeWorkingProcess,
+    EmployeeContractProcess,
+    EmployeeSalaryProcess
+  },
   data: () => {
     return {
       Id: "",

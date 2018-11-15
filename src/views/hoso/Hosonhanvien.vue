@@ -815,20 +815,11 @@ export default {
     async ExtenEmployee() {
       this.showAdd = false;
       this.showExt = !this.showExt;
-      debugger;
+      // debugger;
       if (this.showExt) {
         this.showTable = false;
         this.collapsed = false;
         this.Filter = false;
-        if (_.isEqual(this.dataAllowanceList.length, 0)) {
-          //lay allowancce
-          const getAllowance = new GetAllowanceLists();
-          getAllowance.actflg = "A";
-          await client.get(getAllowance).then(res => {
-            this.dataAllowanceList = res.items;
-            console.log(this.dataAllowanceList);
-          });
-        }
       } else {
         this.showTable = true;
         this.Filter = true;
