@@ -7,7 +7,7 @@
            <div class="panel-title-de1">
              <div>
               <h4>Quản lý hồ sơ lương</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm">
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="Goto">
                   Thêm mới <i class="icon-plus"></i>
               </b-button>
               <b-button class="btn-pill" variant="default" size="sm">
@@ -24,7 +24,37 @@
              </div>
            </div>
            <div class="tbl-de">
-             <c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>
+             <v-client-table  class="table-custom tbl-nosearch" ref="tblWageRecords" :columns="columns" :options="options" :data="dataTable">
+            <template slot="selected" slot-scope="props">
+                <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
+            </template>
+            <template slot="decisionNo" slot-scope="props">
+                 
+                        {{props.row.decisionNo}}
+                  
+            </template>
+            <template slot="decisionTypeId" slot-scope="props">
+             
+                    {{props.row.decisionTypeId}} 
+                
+            </template>
+            <template slot="orgId" slot-scope="props">
+              <label>{{props.row.orgName}}</label>
+            </template>
+             <template slot="name" slot-scope="props">
+              <label>{{props.row.employeeName}}</label>
+            </template>
+            <template slot="titleId" slot-scope="props">
+               <label>{{props.row.titleName}}</label>
+            </template>
+            <template slot="effectDate" slot-scope="props">
+               <label>{{(props.row.effectDate)}} </label>
+            </template>
+              <template slot="expireDate" slot-scope="props">
+               <label>{{(props.row.expireDate)}} </label>
+            </template>
+           
+        </v-client-table> 
            </div>
         </b-card>
 
@@ -37,51 +67,126 @@
 </template>
 
 <script>
-import { shuffleArray } from '@/shared/utils'
-import cTable from './Table.vue'
-
-const someData = () => shuffleArray([
-  {id: '1232', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ', _rowVariant: 'success'},
-  {id: '1233', fullname: 'Quyết định nâng lương', gender: 'Samppa Nori 12', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1234', fullname: 'Quyết định điều chỉnh', gender: 'NSamppa Noriữ', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1235', fullname: 'Quyết định 11', gender: 'Samppa Nori 2dsd', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1236', fullname: 'Quyết định lương thưởng', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1237', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1238', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1239', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1231', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1211', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1212', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1213', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1214', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1216', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1215', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1217', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1218', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1219', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1222', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1221', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1220', fullname: 'Quyết định lương', gender: 'Linh Nguyen', groupSub: 'BA', sub: 'BA Staff', dept: '21/09/19', obj: '21/11/19', status: 'Đã nghỉ'}
-])
-
+import { shuffleArray } from "@/shared/utils";
 export default {
-  name: 'quanlyhosoluong',
-  components: {cTable},
+  name: "quanlyhosoluong",
+  components: {},
   data: () => {
     return {
-      items: someData,
-      itemsArray: someData(),
-      fields: [
-        {key: 'id', label: 'Số quyết định', sortable: true},
-        {key: 'fullname', label: 'Loại quyết định', sortable: true},
-        {key: 'gender', label: 'Họ tên', sortable: true},
-        {key: 'groupSub', label: 'Đơn vị', sortable: true},
-        {key: 'sub', label: 'Chức danh', sortable: true},
-        {key: 'dept', label: 'Ngày hiệu lực', sortable: true},
-        {key: 'obj', label: 'Ngày hết hiệu lực', sortable: true},
-        {key: 'status', label: 'Trạng thái',sortable: true}
+      dataTable: [
+        {
+          selected: false,
+          decisionNo: "N0124",
+          decisionTypeId: "Loai quyết định",
+          name: "Phi tien lam",
+          orgId: "to chuc",
+          titleId: "nhan vien",
+          effectDate: "10/10/2000",
+          statusId: "Ap dung"
+        },
+        {
+          selected: false,
+          decisionNo: "N0124",
+          decisionTypeId: "Loai quyết định",
+          name: "Phi tien lam",
+          orgId: "to chuc",
+          titleId: "nhan vien",
+          effectDate: "10/10/2000",
+          statusId: "Ap dung"
+        },
+        {
+          selected: false,
+          decisionNo: "N0124",
+          decisionTypeId: "Loai quyết định",
+          name: "Phi tien lam",
+          orgId: "to chuc",
+          titleId: "nhan vien",
+          effectDate: "10/10/2000",
+          statusId: "Ap dung"
+        },
+        {
+          selected: false,
+          decisionNo: "N0124",
+          decisionTypeId: "Loai quyết định",
+          name: "Phi tien lam",
+          orgId: "to chuc",
+          titleId: "nhan vien",
+          effectDate: "10/10/2000",
+          statusId: "Ap dung"
+        }
       ],
+      columns: [
+        "selected",
+        "decisionNo",
+        "decisionTypeId",
+        "name",
+        "orgId",
+        "titleId",
+        "effectDate",
+        "expireDate",
+        "statusId"
+      ],
+      options: {
+        filterable: true,
+        sortable: [
+          "decisionNo",
+          "decisionTypeId",
+          "orgId",
+          "titleId",
+          "effectDate",
+          "expireDate",
+          "statusId"
+        ],
+        columnsClasses: {
+          selected: "col-check-box"
+        },
+        headings: {
+          selected: function(h) {
+            return h("input", {
+              attrs: {
+                type: "checkbox",
+                id: "selectAllCheckbox"
+              },
+              on: {
+                click: e => {
+                  this.selectAll(e.srcElement.checked);
+                }
+              },
+              ref: "selectAllCheckbox"
+            });
+          },
+          decisionNo: function(h) {
+            return "NumberDecision";
+          },
+          decisionTypeId: function(h) {
+            return "TypeDecision";
+          },
+          name: function(h) {
+            return "Name";
+          },
+          orgId: function(h) {
+            return "Organization";
+          },
+          statusId: function(h) {
+            return "Actflg";
+          },
+          titleId: function(h) {
+            return "Title";
+          },
+          effectDate: function(h) {
+            return "EffectDate";
+          },
+          expireDate: function(h) {
+            return "ExpiryDate";
+          }
+        }
+      }
+    };
+  },
+  methods: {
+    Goto() {
+      window.location = "/hoso/themhosoluong";
     }
   }
-}
+};
 </script>
