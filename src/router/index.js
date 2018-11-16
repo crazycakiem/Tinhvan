@@ -25,7 +25,7 @@ const Danhmuchopdong = () => import('@/views/hoso/Danhmuchopdong')
 const Thamsohethong = () => import('@/views/system/Thamsohethong')
 const NewContract = () => import('@/views/hoso/NewContract')
 const NewWageRecord = () => import('@/views/hoso/NewWageRecord')
-
+const NewChangeInfoEmployee = () => import('@/views/hoso/NewChangeInfoEmployee')
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')
@@ -227,6 +227,12 @@ export default new Router({
               path: '/hoso/themhosoluong',
               name: 'Thêm hồ sơ lương',
               component: NewWageRecord
+            },
+
+            {
+              path: '/hoso/themthaydoithongtinnhansu',
+              name: 'Thêm thay đổi thông tin nhân sự',
+              component: NewChangeInfoEmployee
             },
             {
               path: '/hoso/themhopdong',
