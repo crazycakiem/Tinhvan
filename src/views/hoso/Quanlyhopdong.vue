@@ -1,13 +1,12 @@
 <template>
   <div class="animated fadeIn">
-
     <b-row>
       <b-col lg="12">
         <b-card class="card-de1">
            <div class="panel-title-de1">
              <div>
               <h4>Quản lý hợp đồng</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm">
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="Goto">
                   Thêm mới <i class="icon-plus"></i>
               </b-button>
               <b-button class="btn-pill" variant="default" size="sm">
@@ -24,54 +23,403 @@
              </div>
            </div>
            <div class="tbl-de">
-             <c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>
+             <v-client-table class="table-custom tbl-nosearch" ref="tblContract" :columns="columns" :options="options" :data="dataContract">
+            <template slot="selected" slot-scope="props">
+                <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
+            </template>
+            <template slot="employeecode" slot-scope="props">
+                <label v-if="props.row.employee!=null">{{props.row.employee.employeeCode}}</label>
+            </template>
+            <template slot="fullname" slot-scope="props">
+                <label v-if="props.row.employee!=null">{{props.row.employee.firstName}} {{props.row.employee.lastName}} </label>
+            </template>
+            <template slot="org" slot-scope="props">
+                <label v-if="props.row.employee!=null">{{props.row.employee.organization.name}} </label>
+            </template>
+            <template slot="effectDate" slot-scope="props">
+                <label>{{(props.row.effectDate)}} </label>
+            </template>
+            <template slot="expireDate" slot-scope="props">
+                <label>{{(props.row.expireDate)}} </label>
+            </template>
+            <template slot="statusId" slot-scope="props">
+               <label>{{props.row.statusId}}</label>
+            </template>
+            <template slot="contractNo" slot-scope="props">
+                <label>
+                    {{props.row.contractNo}}
+                </label>
+            </template>
+        </v-client-table>
            </div>
         </b-card>
-
       </b-col>
 
     </b-row><!--/.row-->
-
   </div>
 
 </template>
-
 <script>
-import { shuffleArray } from '@/shared/utils'
-import cTable from './Table.vue'
-
-const someData = () => shuffleArray([
-  {id: '1232', fullname: 'Samppa Nori', gender: 'BA', groupSub: 'BA staff', sub: '1234', dept: 'Quyết định lương',dept: 'Quyết định lương', date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ', _rowVariant: 'success'},
-  {id: '1233', fullname: 'Linh Nguyen', gender: 'BA', groupSub: 'BA fsf', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1234', fullname: 'Nguyen Linh', gender: 'BA', groupSub: 'BAss', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1235', fullname: 'Nguyen Linh Linh', gender: 'BA', groupSub: 'BA sadas', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1236', fullname: 'Samppa Nori', gender: 'BA', groupSub: 'BA sssaa', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1237', fullname: 'Samppa Nori', gender: 'BA', groupSub: 'BA cccc', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1238', fullname: 'Samppa Nori', gender: 'BA', groupSub: 'BAssss', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1239', fullname: 'Samppa Nori', gender: 'AB', groupSub: 'BAfff', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1231', fullname: 'Samppa Nori', gender: 'CD', groupSub: 'BAssdd', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'},
-  {id: '1211', fullname: 'Samppa Nori', gender: 'MK', groupSub: 'BAaaaaa', sub: '1234', dept: 'Quyết định lương',date: '21/09/19', date2: '21/11/19', status: 'Đã nghỉ'}
-])
-
+import { shuffleArray } from "@/shared/utils";
 export default {
-  name: 'quanlyhopdong',
-  components: {cTable},
+  name: "quanlyhopdong",
+  components: {},
   data: () => {
     return {
-      items: someData,
-      itemsArray: someData(),
-      fields: [
-        {key: 'id', label: 'Mã nhân viên', sortable: true},
-        {key: 'fullname', label: 'Họ tên', sortable: true},
-        {key: 'gender', label: 'Đơn vị', sortable: true},
-        {key: 'groupSub', label: 'Chức danh', sortable: true},
-        {key: 'sub', label: 'Số quyết định', sortable: true},
-        {key: 'dept', label: 'Loại hợp đồng', sortable: true},
-        {key: 'date', label: 'Ngày bắt đầu', sortable: true},
-        {key: 'date2', label: 'Ngày kết thúc', sortable: true},
-        {key: 'status', label: 'Trạng thái',sortable: true}
+      PenddingId: "",
+      SignDate: "",
+      checkButton: false,
+      showcheckbox: false,
+      checkShowWorking: false,
+      dataTitle: [],
+      Id: "",
+      emp: [],
+      listOrg: [],
+      checked: false,
+      checked1: false,
+      editchecked: false,
+      state: false,
+      collapsed: false,
+      Code: "",
+      Name: "",
+      Remark: "",
+      Active: "",
+      groupID: "",
+      nameGroup: "",
+      MessageError: "",
+      CodeRequired: "",
+      GroupRequired: "",
+      NameRequired: "",
+      grouplist: [],
+      listIdTitle: [],
+      listIdChange: [],
+      dataStatus: [],
+      statuslist: [],
+      datacontractype: [],
+      dataTieuChi: [
+        { value: "employeeCode", type: "string" },
+        { value: "joinDateState", type: "datetime" },
+        { value: "fullName", type: "string" },
+        { value: "workstatus", type: "checkbox" }
       ],
+      data: [],
+      checked: false,
+      columns: [
+        "selected",
+        "contractNo",
+        "employeecode",
+        "fullname",
+        "org",
+        "titleId",
+        "typecontract",
+        "effectDate",
+        "expireDate",
+        "statusId"
+      ],
+      dataContract: [
+        {
+          selected: false,
+          contractNo: "N02934",
+          employeecode: "M01",
+          fullname: "Phi tien lam",
+          org: "don vi",
+          titleId: "Chức danh",
+          typecontract: "Loại hợp đồng",
+          effectDate: "10/10/2019",
+          expireDate: "1/12/1990",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          contractNo: "N02934",
+          employeecode: "M01",
+          fullname: "Phi tien lam",
+          org: "don vi",
+          titleId: "Chức danh",
+          typecontract: "Loại hợp đồng",
+          effectDate: "10/10/2019",
+          expireDate: "1/12/1990",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          contractNo: "N02934",
+          employeecode: "M01",
+          fullname: "Phi tien lam",
+          org: "don vi",
+          titleId: "Chức danh",
+          typecontract: "Loại hợp đồng",
+          effectDate: "10/10/2019",
+          expireDate: "1/12/1990",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          contractNo: "N02934",
+          employeecode: "M01",
+          fullname: "Phi tien lam",
+          org: "don vi",
+          titleId: "Chức danh",
+          typecontract: "Loại hợp đồng",
+          effectDate: "10/10/2019",
+          expireDate: "1/12/1990",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          contractNo: "N02934",
+          employeecode: "M01",
+          fullname: "Phi tien lam",
+          org: "don vi",
+          titleId: "Chức danh",
+          typecontract: "Loại hợp đồng",
+          effectDate: "10/10/2019",
+          expireDate: "1/12/1990",
+          statusId: "Hoạt động"
+        }
+      ],
+      options: {
+        filterable: true,
+        sortable: ["employeecode", "fullname", "name", "org", "title"],
+        columnsClasses: {
+          selected: "col-check-box",
+          fullname: "col-group",
+          numberdecision: "col-group",
+          org: "col-group",
+          title: "col-group",
+          actflg: "col-action"
+        },
+        headings: {
+          selected: function(h) {
+            return h("input", {
+              attrs: {
+                type: "checkbox",
+                id: "selectAllCheckbox"
+              },
+              on: {
+                click: e => {
+                  this.selectAll(e.srcElement.checked);
+                }
+              },
+              ref: "selectAllCheckbox"
+            });
+          },
+          contractNo: function(h) {
+            return "ContractNumber";
+          },
+          employeecode: function(h) {
+            return "EmployeeCode";
+          },
+          fullname: function(h) {
+            return "FullName";
+          },
+          numberdecision: function(h) {
+            return "NumberDecision";
+          },
+          typecontract: function(h) {
+            return "ContractType";
+          },
+          name: function(h) {
+            return "Name";
+          },
+          org: function(h) {
+            return "Organization";
+          },
+          titleId: function(h) {
+            return "Title";
+          },
+          effectDate: function(h) {
+            return "EffectDate";
+          },
+          expireDate: function(h) {
+            return "ExpiryDate";
+          },
+          statusId: function(h) {
+            return "Actflg";
+          }
+        }
+      }
+    };
+  },
+  methods: {
+    Goto() {
+      window.location.href = "/hoso/themhopdong";
+    },
+    onChange(evt) {
+      this.grouplist.forEach((key, value) => {
+        if (_.isEqual(this.groupID, key.id)) this.nameGroup = key.name;
+      });
+    },
+    display(evt) {
+      return this.$t(evt);
+    },
+    selectAll(checked) {
+      this.$refs.tblContract.tableData.forEach((key, value) => {
+        if (checked) {
+          {
+            key.selected = true;
+            //  this.checked = true;
+          }
+        } else {
+          key.selected = false;
+          //this.checked = false;
+        }
+      });
+    },
+    ShowEdit() {
+      if (!_.isEqual(this.Id, "")) {
+        window.location.href = "/EditContract?Id=" + this.Id;
+      }
+    },
+    async ShowPopUpSigner() {
+      this.$refs.showPopUpSigner.show();
+      bus.$on("ChooseSignerId", data => {
+        this.$refs.txtSigner.value =
+          data.firstName.trim() + " " + data.lastName.trim();
+        //this.updatecontract.workingId = data.id;
+        this.getSignerInformation(data);
+        this.$refs["showPopUpSigner"].hide();
+        this.$refs.showDetail.show();
+      });
+    },
+    async getSignerInformation(emp) {},
+    async agreeWorking() {
+      this.$refs.showDetail.hide();
+    },
+    async denny(ot) {
+      ot.readOrEdit = null;
+      this.state = false;
+      this.checked = false;
+    },
+    async Apply() {
+      const mess = this.$t("MessageApply");
+      if (confirm(mess)) {
+        let listIdChange = [];
+        if (!_.isEqual(this.listIdChange, null)) {
+          this.$refs.tblContract.tableData.forEach(function(key, value) {
+            if (key.selected) listIdChange.push(key.id);
+          });
+          window.location.href = "/ApprovedChangeContract?Id=" + listIdChange;
+        }
+      }
+    },
+    async Denny() {
+      const mess = this.$t("MessageApply");
+      if (confirm(mess)) {
+        let listIdChange = [];
+        if (!_.isEqual(this.listIdChange, null)) {
+          this.$refs.tblContract.tableData.forEach(function(key, value) {
+            if (key.selected) listIdChange.push(key.id);
+          });
+          window.location.href = "/DennyChangeContract?Id=" + listIdChange;
+        }
+      }
+    },
+    ShowWorking(e) {
+      if (!_.isNull(this.SignDate)) {
+        this.SignDate = notification.customFormatter1(this.SignDate);
+      }
+      this.$refs.showDetail.show();
+    },
+    CheckCheckBox(evt) {
+      this.checkButton = false;
+      this.checked = false;
+      let count = 0;
+      this.Id = "";
+      let length = this.$refs.tblContract.tableData.length;
+      for (let i = 0; i < length; i++) {
+        let ot = this.$refs.tblContract.tableData[i];
+        if (!_.isEqual(ot.id, evt.id)) {
+          if (ot.selected) {
+            count++;
+            if (count > 1) {
+              this.checkButton = false;
+              if (this.checked) {
+                if (!_.isEqual(ot.statusId, this.PenddingId)) {
+                  this.checked = false;
+                } else {
+                  this.checked = true;
+                }
+              }
+            } else {
+              if (_.isEqual(ot.statusId, this.PenddingId)) {
+                this.checked = true;
+                this.checkButton = true;
+                this.Id = ot.id;
+              }
+            }
+          }
+        } else {
+          if (evt.selected) {
+            //bo check
+            if (count > 1) {
+              this.checkButton = false;
+              if (this.checked) {
+                if (_.isEqual(ot.statusId, this.PenddingId)) {
+                  this.checked = true;
+                } else {
+                  this.checked = false;
+                }
+              }
+            } else {
+              let ot = this.$refs.tblContract.tableData[i - 1];
+              if (!_.isUndefined(ot)) {
+                if (ot.selected) {
+                  if (_.isEqual(ot.statusId, this.PenddingId)) {
+                    this.checkButton = true;
+                    this.checked = true;
+                    this.Id = ot.id;
+                  }
+                }
+              }
+            }
+          } else {
+            count++;
+            if (count > 1) {
+              this.checkButton = false;
+              if (this.checked) {
+                if (_.isEqual(ot.statusId, this.PenddingId)) {
+                  this.checked = true;
+                } else {
+                  this.checked = false;
+                }
+              }
+            } else {
+              if (_.isEqual(evt.statusId, this.PenddingId)) {
+                this.checkButton = true;
+                this.checked = true;
+                this.Id = evt.id;
+              }
+            }
+          }
+        }
+      }
+    },
+    Search(evt) {
+      this.collapsed = false;
+    },
+    async Delete() {},
+    collapse() {
+      this.collapsed = !this.collapsed;
+    },
+    removeSearch(filter) {
+      if (_.isEqual(filter, "group")) {
+        this.groupID = "";
+        this.Search(null);
+      } else if (_.isEqual(filter, "code")) {
+        this.Code = "";
+        this.Search(null);
+      } else if (_.isEqual(filter, "name")) {
+        this.Name = "";
+        this.Search(null);
+      } else if (_.isEqual(filter, "active")) {
+        this.Active = "";
+        this.Search(null);
+      } else if (_.isEqual(filter, "remark")) {
+        this.Remark = "";
+        this.Search(null);
+      }
     }
   }
-}
+};
 </script>

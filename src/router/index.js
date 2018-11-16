@@ -23,6 +23,7 @@ const Quanlynghiviec = () => import('@/views/hoso/Quanlynghiviec')
 const Danhmucphucap = () => import('@/views/hoso/Danhmucphucap')
 const Danhmuchopdong = () => import('@/views/hoso/Danhmuchopdong')
 const Thamsohethong = () => import('@/views/system/Thamsohethong')
+const NewContract = () => import('@/views/hoso/NewContract')
 
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
@@ -79,7 +80,7 @@ const Salary = () => import('@/views/category/Salary')
 Vue.use(Router)
 
 export default new Router({
-  mode: 'hash', // https://router.vuejs.org/api/#mode
+  mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({
     y: 0
@@ -220,6 +221,11 @@ export default new Router({
               path: 'quanlyhosoluong',
               name: 'Quản lý hồ sơ lương',
               component: Quanlyhosoluong
+            },
+            {
+              path: '/hoso/themhopdong',
+              name: 'Thêm hợp đồng',
+              component: NewContract
             },
             {
               path: 'quanlyhopdong',
