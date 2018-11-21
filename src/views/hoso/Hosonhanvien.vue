@@ -38,7 +38,7 @@
               </b-button>
             </div>
           </div>
-            <div class="filter-box show-filter-box">
+          <div class="filter-box show-filter-box">
             <div v-show="showbasic" class="basic-box">
              <div class="card">
               <div class="card-body">
@@ -111,7 +111,6 @@
                               <date-picker class="custom-datepicker-style1" lang="en" @change="datepickerClosedFunction(item.value)" v-model="dateModel[item]"
                                            :ref="item.value+'*datecontent'" format="DD-MM-YYYY" v-if="item.type=='datetime'" :clearable="false"></date-picker>
                               <b-form-checkbox class="custom-checkbox-style1" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" v-if="item.type=='checkbox'" value="me">Đã nghỉ</b-form-checkbox>
-                              <!-- <input class="custom-checkbox-style1" type="checkbox" :ref="item.value+'*checkboxcontent'" @change="change(item.value)" v-if="item.type=='checkbox'" /> -->
                             </td>
                           </tr>
                           <tr>

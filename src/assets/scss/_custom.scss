@@ -683,6 +683,7 @@ html:not([dir="rtl"]) .sidebar {
    background-color: transparent;
    outline: none !important;
    box-shadow: none;
+   height: 35px;
    &:focus,
    &:active{
     outline: none !important;
@@ -742,12 +743,6 @@ html:not([dir="rtl"]) .sidebar {
     }
    }
   }
-  .custom-input-style1{
-   height: 34px;
-   width: 100%;
-   border: none;
-   border-bottom: 1px solid #ccc;
-  }
  }
 }
 .form-search-2{
@@ -769,11 +764,15 @@ html:not([dir="rtl"]) .sidebar {
  }
 }
 .custom-input-style1{
- height: 34px;
+ height: 36px;
  width: 100%;
  border: none;
  border-bottom: 1px solid #ccc;
  outline: none;
+ box-shadow: none;
+ padding-left: 7px;
+ padding-right: 7px;
+ border-radius: 0;
  box-shadow: none;
 }
 .table-custom{
@@ -832,6 +831,12 @@ html:not([dir="rtl"]) .sidebar {
     }
    }
   }
+ }
+}
+.custom-checkbox{
+ &.custom-control-inline{
+  height: 35px;
+  align-items: center;
  }
 }
 .more-func{
@@ -893,6 +898,21 @@ html:not([dir="rtl"]) .sidebar {
   }
   span{
    font-weight: bold;
+  }
+ }
+}
+.check-items{
+ .form-control{
+  background-color: transparent;
+  border: none;
+ }
+ &.center-in-table{
+  text-align: center;
+  .form-control{
+   background-color: transparent;
+   border: none;
+   margin-right: 0;
+   width: auto;
   }
  }
 }
