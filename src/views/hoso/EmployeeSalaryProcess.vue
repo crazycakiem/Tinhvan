@@ -7,8 +7,8 @@
                                     <template slot="effectDate" slot-scope="props">
                                         <label>{{(props.row.effectDate)}} </label>
                                     </template>
-                                  
-                                
+
+
                                     <template slot="salaryBasic" slot-scope="props">
                                         <label>{{(props.row.salaryBasic)}}</label>
                                     </template>
@@ -30,7 +30,7 @@
                                 </v-client-table>
     </div>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import _ from "lodash";

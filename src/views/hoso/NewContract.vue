@@ -70,7 +70,7 @@
                 <label label-for="txtExpiryDate">ExpiryDate </label>
             </b-col>
             <b-col cols="2">
-                <date-picker id="txtExpiryDate" lang="en" 
+                <date-picker id="txtExpiryDate" lang="en"
                              format="DD-MM-YYYY" :clearable="false" placeholder="Select Day"></date-picker>
             </b-col>
         </b-row>
@@ -79,7 +79,7 @@
                 <label label-for="txtMorningStart">MorningStart </label>
             </b-col>
             <b-col cols="2">
-                <date-picker id="txtMorningStart" lang="en" type="time" 
+                <date-picker id="txtMorningStart" lang="en" type="time"
                              format="HH:mm" :clearable="false" placeholder="Select Time"></date-picker>
             </b-col>
             <b-col cols="1">
@@ -93,14 +93,14 @@
                 <label label-for="txtAfternoonStart">AfternoonStart </label>
             </b-col>
             <b-col cols="2">
-                <date-picker id="txtAfternoonStart" lang="en" type="time" 
+                <date-picker id="txtAfternoonStart" lang="en" type="time"
                              format="HH:mm" :clearable="false" placeholder="Select Time"></date-picker>
             </b-col>
             <b-col cols="1">
                 <label label-for="txtAfternoonFinish">AfternoonFinish </label>
             </b-col>
             <b-col cols="2">
-                <date-picker id="txtAfternoonFinish" lang="en" type="time" 
+                <date-picker id="txtAfternoonFinish" lang="en" type="time"
                              format="HH:mm" :clearable="false" placeholder="Select Time"></date-picker>
             </b-col>
         </b-row>
@@ -109,7 +109,7 @@
                 <label label-for="cboActflg">Actflg </label>
             </b-col>
             <b-col cols="2">
-                <select id="cboActflg" ref="cboActflg"  v-on:change="changeActflg"> 
+                <select id="cboActflg" ref="cboActflg"  v-on:change="changeActflg">
                     <option v-for="item in dataStatus" :key="item.id" :value="item.id">{{item.name}}  </option>
                 </select>
             </b-col>
@@ -259,7 +259,7 @@
                 <b-col cols="2">
                  <label ref="TotalSalary"> </label>
                 </b-col>
-             
+
             </b-row>
             <b-row class="mt-3">
                 <button id="cboShowAll" type="button" class="btn btn-primary btn-custom" @click="changeShow">Show phu cap</button>
@@ -347,7 +347,7 @@
                 <b-button id="btnSaveAndContinue" type="button" variant="success"  v-show="!showWageRecord" @click="onSaveAndContinue">Continue</b-button>
                 <b-button id="btnEdit" type="button" variant="danger" @click="onEdit" v-show="showWageRecord">Back</b-button>
                 <b-button id="btnSaveWageRecord" type="button" variant="success"  v-show="showWageRecord" @click="onSaveWageRecord">Submit</b-button>
-                
+
             </b-col>
         </b-row>
         <b-modal id="showPopUpManager" ref="showPopUpManager" size="lg" title="Employee" :lazy="true" :hide-footer="true">
@@ -358,7 +358,7 @@
         </b-modal>
     </b-form>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import DatePicker from "vue2-datepicker";

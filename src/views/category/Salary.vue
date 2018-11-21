@@ -20,11 +20,7 @@
 </template>
 
 
-<<<<<<< HEAD
 <script>
-=======
-<script lang="ts">
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import Salarygroup from "./Salarygroup.vue";
@@ -52,7 +48,3 @@ display(evt) {
 
 }
 </script>
-<<<<<<< HEAD
-=======
-
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816

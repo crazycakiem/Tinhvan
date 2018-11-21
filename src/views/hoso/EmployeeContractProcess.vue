@@ -1,14 +1,14 @@
 <template>
     <div id="EmployeeContractProcess">
         <v-client-table class="table-custom" ref="tblEmployeeContractProcess" :data="dataEmployeeContractProcess"
-         :columns="columnsEmployeeContractProcess" :options="optionsEmployeeContractProcess">      
-        
+         :columns="columnsEmployeeContractProcess" :options="optionsEmployeeContractProcess">
+
          <template  slot="contractNo" slot-scope="props">
              <label>{{props.row.contractNo}}</label>
-         </template>  
+         </template>
            <template  slot="effectDate" slot-scope="props">
              <label>{{(props.row.effectDate)}}</label>
-         </template>  
+         </template>
            <template  slot="expiryDate" slot-scope="props">
              <label>{{(props.row.expireDate)}}</label>
          </template>
@@ -21,7 +21,7 @@
         </v-client-table>
     </div>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import _ from "lodash";

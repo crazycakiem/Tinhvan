@@ -108,11 +108,6 @@
                    </div>
                </b-card>
            </b-collapse>
-<<<<<<< HEAD
-
-=======
-          
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
            <div class="tbl-de">
              <v-client-table class="table-custom tbl-nosearch" ref="tblOtherList" :columns="columns" :options="options" :data="dataTable">
                  <template slot="selected" slot-scope="props">

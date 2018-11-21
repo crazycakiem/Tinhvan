@@ -2,11 +2,8 @@
     <div  class="animated fadeIn">
      <b-row>
      <b-col lg="12">
-<<<<<<< HEAD
         <b-card class="card-de1">
-=======
-        <b-card class="card-de1"> 
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
         <div class="panel-title-de1">
           <div>
    <h4>SalaryGroup</h4>
@@ -26,22 +23,16 @@
                  <i class="fa fa-trash" aria-hidden="true" /> D
                </b-button>
           </div>
-<<<<<<< HEAD
             <div class="ml-auto">
-=======
-            <Div class="ml-auto">
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
                <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
                  Print <i class="cui-print icons"></i>
                </b-button>
                <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
                  Export <i class="icon-arrow-down-circle icons"></i>
                </b-button>
-<<<<<<< HEAD
            </div>
-=======
-           </Div>
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
              </div>
                  <div class="function-list mb-2">
              <div class="func-t">
@@ -67,11 +58,8 @@
                     <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')"></i>
                 </li>
             </ul>
-<<<<<<< HEAD
              </div>
-=======
-             </div>             
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
            </div>
             <b-collapse id="collapse2" :visible="collapsed">
                 <b-card class="mb-2">
@@ -115,11 +103,6 @@
                 </b-card>
             </b-collapse>
 
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
         <div class="tbl-de">
         <v-client-table class="table-custom tbl-nosearch" ref="tblSalaryGroup" :columns="columns" :options="options" :data="dataTable">
             <template slot="selected" slot-scope="props">
@@ -191,13 +174,7 @@ import { bus } from "../../main";
 import _ from "lodash";
 export default  {
 name: "Salarygroup",
-  components: {
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
-  },
+  components: {},
   data(){
       return {
           state:false,
@@ -313,11 +290,6 @@ name: "Salarygroup",
         return;
     }
     if (_.isEqual(length, 0)) {
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       ((this.$refs.tblSalaryGroup ).data).push({
           select:false,name:'',code:'',effectDate:'',readOrEdit:'add'
       });
@@ -370,13 +342,7 @@ name: "Salarygroup",
         }
       });
     },
-   agree(ot) {
-<<<<<<< HEAD
-
-=======
-   
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
-  },
+   agree(ot) {},
   async denny(ot) {
     ot.readOrEdit = null;
     this.state = false;
@@ -385,11 +351,6 @@ name: "Salarygroup",
   async Apply() {
   },
   async Denny() {
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
   CheckCheckBox(evt) {
     let length = ((this.$refs.tblSalaryGroup).tableData ).length;
@@ -413,11 +374,6 @@ name: "Salarygroup",
     this.collapsed = false;
   },
   async Delete() {
-<<<<<<< HEAD
-
-=======
-   
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
   collapse() {
     this.collapsed = !this.collapsed;
@@ -454,20 +410,5 @@ name: "Salarygroup",
       }
     }
   },
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
- 
- 
- 
-  
-
-  
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
 }
 </script>

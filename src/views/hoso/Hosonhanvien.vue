@@ -1,15 +1,12 @@
 <template>
   <div class="animated fadeIn">
+
     <b-row>
       <b-col lg="12">
         <b-card class="card-de1">
           <div class="panel-title-de1">
             <div>
               <h4>Hồ sơ nhân viên </h4>
-<<<<<<< HEAD
-              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
-                <i class="fa fa-search"></i> Tìm kiếm
-=======
               <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddEmployee">
                 Thêm mới <i class="icon-plus"></i>
               </b-button>
@@ -27,7 +24,6 @@
               </b-button>
                   <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
                 <i class="fa fa-filter"></i> Tìm kiếm
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
               </b-button>
               <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showAdvance">
                 <i class="fa fa-filter"></i> Tìm kiếm nâng cao
@@ -140,32 +136,8 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-          <div class="more-func full-btn">
-            <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddEmployee">
-              <i class="icon-plus"></i> Thêm mới
-            </b-button>
-            <b-button class="btn-pill mr-1" variant="default" size="sm"  @click="ExtenEmployee" v-if="checkButton">
-              <i class="cui-pencil icons"></i> Edit
-            </b-button>
-            <b-button class="btn-pill mr-1" variant="default" size="sm">
-              <i class="fa fa-file-text-o"></i> Làm hợp đồng
-            </b-button>
-            <b-button class="btn-pill mr-1" variant="default" size="sm">
-              <i class="fa fa-file-o"></i> Làm hồ sơ lương
-            </b-button>
-            <b-button class="btn-pill mr-1" variant="default" size="sm">
-              <i class="fa fa-user-times"></i> Nghỉ việc
-            </b-button>
-          </div>
           <div class="tbl-de">
-            <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
             <v-client-table class="table-custom tbl-nosearch" :columns="columns" :data="itemsArray" :options="options" ref="tblEmployee" v-show="showTable">
-=======
-          <div class="tbl-de">
-            <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
-            <v-client-table :columns="columns" :data="itemsArray" :options="options" ref="tblEmployee" v-show="showTable">
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
               <template slot="selected" slot-scope="props">
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
               </template>
@@ -178,18 +150,6 @@
             </v-client-table>
           </div>
           <!-- element to new Employee -->
-<<<<<<< HEAD
-          <b-collapse id="newEmployee" v-model="showAdd">
-              <NewEmployee :dataGender="dataGender" :dataEmployeeObject="dataEmployeeObject" :dataReligion="dataReligion" :dataEthnic="dataEthnic"
-                           :dataNation="dataNation"  :dataTitle="dataTitle" :dataOrg="dataOrg">
-              </NewEmployee>
-          </b-collapse>
-          <!-- element to extension employee -->
-          <b-collapse id="extenEmployee" v-model="showExt">
-            <EditEmployee v-if="showExt" >
-            </EditEmployee>
-          </b-collapse>
-=======
             <b-collapse id="newEmployee" v-model="showAdd">
                 <NewEmployee :dataGender="dataGender" :dataEmployeeObject="dataEmployeeObject" :dataReligion="dataReligion" :dataEthnic="dataEthnic"
                              :dataNation="dataNation"  :dataTitle="dataTitle" :dataOrg="dataOrg">
@@ -203,7 +163,6 @@
             </b-collapse>
 
 
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
         </b-card>
       </b-col>
     </b-row><!--/.row-->
@@ -855,27 +814,11 @@ export default {
     async ExtenEmployee() {
       this.showAdd = false;
       this.showExt = !this.showExt;
-<<<<<<< HEAD
-      debugger;
-=======
       // debugger;
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       if (this.showExt) {
         this.showTable = false;
         this.collapsed = false;
         this.Filter = false;
-<<<<<<< HEAD
-        if (_.isEqual(this.dataAllowanceList.length, 0)) {
-          //lay allowancce
-          const getAllowance = new GetAllowanceLists();
-          getAllowance.actflg = "A";
-          await client.get(getAllowance).then(res => {
-            this.dataAllowanceList = res.items;
-            console.log(this.dataAllowanceList);
-          });
-        }
-=======
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       } else {
         this.showTable = true;
         this.Filter = true;
@@ -889,8 +832,4 @@ export default {
     }
   }
 };
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816

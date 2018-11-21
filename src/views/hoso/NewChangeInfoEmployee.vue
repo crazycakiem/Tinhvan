@@ -77,7 +77,7 @@
                 <label label-for="txtExpiryDate">ExpiryDate </label>
             </b-col>
             <b-col cols="2">
-                <date-picker id="txtExpiryDate" lang="en" 
+                <date-picker id="txtExpiryDate" lang="en"
                              format="DD-MM-YYYY" :clearable="false"></date-picker>
             </b-col>
         </b-row>
@@ -146,7 +146,7 @@
         </b-modal>
     </b-form>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import DatePicker from "vue2-datepicker";

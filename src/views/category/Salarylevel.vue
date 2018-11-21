@@ -2,11 +2,9 @@
     <div  class="animated fadeIn">
        <b-row>
         <b-col lg="12">
-<<<<<<< HEAD
+
             <b-card class="card-de1">
-=======
-            <b-card class="card-de1">       
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
         <div class="panel-title-de1">
           <Div>
   <h4>SalaryLevel</h4>
@@ -56,11 +54,9 @@
                     <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')"></i>
                 </li>
             </ul>
-<<<<<<< HEAD
+
              </div>
-=======
-             </div>             
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
            </div>
             <b-collapse id="collapse2" :visible="collapsed">
                 <b-card class="mb-2">
@@ -97,11 +93,9 @@
                         </button>
                     </div>
                 </b-card>
-<<<<<<< HEAD
+
             </b-collapse>
-=======
-            </b-collapse> 
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
         <div class="tbl-de">
         <v-client-table class="table-custom tbl-nosearch" ref="tblCity" :columns="columns" :options="options" :data="dataTable">
             <template slot="selected" slot-scope="props">
@@ -165,11 +159,9 @@
         </b-row>
     </div>
 </template>
-<<<<<<< HEAD
+
 <script>
-=======
-<script lang="ts">
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { bus } from "../../main";
@@ -177,11 +169,6 @@ import _ from "lodash";
 export default {
     name: "Salarylevel",
   components: {
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
 data(){
     return{
@@ -354,17 +341,10 @@ onChange(evt) {
   async agree(ot) {
     if (_.isEqual(ot.readOrEdit, "add")) {
       this.state = true;
-<<<<<<< HEAD
 
     } else if (_.isEqual(ot.readOrEdit, "edit")) {
       this.state = true;
 
-=======
-     
-    } else if (_.isEqual(ot.readOrEdit, "edit")) {
-      this.state = true;
-     
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
     }
   },
  async denny(ot) {
@@ -373,17 +353,10 @@ onChange(evt) {
     this.checked = false;
   },
   async Apply() {
-<<<<<<< HEAD
 
   },
   async Denny() {
 
-=======
-   
-  },
-  async Denny() {
-    
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
   CheckCheckBox(evt) {
     let length = ((this.$refs.tblCity).tableData).length;
