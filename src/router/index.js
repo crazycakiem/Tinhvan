@@ -23,7 +23,9 @@ const Quanlynghiviec = () => import('@/views/hoso/Quanlynghiviec')
 const Danhmucphucap = () => import('@/views/hoso/Danhmucphucap')
 const Danhmuchopdong = () => import('@/views/hoso/Danhmuchopdong')
 const Thamsohethong = () => import('@/views/system/Thamsohethong')
-
+const NewContract = () => import('@/views/hoso/NewContract')
+const NewWageRecord = () => import('@/views/hoso/NewWageRecord')
+const NewChangeInfoEmployee = () => import('@/views/hoso/NewChangeInfoEmployee')
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
 const Forms = () => import('@/views/base/Forms')
@@ -79,7 +81,7 @@ const Salary = () => import('@/views/category/Salary')
 Vue.use(Router)
 
 export default new Router({
-  mode: 'hash', // https://router.vuejs.org/api/#mode
+  mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({
     y: 0
@@ -220,6 +222,22 @@ export default new Router({
               path: 'quanlyhosoluong',
               name: 'Quản lý hồ sơ lương',
               component: Quanlyhosoluong
+            },
+            {
+              path: '/hoso/themhosoluong',
+              name: 'Thêm hồ sơ lương',
+              component: NewWageRecord
+            },
+
+            {
+              path: '/hoso/themthaydoithongtinnhansu',
+              name: 'Thêm thay đổi thông tin nhân sự',
+              component: NewChangeInfoEmployee
+            },
+            {
+              path: '/hoso/themhopdong',
+              name: 'Thêm hợp đồng',
+              component: NewContract
             },
             {
               path: 'quanlyhopdong',

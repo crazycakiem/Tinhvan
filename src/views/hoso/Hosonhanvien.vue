@@ -6,8 +6,28 @@
           <div class="panel-title-de1">
             <div>
               <h4>Hồ sơ nhân viên </h4>
+<<<<<<< HEAD
               <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
                 <i class="fa fa-search"></i> Tìm kiếm
+=======
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddEmployee">
+                Thêm mới <i class="icon-plus"></i>
+              </b-button>
+                <b-button class="btn-pill mr-1" variant="default" size="sm"  @click="ExtenEmployee" v-if="checkButton">
+                Edit <i class="icon-plus"></i>
+              </b-button>
+                <b-button class="btn-pill" variant="default" size="sm">
+                <i class="icon-plus icons"></i> Làm hợp đồng
+              </b-button>
+                <b-button class="btn-pill" variant="default" size="sm">
+                <i class="icon-plus icons"></i> Làm hồ sơ lương
+              </b-button>
+                <b-button class="btn-pill" variant="default" size="sm">
+                <i class="icon-plus icons"></i> nghỉ việc
+              </b-button>
+                  <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
+                <i class="fa fa-filter"></i> Tìm kiếm
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
               </b-button>
               <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showAdvance">
                 <i class="fa fa-filter"></i> Tìm kiếm nâng cao
@@ -22,7 +42,7 @@
               </b-button>
             </div>
           </div>
-          <div class="filter-box show-filter-box">
+            <div class="filter-box show-filter-box">
             <div v-show="showbasic" class="basic-box">
              <div class="card">
               <div class="card-body">
@@ -120,6 +140,7 @@
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <div class="more-func full-btn">
             <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddEmployee">
               <i class="icon-plus"></i> Thêm mới
@@ -140,6 +161,11 @@
           <div class="tbl-de">
             <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
             <v-client-table class="table-custom tbl-nosearch" :columns="columns" :data="itemsArray" :options="options" ref="tblEmployee" v-show="showTable">
+=======
+          <div class="tbl-de">
+            <!--<c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>-->
+            <v-client-table :columns="columns" :data="itemsArray" :options="options" ref="tblEmployee" v-show="showTable">
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
               <template slot="selected" slot-scope="props">
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
               </template>
@@ -152,6 +178,7 @@
             </v-client-table>
           </div>
           <!-- element to new Employee -->
+<<<<<<< HEAD
           <b-collapse id="newEmployee" v-model="showAdd">
               <NewEmployee :dataGender="dataGender" :dataEmployeeObject="dataEmployeeObject" :dataReligion="dataReligion" :dataEthnic="dataEthnic"
                            :dataNation="dataNation"  :dataTitle="dataTitle" :dataOrg="dataOrg">
@@ -162,6 +189,21 @@
             <EditEmployee v-if="showExt" >
             </EditEmployee>
           </b-collapse>
+=======
+            <b-collapse id="newEmployee" v-model="showAdd">
+                <NewEmployee :dataGender="dataGender" :dataEmployeeObject="dataEmployeeObject" :dataReligion="dataReligion" :dataEthnic="dataEthnic"
+                             :dataNation="dataNation"  :dataTitle="dataTitle" :dataOrg="dataOrg">
+                </NewEmployee>
+            </b-collapse>
+
+          <!-- element to extension employee -->
+            <b-collapse id="extenEmployee" v-model="showExt">
+              <EditEmployee v-if="showExt" >
+              </EditEmployee>
+            </b-collapse>
+
+
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
         </b-card>
       </b-col>
     </b-row><!--/.row-->
@@ -813,11 +855,16 @@ export default {
     async ExtenEmployee() {
       this.showAdd = false;
       this.showExt = !this.showExt;
+<<<<<<< HEAD
       debugger;
+=======
+      // debugger;
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       if (this.showExt) {
         this.showTable = false;
         this.collapsed = false;
         this.Filter = false;
+<<<<<<< HEAD
         if (_.isEqual(this.dataAllowanceList.length, 0)) {
           //lay allowancce
           const getAllowance = new GetAllowanceLists();
@@ -827,6 +874,8 @@ export default {
             console.log(this.dataAllowanceList);
           });
         }
+=======
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       } else {
         this.showTable = true;
         this.Filter = true;
@@ -840,4 +889,8 @@ export default {
     }
   }
 };
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816

@@ -42,7 +42,11 @@
         <b-container fluid>
             <b-row>
                 <b-col cols="4">
+<<<<<<< HEAD
                     <v-jstree :data="data"
+=======
+                    <v-jstree :data="data"                            
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
                               :show-checkbox="showcheckbox"
                               :multiple="multiple"
                               :collapse="collapse"
@@ -52,13 +56,22 @@
                               :text-field-name="txtparent"
                               :value-field-name="valueparent"
                               :children-field-name="txtchild"
+<<<<<<< HEAD
                               @item-click="itemclick"
+=======
+                              @item-click="itemclick"                            
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
                               :size="size"
                               ref="tree">
                                  <template scope="_">
          <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl" >
+<<<<<<< HEAD
            <i :class="_.vm.themeIconClasses" role="presentation" ></i>
                          {{_.model.text}}
+=======
+           <i :class="_.vm.themeIconClasses" role="presentation" ></i> 
+                         {{_.model.text}} 
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
     </div>
        </template>
                         </v-jstree>
@@ -66,10 +79,17 @@
                 </b-col>
                 <b-col cols="8">
                     <v-client-table ref="tblTitle" :options="options" :columns="columns" :data="dataTable">
+<<<<<<< HEAD
                         <template slot="selected" slot-scope="props">
                                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" >
                         </template>
 
+=======
+                        <template slot="selected" slot-scope="props">                         
+                                <input id="chkSelected" v-model="props.row.selected" type="checkbox" >   
+                        </template>
+                      
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
                     </v-client-table>
                 </b-col>
             </b-row>

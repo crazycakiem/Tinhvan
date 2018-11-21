@@ -7,7 +7,7 @@
            <div class="panel-title-de1">
              <div>
               <h4>Quản lý thay đổi thông tin nhân sự</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm">
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="Goto">
                   Thêm mới <i class="icon-plus"></i>
               </b-button>
               <b-button class="btn-pill" variant="default" size="sm">
@@ -24,7 +24,32 @@
              </div>
            </div>
            <div class="tbl-de">
-             <c-table class="card-tbl-de1" :table-data="items" :fields="fields"></c-table>
+              <v-client-table class="table-custom" ref="tblChangeInfo" :columns="columns" :options="options" :data="dataTable">
+            <template slot="selected" slot-scope="props">
+                <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
+            </template>
+            <template slot="id" slot-scope="props">
+                {{props.row.id}} 
+            </template>
+            <template slot="titleId" slot-scope="props">
+              {{props.row.titleId}}
+            </template>
+            <template slot="orgId" slot-scope="props">
+              {{props.row.orgId}}
+            </template>
+            <template slot="decisionNo" slot-scope="props">
+                {{props.row.decisionNo}}
+            </template>
+            <template slot="name" slot-scope="props">
+                {{props.row.name}} 
+            </template>
+            <template slot="decisionTypeId" slot-scope="props">
+                <label >{{props.row.decisionTypeId}}</label>
+            </template>
+            <template slot="statusId" slot-scope="props">
+             <label>{{props.row.statusId}}</label>
+            </template>
+        </v-client-table>
            </div>
         </b-card>
 
@@ -37,35 +62,112 @@
 </template>
 
 <script>
-import { shuffleArray } from '@/shared/utils'
-import cTable from './Table.vue'
-
-const someData = () => shuffleArray([
-  {id: '1232', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff', _rowVariant: 'success'},
-  {id: '1233', fullname: 'Quyết định nâng lương', gender: 'Samppa Nori 12', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1234', fullname: 'Quyết định điều chỉnh', gender: 'NSamppa Noriữ', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1235', fullname: 'Quyết định 11', gender: 'Samppa Nori 2dsd', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1236', fullname: 'Quyết định lương thưởng', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1237', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1238', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff'},
-  {id: '1239', fullname: 'Quyết định lương', gender: 'Samppa Nori', groupSub: 'BA', sub: 'BA Staff'}
-])
-
+import { shuffleArray } from "@/shared/utils";
 export default {
-  name: 'quanlythaydoithongtinnhansu',
-  components: {cTable},
+  name: "quanlythaydoithongtinnhansu",
+  components: {},
   data: () => {
     return {
-      items: someData,
-      itemsArray: someData(),
-      fields: [
-        {key: 'id', label: 'Số quyết định', sortable: true},
-        {key: 'fullname', label: 'Loại quyết định', sortable: true},
-        {key: 'gender', label: 'Họ tên', sortable: true},
-        {key: 'groupSub', label: 'Đơn vị', sortable: true},
-        {key: 'sub', label: 'Chức danh', sortable: true}
+      dataTable: [
+        {
+          selected: false,
+          decisionNo: "N0123",
+          decisionTypeId: "Loại quyết định",
+          name: "phi tien lam",
+          orgId: "tổ chức",
+          titleId: "Trọng tài",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          decisionNo: "N0123",
+          decisionTypeId: "Loại quyết định",
+          name: "phi tien lam",
+          orgId: "tổ chức",
+          titleId: "Trọng tài",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          decisionNo: "N0123",
+          decisionTypeId: "Loại quyết định",
+          name: "phi tien lam",
+          orgId: "tổ chức",
+          titleId: "Trọng tài",
+          statusId: "Hoạt động"
+        },
+        {
+          selected: false,
+          decisionNo: "N0123",
+          decisionTypeId: "Loại quyết định",
+          name: "phi tien lam",
+          orgId: "tổ chức",
+          titleId: "Trọng tài",
+          statusId: "Hoạt động"
+        }
       ],
+      columns: [
+        "selected",
+        "decisionNo",
+        "decisionTypeId",
+        "name",
+        "orgId",
+        "titleId",
+        "statusId"
+      ],
+      options: {
+        filterable: true,
+        sortable: [
+          "decisionNo",
+          "decisionTypeId",
+          "orgId",
+          "titleId",
+          "statusId"
+        ],
+        columnsClasses: {
+          selected: "col-check-box"
+        },
+        headings: {
+          selected: function(h) {
+            return h("input", {
+              attrs: {
+                type: "checkbox",
+                id: "selectAllCheckbox"
+              },
+              on: {
+                click: e => {
+                  this.selectAll(e.srcElement.checked);
+                }
+              },
+              ref: "selectAllCheckbox"
+            });
+          },
+          decisionNo: function(h) {
+            return "NumberDecision";
+          },
+          decisionTypeId: function(h) {
+            return "TypeDecision";
+          },
+          name: function(h) {
+            return "Name";
+          },
+          orgId: function(h) {
+            return "Organization";
+          },
+          titleId: function(h) {
+            return "Title";
+          },
+          statusId: function(h) {
+            return "Actflg";
+          }
+        }
+      }
+    };
+  },
+  methods: {
+    Goto() {
+      window.location = "/hoso/themthaydoithongtinnhansu";
     }
   }
-}
+};
 </script>

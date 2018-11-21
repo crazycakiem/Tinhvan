@@ -2,8 +2,13 @@
     <div class="animated fadeIn">
       <b-row>
          <b-col lg="12">
+<<<<<<< HEAD
               <b-card class="card-de1">
         <div  class="panel-title-de1">
+=======
+              <b-card class="card-de1">   
+        <div  class="panel-title-de1"> 
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
           <div>
                      <h4>{{("SalaryLevel")}}</h4>
                         <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default" size="sm">
@@ -55,7 +60,11 @@
                     <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')"></i>
                 </li>
             </ul>
+<<<<<<< HEAD
              </div>
+=======
+             </div>             
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
            </div>
             <b-collapse id="collapse2" :visible="collapsed">
                 <b-card class="mb-2">
@@ -180,12 +189,20 @@
             </div>
         </v-client-table>
         </div>
+<<<<<<< HEAD
         </b-card>
+=======
+        </b-card>   
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
         </b-col>
         </b-row>
     </div>
 </template>
+<<<<<<< HEAD
 <script>
+=======
+<script >
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { bus } from "../../main";
@@ -339,8 +356,13 @@ onChange1(evt) {
       ((this.$refs.tblrank ).data ).push(t);
       (this.$refs.tblrank ).count = 1;
     } else {
+<<<<<<< HEAD
 
 
+=======
+      
+     
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
       ((this.$refs.tblrank ).tableData ).unshift({});
     }
   },
@@ -375,10 +397,17 @@ onChange1(evt) {
   async agree(ot) {
     if (_.isEqual(ot.readOrEdit, "add")) {
       this.state = true;
+<<<<<<< HEAD
 
     } else if (_.isEqual(ot.readOrEdit, "edit")) {
       this.state = true;
 
+=======
+     
+    } else if (_.isEqual(ot.readOrEdit, "edit")) {
+      this.state = true;
+     
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
     }
   },
   async denny(ot) {
@@ -387,10 +416,17 @@ onChange1(evt) {
     this.checked = false;
   },
   async Apply() {
+<<<<<<< HEAD
 
   },
   async Denny() {
 
+=======
+    
+  },
+  async Denny() {
+   
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
   CheckCheckBox(evt) {
     let length = ((this.$refs.tblrank ).tableData ).length;
@@ -414,7 +450,11 @@ onChange1(evt) {
     this.collapsed = false;
   },
   async Delete() {
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
   },
   collapse() {
     this.collapsed = !this.collapsed;
