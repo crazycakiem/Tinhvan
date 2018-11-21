@@ -31,7 +31,8 @@
                    @item-click="itemClick"
                    @item-toggle="itemToggle"
                    :size="size"
-                   ref="tree">
+                   ref="tree"
+                   class="tv-tree-st1">
                    <template scope="_">
                      <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl">
                        <i :class="_.vm.themeIconClasses" role="presentation" v-if="!_.model.loading"></i>

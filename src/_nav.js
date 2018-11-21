@@ -31,7 +31,7 @@ export default {
         },
         {
           name: 'Thiết lập chức danh cho đơn vị',
-          url: 'link1',
+          url: '/tochuc/thietlapchucdanhchodonvi',
           icon: 'icon-doc'
         },
         {
@@ -45,6 +45,16 @@ export default {
           icon: 'icon-doc'
         }
       ]
+    },
+    {
+      name: 'Danh mục',
+      url: '/danhmuc',
+      icon: 'icon-folder',
+      children: [{
+        name: 'Danh mục lương',
+        url: '/danhmuc/danhmucluong',
+        icon: 'icon-doc'
+      }]
     },
     {
       name: 'Hồ sơ',

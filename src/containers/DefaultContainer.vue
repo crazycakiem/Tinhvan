@@ -5,6 +5,7 @@
       <div class="top-logo">
         <b-link class="navbar-brand" to="#">
           <span class="navbar-brand-full">TINHVAN System</span>
+          <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
         </b-link>
         <SidebarToggler class="d-md-down-none ml-auto" display="lg" />
       </div>
@@ -36,6 +37,7 @@
         <SidebarForm/>
         <SidebarNav :navItems="nav"></SidebarNav>
         <SidebarFooter/>
+        <SidebarMinimizer/>
       </AppSidebar>
       <main class="main">
         <!-- <Breadcrumb :list="list"/> -->
@@ -48,8 +50,7 @@
         <DefaultAside/>
       </AppAside> -->
     </div>
-    <TheFooter>
-      <!--footer-->
+    <!-- <TheFooter>
       <div>
         <span class="ml-1">&copy; 2018 TINHVAN.</span>
       </div>
@@ -57,7 +58,7 @@
         <span class="mr-1">Powered by</span>
         <a href="#">Bootstrap & Vue</a>
       </div>
-    </TheFooter>
+    </TheFooter> -->
   </div>
 </template>
 
@@ -82,7 +83,8 @@ export default {
     SidebarFooter,
     SidebarToggler,
     SidebarHeader,
-    SidebarNav
+    SidebarNav,
+    SidebarMinimizer
   },
   data () {
     return {

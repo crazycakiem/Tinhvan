@@ -72,6 +72,9 @@ const User = () => import('@/views/users/User')
 //Organization
 const Organization = () => import('@/views/org/Organization')
 const Themtochuc = () => import('@/views/tochuc/Themtochuc')
+const Chucdanhchodonvi = () => import('@/views/org/Chucdanhchodonvi')
+//category
+const Salary = () => import('@/views/category/Salary')
 
 Vue.use(Router)
 
@@ -92,6 +95,20 @@ export default new Router({
           component: Dashboard
         },
         {
+          path: 'danhmuc',
+          name: 'Danh mục',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [{
+            path: 'danhmucluong',
+            name: 'Danh mục lương',
+            component: Salary
+          }]
+        },
+        {
           path: 'tochuc',
           name: 'Tổ chức',
           component: {
@@ -100,15 +117,21 @@ export default new Router({
             }
           },
           children: [{
-             path: '/tochuc/Organization',
-             name: 'Thiết lập sơ đồ tổ chức',
-             component: Organization
-           },
-           {
-            path: '/tochuc/Themtochuc',
-            name: 'Thêm mới tổ chức',
-            component: Themtochuc
-          }]
+              path: '/tochuc/thietlapsodotochuc',
+              name: 'Thiết lập sơ đồ tổ chức',
+              component: Organization
+            },
+            {
+              path: '/tochuc/Themtochuc',
+              name: 'Thêm mới tổ chức',
+              component: Themtochuc
+            },
+            {
+              path: '/tochuc/thietlapchucdanhchodonvi',
+              name: 'Thiết lập chức danh cho đơn vị',
+              component: Chucdanhchodonvi
+            }
+          ]
         },
         {
           path: 'system',
