@@ -114,29 +114,40 @@
                      <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
                  </template>
                  <template slot="code" slot-scope="props">
-                     <input id="txtCode" :class="CheckClassReadOrEdit(props.row.code,props.row.readOrEdit,state)"
-                            v-model="props.row.code" type="text" v-bind:ref="props.row.id+'*code'" v-if="CheckIfOnlyAdd(props.row.readOrEdit)" name="props.row.id" />
+                     <input placeholder="Nhập Code" class="custom-input-style1 h30" id="txtCode" :class="CheckClassReadOrEdit(props.row.code,props.row.readOrEdit,state)"
+                         v-model="props.row.code" type="text" v-bind:ref="props.row.id+'*code'" v-if="CheckIfOnlyAdd(props.row.readOrEdit)" name="props.row.id" />
                      <label v-if="CheckIfOnlyAddHide(props.row.readOrEdit)">{{props.row.code}}</label>
                  </template>
                  <template slot="name" slot-scope="props">
-                     <input id="txtName" :class="CheckClassReadOrEdit(props.row.name,props.row.readOrEdit,state)"
-                            v-model="props.row.name" v-bind:ref="props.row.id+'*name'"
-                            v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
+                     <input placeholder="Nhập Tên" class="custom-input-style1 h30" id="txtName" :class="CheckClassReadOrEdit(props.row.name,props.row.readOrEdit,state)"
+                         v-model="props.row.name" v-bind:ref="props.row.id+'*name'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
                      <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.name}} </label>
                  </template>
                  <template slot="type" slot-scope="props">
-                     <select id="cboTypeId" :class="CheckClassReadOrEdit(props.row.typeId,props.row.readOrEdit,state)" v-model="props.row.typeId" v-if="CheckIfOnlyAdd(props.row.readOrEdit)">
+                     <!-- <select id="cboTypeId" :class="CheckClassReadOrEdit(props.row.typeId,props.row.readOrEdit,state)" v-model="props.row.typeId" v-if="CheckIfOnlyAdd(props.row.readOrEdit)">
                          <option value="" disabled selected hidden v-if="CheckIfOption(props.row.typeId,props.row.readOrEdit,state)">
                              {{TypeRequired}}
                          </option>
                          <option v-for="or in listAlltype" :value="or.id" :key="or.id">{{or.name}}</option>
-                     </select>
+                     </select> -->
+                     <div class="custom-slbox" v-if="CheckIfOnlyAdd(props.row.readOrEdit)">
+                      <b-form-select id="cboTypeId"
+                        class="sl-tv-style1"
+                        :plain="true"
+                        :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                        value="Please select"
+                        v-model="props.row.typeId"
+                        :class="CheckClassReadOrEdit(props.row.typeId,props.row.readOrEdit,state)"
+                        >
+                      </b-form-select>
+                     </div>
                      <label v-if="CheckDisPlayTypeLabel(props.row.typeId,i.id,props.row.readOrEdit)" v-for="i in listAlltype" :key="i.id">
                          {{i.name}}
                      </label>
                  </template>
                  <template slot="remark" slot-scope="props">
-                     <input id="txtRemark" class="form-control" v-model="props.row.remark" v-bind:ref="props.row.id+'*remark'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
+                     <input placeholder="Nhập Remark" class="custom-input-style1 h30" id="txtremark" :class="CheckClassReadOrEdit(props.row.remark,props.row.readOrEdit,state)"
+                         v-model="props.row.remark" v-bind:ref="props.row.id+'*remark'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
                      <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.remark}} </label>
                  </template>
                  <template slot="actflg" slot-scope="props">

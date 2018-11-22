@@ -774,6 +774,9 @@ html:not([dir="rtl"]) .sidebar {
  padding-right: 7px;
  border-radius: 0;
  box-shadow: none;
+ &.h30{
+  height: 30px;
+ }
 }
 .table-custom{
  &.sml-table{

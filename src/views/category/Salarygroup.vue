@@ -12,7 +12,7 @@
             <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default" size="sm">
               <i class="fa fa-filter"></i> Search
             </b-button>
-            <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+            <!-- <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
               <i class="fa fa-unlock-alt" aria-hidden="true" /> A
             </b-button>
             <b-button id="btnDenny" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
@@ -20,7 +20,7 @@
             </b-button>
             <b-button id="btnDelete" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
               <i class="fa fa-trash" aria-hidden="true" /> D
-            </b-button>
+            </b-button> -->
           </div>
           <div class="ml-auto">
 
@@ -30,33 +30,6 @@
             <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
               Export <i class="icon-arrow-down-circle icons"></i>
             </b-button>
-          </div>
-
-        </div>
-        <div class="function-list mb-2">
-          <div class="func-t">
-            <ul class="search">
-              <li v-if="Code!=''">
-                <span>Code: {{Code}}</span>
-                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')"></i>
-              </li>
-              <li v-if="Name!=''">
-                <span>Name: {{Name}}</span>
-                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')"></i>
-              </li>
-              <li v-if="IsBonus!=null || IsBonus==false">
-                <span>IsBonus: {{IsBonus}}</span>
-                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('isBonus')"></i>
-              </li>
-              <li v-if="EffectDate!=''">
-                <span>EffectDate: {{EffectDate}}</span>
-                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('effectDate')"></i>
-              </li>
-              <li v-if="Active!=''">
-                <span>Actflg: {{(Active)}}</span>
-                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')"></i>
-              </li>
-            </ul>
           </div>
 
         </div>
@@ -100,9 +73,44 @@
             </div>
           </b-card>
          </div>
-
         </b-collapse>
-
+        <div class="function-list mb-2">
+          <div class="func-t">
+            <ul class="search">
+              <li v-if="Code!=''">
+                <span>Code: {{Code}}</span>
+                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('code')"></i>
+              </li>
+              <li v-if="Name!=''">
+                <span>Name: {{Name}}</span>
+                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('name')"></i>
+              </li>
+              <li v-if="IsBonus!=null || IsBonus==false">
+                <span>IsBonus: {{IsBonus}}</span>
+                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('isBonus')"></i>
+              </li>
+              <li v-if="EffectDate!=''">
+                <span>EffectDate: {{EffectDate}}</span>
+                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('effectDate')"></i>
+              </li>
+              <li v-if="Active!=''">
+                <span>Actflg: {{(Active)}}</span>
+                <i class="fa fa-times" aria-hidden="true" @click="removeSearch('active')"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="func-b">
+            <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+              <i class="fa fa-lock" aria-hidden="true" /> Khoá
+            </b-button>
+            <b-button id="btnApply" @click="Denny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+              <i class="fa fa-unlock-alt" aria-hidden="true" /> Mở khoá
+            </b-button>
+            <b-button id="btnApply" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+              <i class="fa fa-trash" aria-hidden="true" /> Xoá
+            </b-button>
+          </div>
+        </div>
         <div class="tbl-de">
           <v-client-table class="table-custom tbl-nosearch" ref="tblSalaryGroup" :columns="columns" :options="options" :data="dataTable">
             <template slot="selected" slot-scope="props">
@@ -120,22 +128,22 @@
                 </label>
             </template>
             <template slot="code" slot-scope="props">
-                <input placeholder="Nhập Code" class="custom-input-style1 my-3" id="txtCode" :class="CheckClassReadOrEdit(props.row.code,props.row.readOrEdit,state)"
+                <input placeholder="Nhập Code" class="custom-input-style1 h30" id="txtCode" :class="CheckClassReadOrEdit(props.row.code,props.row.readOrEdit,state)"
                        v-model="props.row.code" type="text" v-bind:ref="props.row.id+'*code'" v-if="CheckIfOnlyAdd(props.row.readOrEdit)" />
                 <label v-if="CheckIfOnlyAddHide(props.row.readOrEdit)">{{props.row.code}} </label>
             </template>
             <template slot="name" slot-scope="props">
-                <input placeholder="Nhập Tên" class="custom-input-style1 my-3" id="txtName" :class="CheckClassReadOrEdit(props.row.name,props.row.readOrEdit,state)"
+                <input placeholder="Nhập Tên" class="custom-input-style1 h30" id="txtName" :class="CheckClassReadOrEdit(props.row.name,props.row.readOrEdit,state)"
                        v-model="props.row.name" v-bind:ref="props.row.id+'*name'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
                 <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.name}} </label>
             </template>
             <template slot="effectDate" slot-scope="props">
-                <input class="custom-input-style1 my-3" id="dtpeffectDate" type="date" :class="CheckClassReadOrEdit(props.row.effectDate,props.row.readOrEdit,state)"
+                <input class="custom-input-style1 h30" id="dtpeffectDate" type="date" :class="CheckClassReadOrEdit(props.row.effectDate,props.row.readOrEdit,state)"
                        v-model="date2" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" :ref="'dtpeffectDate'" />
                 <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.effectDate}}</label>
             </template>
             <template slot="order" slot-scope="props">
-                <input placeholder="Nhập Order" class="custom-input-style1 my-3" id="nmbOrder" :class="CheckClassReadOrEdit(props.row.order,props.row.readOrEdit,state)" type="number"
+                <input placeholder="Nhập Order" class="custom-input-style1 h30" id="nmbOrder" :class="CheckClassReadOrEdit(props.row.order,props.row.readOrEdit,state)" type="number"
                        v-model="props.row.order" v-bind:ref="props.row.id+'*order'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
                 <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.order}} </label>
             </template>
@@ -149,7 +157,7 @@
                 </div>
             </template>
             <template slot="remark" slot-scope="props">
-                <input placeholder="Nhập Remark" class="custom-input-style1 my-3" id="txtremark" :class="CheckClassReadOrEdit(props.row.remark,props.row.readOrEdit,state)"
+                <input placeholder="Nhập Remark" class="custom-input-style1 h30" id="txtremark" :class="CheckClassReadOrEdit(props.row.remark,props.row.readOrEdit,state)"
                        v-model="props.row.remark" v-bind:ref="props.row.id+'*remark'" v-if="CheckIfReadOrEditForInput(props.row.readOrEdit)" />
                 <label v-if="CheckIfReadOrEditForLable(props.row.readOrEdit)">{{props.row.remark}} </label>
             </template>
