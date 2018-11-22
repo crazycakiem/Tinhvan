@@ -1,11 +1,20 @@
 <template>
   <AppHeaderDropdown right no-caret>
     <template slot="header">
-      <img
-        src="img/avatars/6.jpg"
-        class="img-avatar"
-        alt="admin@bootstrapmaster.com" />
-    </template>\
+      <div class="user-slot">
+        <div class="image">
+         <div class="inner">
+          <img
+            src="img/avatars/6.jpg"
+            class="img-avatar"
+            alt="admin@bootstrapmaster.com" />
+         </div>
+        </div>
+        <div class="name">
+         TinhVan media<span class="email">info@tinhvan.com</span>
+        </div>
+      </div>
+    </template>
     <template slot="dropdown">
       <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>
       <b-dropdown-item><i class="fa fa-bell-o" /> Updates

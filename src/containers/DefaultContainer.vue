@@ -7,16 +7,12 @@
           <span class="navbar-brand-full">TINHVAN System</span>
           <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
         </b-link>
-        <SidebarToggler class="d-md-down-none ml-auto" display="lg" />
+        <!-- <SidebarToggler class="d-md-down-none ml-auto" display="lg" /> -->
       </div>
-      <!-- <b-navbar-nav class="d-md-down-none">
-        <b-nav-item class="px-3">
-         <i class="icon-magnifier icons"></i> Tìm kiếm
-        </b-nav-item>
-      </b-navbar-nav> -->
-      <b-navbar-nav class="ml-auto mr-4">
-        <!-- <AsideToggler class="show-map d-none d-lg-block" /> -->
-        <!--<AsideToggler class="d-lg-none" mobile />-->
+      <SidebarToggler class="d-md-down-none btn-show-nav" display="lg" />
+      <b-navbar-nav class="mr-auto ml-3">
+        <!-- <SidebarToggler class="d-md-down-none ml-auto" display="lg" /> -->
+        <DefaultHeaderDropdownAccnt/>
         <b-nav-item class="d-md-down-none">
           <i class="fa fa-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
@@ -28,7 +24,29 @@
         <b-nav-item class="d-md-down-none">
           <i class="fa fa-gear"></i>
         </b-nav-item>
-        <DefaultHeaderDropdownAccnt/>
+        <b-nav-item-dropdown class="d-md-down-none drop-lang">
+           <template slot="button-content">
+            <img
+              src="img/vietnam.png"
+              class="img-lang"
+              alt="Tiếng Việt" />
+           </template>
+           <b-dropdown-item class="active" href="#">
+            <img
+             src="img/vietnam.png"
+             class="img-lang"
+             alt="Tiếng Việt" /> Tiếng Việt</b-dropdown-item>
+           <b-dropdown-item href="#">
+            <img
+             src="img/united-kingdom.png"
+             class="img-lang"
+             alt="English" /> English</b-dropdown-item>
+           <b-dropdown-item href="#">
+            <img
+             src="img/france.png"
+             class="img-lang"
+             alt="Tiếng Việt" /> French</b-dropdown-item>
+        </b-nav-item-dropdown>
       </b-navbar-nav>
     </AppHeader>
     <div class="app-body">
@@ -37,7 +55,6 @@
         <SidebarForm/>
         <SidebarNav :navItems="nav"></SidebarNav>
         <SidebarFooter/>
-        <SidebarMinimizer/>
       </AppSidebar>
       <main class="main">
         <!-- <Breadcrumb :list="list"/> -->
@@ -46,9 +63,6 @@
           <router-view></router-view>
         </div>
       </main>
-      <!-- <AppAside fixed>
-        <DefaultAside/>
-      </AppAside> -->
     </div>
     <!-- <TheFooter>
       <div>
@@ -64,7 +78,7 @@
 
 <script>
 import nav from '@/_nav'
-import { Header as AppHeader, SidebarToggler, Sidebar as AppSidebar, SidebarFooter, SidebarForm, SidebarHeader, SidebarMinimizer, SidebarNav, Aside as AppAside, AsideToggler, Footer as TheFooter, Breadcrumb } from '@coreui/vue'
+import { Header as AppHeader, SidebarToggler, Sidebar as AppSidebar, SidebarFooter, SidebarForm, SidebarHeader, SidebarNav, Aside as AppAside, AsideToggler, Footer as TheFooter, Breadcrumb } from '@coreui/vue'
 import DefaultAside from './DefaultAside'
 import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 
@@ -83,8 +97,8 @@ export default {
     SidebarFooter,
     SidebarToggler,
     SidebarHeader,
-    SidebarNav,
-    SidebarMinimizer
+    SidebarNav
+    // SidebarMinimizer
   },
   data () {
     return {

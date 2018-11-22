@@ -81,7 +81,7 @@ const Salary = () => import('@/views/category/Salary')
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history', // https://router.vuejs.org/api/#mode
+  mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({
     y: 0
