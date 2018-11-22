@@ -3,7 +3,6 @@
   <b-row>
     <b-col lg="12">
       <b-card class="card-de1">
-
         <div class="panel-title-de1">
           <div>
             <h4>SalaryGroup</h4>
