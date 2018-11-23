@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <div class="form-inline">
                     <div class="form-group">
-                        <label for="cboGroup">'GroupTitle'</label>
+                        <label for="cboGroup">GroupTitle</label>
                         <select id="cboGroup" v-model="groupId" class="form-control" >
                             <option></option>
                             <option v-for="i in listGroup" :value="i.id" :key="i.id">{{i.name}}</option>
@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 <div class="form-inline">
                     <div class="form-group">
-                        <label for="txtCode">'CodeTitle'</label>
+                        <label for="txtCode">CodeTitle</label>
                         <input id="txtCode" class="form-control" type="text" v-model="code"  />
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="form-inline">
                     <div class="form-group">
-                        <label for="txtNameTitle">'NameTitle'</label>
+                        <label for="txtNameTitle">'NameTitle</label>
                         <input id="txtNameTitle" class="form-control" type="text" v-model="name"  />
                     </div>
 
@@ -42,11 +42,7 @@
         <b-container fluid>
             <b-row>
                 <b-col cols="4">
-<<<<<<< HEAD
-                    <v-jstree :data="data"
-=======
                     <v-jstree :data="data"                            
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
                               :show-checkbox="showcheckbox"
                               :multiple="multiple"
                               :collapse="collapse"
@@ -56,59 +52,126 @@
                               :text-field-name="txtparent"
                               :value-field-name="valueparent"
                               :children-field-name="txtchild"
-<<<<<<< HEAD
-                              @item-click="itemclick"
-=======
                               @item-click="itemclick"                            
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
                               :size="size"
                               ref="tree">
-                                 <template scope="_">
+                                <template slot-scope="_">
          <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl" >
-<<<<<<< HEAD
-           <i :class="_.vm.themeIconClasses" role="presentation" ></i>
-                         {{_.model.text}}
-=======
-           <i :class="_.vm.themeIconClasses" role="presentation" ></i> 
-                         {{_.model.text}} 
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
-    </div>
+           <i :class="_.vm.themeIconClasses" role="presentation" ></i>     
+                         {{_.model.text}}         
+         </div>
        </template>
                         </v-jstree>
+
                         <button id="btnSave" class="btn btn-success"  @click="Save"> Save</button>
                 </b-col>
                 <b-col cols="8">
                     <v-client-table ref="tblTitle" :options="options" :columns="columns" :data="dataTable">
-<<<<<<< HEAD
-                        <template slot="selected" slot-scope="props">
-                                <input id="chkSelected" v-model="props.row.selected" type="checkbox" >
-                        </template>
-
-=======
                         <template slot="selected" slot-scope="props">                         
                                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" >   
                         </template>
-                      
->>>>>>> 26e043c3190b0d1804bcb4b7c1dabbf516ec7816
+                        <template slot="groupId" slot-scope="props">
+                         
+                        </template>
                     </v-client-table>
                 </b-col>
             </b-row>
         </b-container>
     </div>
 </template>
-<script>
+<script >
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import VJstree from "vue-jstree";
 import _ from "lodash";
-export default {
-  name: "NewOrgTitle",
+export default  {
+  name:'NewOrgTitle',
   components: {
     VJstree
   },
-  data() {
-    return {
-      data: [
+data() {
+  return {
+      multiple: true,
+      size: "small",
+      batch: true,
+      whole: false,
+      nodots: false,
+      txtparent: "name",
+      valueparent: "id",
+      txtchild: "children",
+      showcheckbox: true,
+      collapse: false,
+      columns: ["selected", "code", "groupId", "name", "remark"],
+      options: {
+        filterable: true,
+        filterByColumn: false,
+        sortable: ["code", "name"],
+        headings: {
+          selected: function(h) {
+            return h("input", {
+              attrs: {
+                type: "checkbox",
+                id: "selectAllCheckbox"
+              },
+              on: {
+                click: e => {
+                  this.selectAll(e.srcElement.checked);
+                }
+              },
+              ref: "selectAllCheckbox"
+            });
+          },
+          name: function(h) {
+            return 'Name'
+          },
+          code: function(h) {
+            return "CodeTitle";
+          },
+          remark: function(h) {
+            return "Remark";
+          },
+          groupId: function(h) {
+            return "GroupTitle";
+          }
+        }
+      },
+      dataTable:[
+       {
+          selected: false,
+          code: "N01",
+          name: "Phong lAP TRINH",
+          remark: "ghi chu",
+          titleId: "Chức danh",
+          groupTitle: "Nhóm chức danh",
+          actflg: "Hoạt động"
+        },
+          {
+          selected: false,
+          code: "N01",
+          name: "Phong lAP TRINH",
+          remark: "ghi chu",
+          titleId: "Chức danh",
+          groupTitle: "Nhóm chức danh",
+          actflg: "Hoạt động"
+        },
+          {
+          selected: false,
+          code: "N01",
+          name: "Phong lAP TRINH",
+          remark: "ghi chu",
+          titleId: "Chức danh",
+          groupTitle: "Nhóm chức danh",
+          actflg: "Hoạt động"
+        },
+      ],
+  groupId: "",
+  ArryOrg:  [],
+  ArryTitle:  [],
+  data:[],
+  listGroup:[],
+  name: "",
+  code: "",
+    data: [
         {
           id: 0,
           text: "Same but with checkboxes",
@@ -307,143 +370,43 @@ export default {
           dropDisabled: true
         }
       ],
-      listGroup: [],
-      groupId: "",
-      ArryOrg: [],
-      ArryTitle: [],
-      name: "",
-      code: "",
-      multiple: true,
-      size: "small",
-      batch: true,
-      whole: false,
-      nodots: false,
-      txtparent: "name",
-      valueparent: "id",
-      txtchild: "children",
-      showcheckbox: true,
-      collapse: false,
-      dataTable: [
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        },
-        {
-          selected: false,
-          code: "N02",
-          groupId: "Nhom 1",
-          name: "Truong phong",
-          remark: "danh dau"
-        }
-      ],
-      columns: ["selected", "code", "groupId", "name", "remark"],
-      options: {
-        filterable: true,
-        filterByColumn: false,
-        sortable: ["code", "name"],
-        headings: {
-          selected: function(h) {
-            return h("input", {
-              attrs: {
-                type: "checkbox",
-                id: "selectAllCheckbox"
-              },
-              on: {
-                click: e => {
-                  this.selectAll(e.srcElement.checked);
-                }
-              },
-              ref: "selectAllCheckbox"
-            });
-          },
-          name: function(h) {
-            return "Name";
-          },
-          code: function(h) {
-            return "CodeTitle";
-          },
-          remark: function(h) {
-            return "Remark";
-          },
-          groupId: function(h) {
-            return "GroupTitle";
-          }
-        }
-      }
     };
+},
+methods:{
+Search() {
+    const search =
+      this.groupId + "!" + this.code + "!" + this.name + "!" + "" + "!" + "A";
   },
-  methods: {
-    Search() {},
-    itemclick() {
-      let arr = [];
-      this.$refs.tree.handleRecursionNodeChilds(this.$refs.tree, function(
-        node
-      ) {
+  itemclick() {
+    let arr = [];
+    (this.$refs.tree).handleRecursionNodeChilds(
+      this.$refs.tree,
+      function(node) {
         if (!_.isUndefined(node.model)) {
           if (node.model.selected) {
             arr.push(node.model.id);
           }
         }
-      });
-      this.ArryOrg = arr;
-    },
-    selectAll(checked) {
-      this.$refs.tblTitle.tableData.forEach((key, value) => {
-        if (checked) {
-          {
-            key.selected = true;
-          }
-        } else {
-          key.selected = false;
+      }
+    );
+   // this.ArryOrg = arr
+  },
+  selectAll(checked) {
+    (this.$refs.tblTitle).tableData.forEach((key, value) => {
+      if (checked) {
+        {
+          key.selected = true;
         }
-      });
-    },
-    Save() {}
-  }
-};
+      } else {
+        key.selected = false;
+      }
+    });
+  },
+  async Save() {
+    }
+  
+},
+  
+  
+}
 </script>

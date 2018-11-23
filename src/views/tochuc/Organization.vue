@@ -47,8 +47,11 @@
                   <template scope="_">
                     <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl"  @mouseover="mouseover(_.model)" @mouseout="mouseout">
                       <i :class="_.vm.themeIconClasses" role="presentation" v-if="!_.model.loading"></i>
-                       <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
-                                   {{_.model.tex23t}}</div>
+                       <!-- <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
+                                   {{_.model.tex23t}}</div> -->
+                                   <span>
+                                         {{_.model.tex23t}}
+                                   </span>
                       <!-- <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button> -->
                     </div>
                   </template>
