@@ -211,6 +211,40 @@ export default {
   },
   data: () => {
     return {
+      // data: [
+      //   {
+      //     selected: false,
+      //     effectDate: "10/10/2018",
+      //     allowanceId: "me",
+      //     expireDate: "10/10/2018",
+      //     isInsurrance: false,
+      //     amount: "200.000"
+      //   },
+      //   {
+      //     selected: false,
+      //     effectDate: "10/10/2018",
+      //     allowanceId: "me",
+      //     expireDate: "10/10/2018",
+      //     isInsurrance: false,
+      //     amount: "200.000"
+      //   },
+      //   {
+      //     selected: false,
+      //     effectDate: "10/10/2018",
+      //     allowanceId: "me",
+      //     expireDate: "10/10/2018",
+      //     isInsurrance: false,
+      //     amount: "200.000"
+      //   },
+      //   {
+      //     selected: false,
+      //     effectDate: "10/10/2018",
+      //     allowanceId: "me",
+      //     expireDate: "10/10/2018",
+      //     isInsurrance: false,
+      //     amount: "200.000"
+      //   }
+      // ],
       organization: { nameVN: "", code: "", foundationDate: "" },
       list: [],
       listOrg: [],
@@ -264,7 +298,7 @@ export default {
         "isInsurrance",
         "act"
       ],
-      items: [],
+      items: ["aa", "baana", "meta"],
       PenddingId: "",
       salaryBasic: "0",
       salaryTotal: "0",
@@ -277,11 +311,11 @@ export default {
       dataSalaryLevel: [],
       dataSalaryRank: [],
       dataACTIVEDECISION: [],
-      data: [],
       showcheckbox: true,
       SignDate: "",
       showWage: false,
       show: false,
+      data: [],
       sumMoney: 0,
       size: "small",
       batch: false,
@@ -293,7 +327,17 @@ export default {
       ParentRequired: "",
       FoundationDateRequired: "",
       NameRequired: "",
-      dataAllownance: []
+      dataAllownance: [
+        {
+          id: "1",
+          name: "Ăn trưa"
+        },
+        {
+          id: "2",
+          name: "Tàu xe"
+        },
+        { id: "3", name: "Điện thoại" }
+      ]
     };
   },
   methods: {
@@ -303,27 +347,6 @@ export default {
           _.assign(key, evt);
         }
       });
-    },
-    async created() {
-      this.showcheckbox = true;
-      this.size = "small";
-      this.batch = false;
-      this.whole = true;
-      this.nodots = false;
-      this.collapse = true;
-      this.multiple = false;
-      this.data = [
-        {
-          effectDate: "",
-          expireDate: "",
-          selected: false,
-          allowanceId: "",
-          amount: 0,
-          isInsurrance: false,
-          id: this.GenGuidId()
-        }
-      ];
-      //call get typeDecistion
     },
 
     async ShowTreeVue() {},
@@ -377,7 +400,7 @@ export default {
         effectDate: "",
         expireDate: "",
         selected: false,
-        allowanceId: "",
+        allowanceId: "1",
         amount: 0,
         isInsurrance: false,
         basicsalary: false,
@@ -441,6 +464,27 @@ export default {
     changeShow() {
       this.showWage = !this.showWage;
     }
+  },
+  created() {
+    this.showcheckbox = true;
+    this.size = "small";
+    this.batch = false;
+    this.whole = true;
+    this.nodots = false;
+    this.collapse = true;
+    this.multiple = false;
+    this.data = [
+      {
+        effectDate: "",
+        expireDate: "",
+        selected: false,
+        allowanceId: "1",
+        amount: 0,
+        isInsurrance: false,
+        id: this.GenGuidId()
+      }
+    ];
+    //call get typeDecistion
   }
 };
 </script>

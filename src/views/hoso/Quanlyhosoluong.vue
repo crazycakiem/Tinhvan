@@ -1,6 +1,5 @@
 <template>
   <div class="animated fadeIn">
-
     <b-row>
       <b-col lg="12">
         <b-card class="card-de1">
@@ -23,7 +22,7 @@
               </b-button>
              </div>
            </div>
-           <div class="tbl-de">
+           <div class="tbl-de" v-show="showTable">
              <v-client-table  class="table-custom tbl-nosearch" ref="tblWageRecords" :columns="columns" :options="options" :data="dataTable">
             <template slot="selected" slot-scope="props">
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
@@ -56,10 +55,13 @@
            
         </v-client-table> 
            </div>
+           <div  v-show="showAdd" id="newWageRecord">
+    <NewWageRecord></NewWageRecord>
+  </div>
         </b-card>
 
       </b-col>
-
+  
     </b-row><!--/.row-->
 
   </div>
@@ -68,11 +70,14 @@
 
 <script>
 import { shuffleArray } from "@/shared/utils";
+import NewWageRecord from "./NewWageRecord.vue";
 export default {
   name: "quanlyhosoluong",
-  components: {},
+  components: { NewWageRecord },
   data: () => {
     return {
+      showAdd: false,
+      showTable: true,
       dataTable: [
         {
           selected: false,
@@ -185,7 +190,9 @@ export default {
   },
   methods: {
     Goto() {
-      window.location = "/hoso/themhosoluong";
+      // window.location = "/hoso/themhosoluong";
+      this.showAdd = true;
+      this.showTable = false;
     }
   }
 };
