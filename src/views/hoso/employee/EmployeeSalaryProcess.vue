@@ -1,34 +1,47 @@
 <template>
-    <div id="EmployeeSalaryProcess">
-       <v-client-table :columns="columnsSalary" :data="dataSalaryExten" :options="optionsSalaryExten" ref="tblWageRecordExten" @row-click="rowWageRecoredExten">
-                                    <template slot="decisionNo" slot-scope="props">
-                                        <label>{{props.row.decisionNo}}</label>
-                                    </template>
-                                    <template slot="effectDate" slot-scope="props">
-                                        <label>{{(props.row.effectDate)}} </label>
-                                    </template>
-
-
-                                    <template slot="salaryBasic" slot-scope="props">
-                                        <label>{{(props.row.salaryBasic)}}</label>
-                                    </template>
-                                    <template slot="salaryPercent" slot-scope="props">
-                                        <label>{{props.row.salaryPercent}}</label>
-                                    </template>
-                                    <template slot="SalaryTotal" slot-scope="props">
-                                        <label>{{(props.row.salaryTotal)}}</label>
-                                    </template>
-                                </v-client-table>
-                                <br />
-                                <v-client-table :columns="columnsAllowance" :data="dataAllowanceExten" :options="optionsAllownanceExten" ref="tblAllowance">
-                                    <template slot="allowanceId" slot-scope="props">
-                                        <label v-for="item in dataAllowanceList" :key="item.id" v-if="CheckCondition(props.row.allowanceId,item.id)">{{item.name}}</label>
-                                    </template>
-                                    <template slot="isInsurrance" slot-scope="props">
-                                        <input type="checkbox" v-model="props.row.isInsurrance" disabled />
-                                    </template>
-                                </v-client-table>
-    </div>
+  <div id="EmployeeSalaryProcess">
+    <v-client-table
+      :columns="columnsSalary"
+      :data="dataSalaryExten"
+      :options="optionsSalaryExten"
+      ref="tblWageRecordExten"
+      @row-click="rowWageRecoredExten"
+    >
+      <template slot="decisionNo" slot-scope="props">
+        <label>{{props.row.decisionNo}}</label>
+      </template>
+      <template slot="effectDate" slot-scope="props">
+        <label>{{(props.row.effectDate)}}</label>
+      </template>
+      <template slot="salaryBasic" slot-scope="props">
+        <label>{{(props.row.salaryBasic)}}</label>
+      </template>
+      <template slot="salaryPercent" slot-scope="props">
+        <label>{{props.row.salaryPercent}}</label>
+      </template>
+      <template slot="SalaryTotal" slot-scope="props">
+        <label>{{(props.row.salaryTotal)}}</label>
+      </template>
+    </v-client-table>
+    <br>
+    <v-client-table
+      :columns="columnsAllowance"
+      :data="dataAllowanceExten"
+      :options="optionsAllownanceExten"
+      ref="tblAllowance"
+    >
+      <template slot="allowanceId" slot-scope="props">
+        <label
+          v-for="item in dataAllowanceList"
+          :key="item.id"
+          v-if="CheckCondition(props.row.allowanceId,item.id)"
+        >{{item.name}}</label>
+      </template>
+      <template slot="isInsurrance" slot-scope="props">
+        <input type="checkbox" v-model="props.row.isInsurrance" disabled>
+      </template>
+    </v-client-table>
+  </div>
 </template>
 <script>
 import Vue from "vue";
