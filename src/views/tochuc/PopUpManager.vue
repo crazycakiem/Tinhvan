@@ -3,16 +3,16 @@
         <b-row>
             <b-col cols="5">
               <div class="more-func">
-                <b-button id="btnMultiAppy" @click="MultiAppy" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <b-button v-b-tooltip.hover title="Lock" id="btnMultiAppy" @click="MultiAppy" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                   <i class="fa fa-unlock" aria-hidden="true"></i>
                 </b-button>
-                <b-button id="btnMultiDenny" @click="MultiDenny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <b-button v-b-tooltip.hover title="Unlock" id="btnMultiDenny" @click="MultiDenny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                   <i class="fa fa-lock" aria-hidden="true"></i>
                 </b-button>
-                <b-button id="btnMergerOrg" @click="MergerOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <b-button v-b-tooltip.hover title="Merge" id="btnMergerOrg" @click="MergerOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                   <i class="fa fa-compress" aria-hidden="true"></i>
                 </b-button>
-                <b-button id="btnSeparaOrg" @click="SeparaOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+                <b-button v-b-tooltip.hover title="Separate" id="btnSeparaOrg" @click="SeparaOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                   <i class="fa fa-code-fork" aria-hidden="true"></i>
                 </b-button>
                 <b-form-checkbox id="chkShowAll" class="custom-checkbox-style1" @click="ShowAll($event)" v-model="Show">ShowAll</b-form-checkbox>

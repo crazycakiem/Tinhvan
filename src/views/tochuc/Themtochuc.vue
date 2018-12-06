@@ -6,10 +6,10 @@
           <div class="panel-title-de1">
             <div>
               <h4>Organization</h4>
-              <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default" size="sm">
-                Thêm mới <i class="icon-plus"></i>
+              <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default">
+                <i class="icon-plus"></i> Thêm mới
               </b-button>
-              <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default" size="sm">
+              <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default">
                 <i class="fa fa-filter"></i> Tìm kiếm
               </b-button>
             </div>

@@ -6,11 +6,11 @@
         <div class="panel-title-de1">
           <div>
             <h4>SalaryGroup</h4>
-            <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default" size="sm">
-              Add <i class="icon-plus"></i>
+            <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default">
+              <i class="icon-plus"></i> Thêm mới
             </b-button>
-            <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default" size="sm">
-              <i class="fa fa-filter"></i> Search
+            <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default">
+              <i class="fa fa-filter"></i> Tìm kiếm
             </b-button>
             <!-- <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
               <i class="fa fa-unlock-alt" aria-hidden="true" /> A

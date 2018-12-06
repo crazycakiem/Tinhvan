@@ -630,7 +630,7 @@
     </b-modal>
   </b-form>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { bus } from "../../../main";

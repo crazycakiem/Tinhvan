@@ -28,14 +28,14 @@
                 <input id="chkSelected" v-model="props.row.selected" type="checkbox" @click="CheckCheckBox(props.row)">
             </template>
             <template slot="decisionNo" slot-scope="props">
-                 
+
                         {{props.row.decisionNo}}
-                  
+
             </template>
             <template slot="decisionTypeId" slot-scope="props">
-             
-                    {{props.row.decisionTypeId}} 
-                
+
+                    {{props.row.decisionTypeId}}
+
             </template>
             <template slot="orgId" slot-scope="props">
               <label>{{props.row.orgName}}</label>
@@ -52,8 +52,8 @@
               <template slot="expireDate" slot-scope="props">
                <label>{{(props.row.expireDate)}} </label>
             </template>
-           
-        </v-client-table> 
+
+        </v-client-table>
            </div>
            <div  v-show="showAdd" id="newWageRecord">
     <NewWageRecord></NewWageRecord>
@@ -61,7 +61,7 @@
         </b-card>
 
       </b-col>
-  
+
     </b-row><!--/.row-->
 
   </div>

@@ -10,9 +10,8 @@
         <!-- <SidebarToggler class="d-md-down-none ml-auto" display="lg" /> -->
       </div>
       <SidebarToggler class="d-md-down-none btn-show-nav" display="lg" />
-      <b-navbar-nav class="mr-auto ml-3">
+      <b-navbar-nav class="ml-auto mr-3">
         <!-- <SidebarToggler class="d-md-down-none ml-auto" display="lg" /> -->
-        <DefaultHeaderDropdownAccnt/>
         <b-nav-item class="d-md-down-none">
           <i class="fa fa-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
@@ -47,6 +46,7 @@
              class="img-lang"
              alt="Tiếng Việt" /> French</b-dropdown-item>
         </b-nav-item-dropdown>
+        <DefaultHeaderDropdownAccnt/>
       </b-navbar-nav>
     </AppHeader>
     <div class="app-body">

@@ -125,7 +125,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import DatePicker from "vue2-datepicker";

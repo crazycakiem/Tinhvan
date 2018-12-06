@@ -6,14 +6,14 @@
             <b-card class="card-de1">
 
         <div class="panel-title-de1">
-          <Div>
+          <div>
   <h4>SalaryLevel</h4>
-      <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default" size="sm">
-                 Add <i class="icon-plus"></i>
-               </b-button>
-           <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default" size="sm">
-                 <i class="fa fa-filter"></i>Search
-               </b-button>
+              <b-button id="btnAdd" @click="AddRow" class="btn-pill mr-1" variant="default">
+                <i class="icon-plus"></i> Thêm mới
+              </b-button>
+              <b-button id="btnFilter" @click="collapse" class="btn-pill" variant="default">
+                <i class="fa fa-filter"></i> Tìm kiếm
+              </b-button>
                  <b-button id="btnApply" @click="Apply" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                  <i class="fa fa-unlock-alt" aria-hidden="true" /> A
                </b-button>
@@ -23,15 +23,15 @@
                <b-button id="btnDelete" @click="Delete" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                  <i class="fa fa-trash" aria-hidden="true" /> D
                </b-button>
-          </Div>
-              <Div class="ml-auto">
+          </div>
+              <div class="ml-auto">
                <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
                  Print <i class="cui-print icons"></i>
                </b-button>
                <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
                  Export <i class="icon-arrow-down-circle icons"></i>
                </b-button>
-           </Div>
+           </div>
              </div>
                       <div class="function-list mb-2">
              <div class="func-t">

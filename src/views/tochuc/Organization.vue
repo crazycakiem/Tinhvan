@@ -6,14 +6,14 @@
           <div class="panel-title-de1">
             <div>
               <h4>Sơ đồ tổ chức</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm" to="/tochuc/themtochuc">
-                Thêm mới tổ chức <i class="icon-plus"></i>
+              <b-button class="btn-pill mr-1" variant="default" to="/tochuc/themtochuc">
+                Thêm mới tổ chức<i class="icon-plus"></i>
               </b-button>
             </div>
           </div>
           <div class="inside-page">
             <div class="more-func">
-              <b-button id="btnMultiAppy" @click="MultiAppy" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
+              <b-button v-b-tooltip.hover title="I'm a tooltip!" id="btnMultiAppy" @click="MultiAppy" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
                 <i class="fa fa-unlock" aria-hidden="true"></i>
               </b-button>
               <b-button id="btnMultiDenny" @click="MultiDenny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">

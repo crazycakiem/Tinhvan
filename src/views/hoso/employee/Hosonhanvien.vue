@@ -6,35 +6,37 @@
           <div class="panel-title-de1">
             <div>
               <h4>Hồ sơ nhân viên</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddEmployee">
-                Thêm mới
-                <i class="icon-plus"></i>
+              <b-button class="btn-pill mr-1" variant="default" @click="AddEmployee">
+                <i class="icon-plus"></i> Thêm mới
               </b-button>
               <b-button
                 class="btn-pill mr-1"
                 variant="default"
-                size="sm"
                 @click="ExtenEmployee"
                 v-if="checkButton"
               >
-                Edit
-                <i class="icon-plus"></i>
+                <i class="icon-pencil"></i> Edit
               </b-button>
-              <b-button class="btn-pill" variant="default" size="sm">
-                <i class="icon-plus icons"></i> Làm hợp đồng
-              </b-button>
-              <b-button class="btn-pill" variant="default" size="sm">
-                <i class="icon-plus icons"></i> Làm hồ sơ lương
-              </b-button>
-              <b-button class="btn-pill" variant="default" size="sm">
-                <i class="icon-plus icons"></i> nghỉ việc
-              </b-button>
-              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showBasic">
+              <b-button class="btn-pill mr-1" variant="default" @click="showBasic">
                 <i class="fa fa-filter"></i> Tìm kiếm
               </b-button>
-              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="showAdvance">
-                <i class="fa fa-filter"></i> Tìm kiếm nâng cao
-              </b-button>
+              <b-dropdown id="ddown1" variant="viewMore" class="tv-drop-viewmore m-md-1" no-caret>
+                <template slot="button-content">
+                  <i class="icon-options"></i>
+                </template>
+                <b-dropdown-item @click="showAdvance">
+                 <i class="fa fa-filter"></i> Tìm kiếm nâng cao
+                </b-dropdown-item>
+                <b-dropdown-item>
+                 <i class="fa fa-file-text-o"></i> Làm hợp đồng
+                </b-dropdown-item>
+                <b-dropdown-item>
+                 <i class="fa fa-file-text-o"></i> Làm hồ sơ lương
+                </b-dropdown-item>
+                <b-dropdown-item>
+                 <i class="icon icon-user-unfollow"></i> Nghỉ việc
+                </b-dropdown-item>
+              </b-dropdown>
             </div>
             <div class="ml-auto">
               <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">

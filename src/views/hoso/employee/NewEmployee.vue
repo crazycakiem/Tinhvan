@@ -1,159 +1,225 @@
 <template>
   <div>
     <b-form>
-      <b-row>
-        <b-col cols="1">Ảnh đại diện</b-col>
-        <b-col cols="2">
-          <input type="file" @change="OnSelected">
-          <button @click="Upload">Upload</button>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtOrg">Tổ chức</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtOrg" type="text" readonly ref="txtOrg">
-          <b-btn id="btnShowOrg" @click="showOrg">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </b-btn>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtCode">Mã nhân viên</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtCode" type="text">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtCode">Nick Name</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtCode" type="text">
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="txtFirstName">Họ nhân viên</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtFirstName" type="text">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtLastName">Tên nhân viên</label>
-        </b-col>
-        <b-col>
-          <input id="txtLastName" type="text">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtManager">Người quản lý</label>
-        </b-col>
-        <b-col cols="2">
-          <Autocomplete :items="items" :isAsync="false" ref="autocomplete" :isDisplayFull="false"></Autocomplete>
-          <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </b-btn>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="txtSwipeCode">Mã quẹt thẻ</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtSwipeCode" type="text">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="cboTitle">Chức danh</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboTitle">
-            <option
-              v-for="item in dataTitle"
-              :value="item.titleId"
-              :key="item.titleId"
-            >{{item.title.name}}</option>
-          </select>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="partyDate">Ngày sinh</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="cboGender">Giới tính</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboGender">
-            <option v-for="gen in dataGender" :value="gen.id" :key="gen.id">{{gen.name}}</option>
-          </select>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="cboTarget">Đối tượng nhân viên</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboTarget">
-            <option v-for="oj in dataEmployeeObject" :key="oj.id" :value="oj.id">{{oj.name}}</option>
-          </select>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtID">Chứng minh thư</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtID" type="text">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtDateID">Ngày cấp</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtPlaceID">Nơi cấp</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtPlaceID" type="text">
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="cboNationality">Quốc tịch</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboNationality">
-            <option :value="item.id" v-for="item in dataNation" :key="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="cboEthnic">Dân tộc</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboEthnic">
-            <option v-for="item in dataEthnic" :value="item.id" :key="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="cboReligion">Tôn giáo</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboReligion">
-            <option :value="item.id" v-for="item in dataReligion" :key="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="3">
-          <b-button id="btnSubmit" type="button" variant="primary" @click="onSubmit">Lưu</b-button>
-          <b-button
-            id="btnSubmitAndContinue"
-            type="button"
-            variant="success"
-            @click="onSubmitAndContinue"
-          >Lưu và tiếp tục</b-button>
-          <b-button id="btnReset" type="button" variant="danger" @click="onReset">Hoàn tác</b-button>
-        </b-col>
-      </b-row>
+     <b-card>
+       <div slot="header">
+         <strong>Thêm mới nhân viên</strong>
+       </div>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="fileInput">Ảnh đại diện</label>
+             <b-form-file id="fileInput" :plain="true"></b-form-file>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="txtOrg">Tổ chức</label>
+             <div class="input-popup">
+              <b-form-input readonly type="text" id="txtOrg" ref="txtOrg" placeholder=""></b-form-input>
+              <b-btn id="btnShowOrg" @click="showOrg">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </b-btn>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip3">Mã nhân viên</label>
+             <b-form-input type="text" id="ip3" placeholder="ex: 1234"></b-form-input>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip4">Nickname</label>
+             <b-form-input type="text" id="ip4" placeholder="ex: 1234"></b-form-input>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip5">Họ nhân viên</label>
+             <b-form-input type="text" id="ip5" placeholder="ex: Nguyễn"></b-form-input>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip6">Tên nhân viên</label>
+             <b-form-input type="text" id="ip6" placeholder="ex: Linh"></b-form-input>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip7">Người quản lý</label>
+             <div class="input-popup">
+              <Autocomplete :items="items" :isAsync="false" ref="autocomplete" :isDisplayFull="false"></Autocomplete>
+              <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </b-btn>
+             </div>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip8">Mã quẹt thẻ</label>
+             <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="cboTitle">Chức danh</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id="cboTitle"
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+               <!-- <select id="cboTitle">
+                 <option
+                   v-for="item in dataTitle"
+                   :value="item.titleId"
+                   :key="item.titleId"
+                 >{{item.title.name}}</option>
+               </select> -->
+             </div>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="ip6">Ngày sinh</label>
+             <div class="form-box-control">
+               <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Giới tính</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Đối tượng nhân viên</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Số chứng minh thư</label>
+             <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Ngày cấp</label>
+             <div class="form-box-control">
+               <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Nơi cấp</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Quốc tịch</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <b-row>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Dân tộc</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+         <b-col sm="6">
+           <b-form-group>
+             <label for="">Tôn giáo</label>
+             <div class="form-box-control">
+               <b-form-select
+                 size="lg"
+                 :plain="true"
+                 id=""
+                 :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                 value="Please select">
+               </b-form-select>
+             </div>
+           </b-form-group>
+         </b-col>
+       </b-row>
+       <div slot="footer">
+         <b-button class="mr-2 btn-pill" type="submit" @click="onSubmit" variant="primary"><i class="cui-circle-check icons icon-"></i> Submit</b-button>
+         <b-button
+           id="btnSubmitAndContinue"
+           type="button"
+           variant="success"
+           class="mr-2 btn-pill"
+           @click="onSubmitAndContinue"
+         ><i class="cui-task icons icon-"></i> Lưu và tiếp tục</b-button>
+         <b-button class="btn-pill" d="btnReset" @click="onReset" type="reset" variant="danger"><i class="fa fa-ban icon-"></i> Reset</b-button>
+       </div>
+     </b-card>
     </b-form>
     <b-modal ref="org" size="lg" title="Using Component Methods">
       <!-- <TreeVue :showcheckbox="showcheckbox" :data="dataOrg" :multiple="multiple"
