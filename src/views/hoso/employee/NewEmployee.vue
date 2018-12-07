@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form>
-     <b-card>
+     <b-card class="card-de2">
        <div slot="header">
          <strong>Thêm mới nhân viên</strong>
        </div>

@@ -1,185 +1,613 @@
 <template>
   <b-form>
-    <div id="newconttract" v-show="!showWageRecord">
-      <b-row class="mt-3">
-        <b-col cols="1">
-          <label>Mã nhân viên</label>
-        </b-col>
-        <b-col cols="2">
-          <Autocomplete
-            :items="items"
-            :isAsync="true"
-            ref="autocompleteEmployeeContract"
-            :isDisplayFull="false"
-            AutocompleteChangeEvent="AutocompleteEmployeeContractChange"
-            AutocompleteSelected="AutocompleteEmployeeContractSelected"
-          ></Autocomplete>
-          <button id="btnShowPopUpManager" @click="ShowPopUpManager" type="button" :disabled="save">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtFullName">Họ tên</label>
-        </b-col>
-        <b-col cols="2">
-          <label ref="lbFullName">Hoàng văn hòa</label>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtOrg">tổ chức</label>
-        </b-col>
-        <b-col cols="2">
-          <label ref="lbOrgContract">Tinh vân conlutiong</label>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="2">
-          <label label-for="lbGroupTitleContract">Nhóm chức danh</label>
-        </b-col>
-        <b-col cols="2">
-          <label ref="lbGroupTitleContract">Chức danh nhân viên</label>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="lbTitleContract">Chức danh</label>
-        </b-col>
-        <b-col cols="2">
-          <label ref="lbTitleContract">Trưởng phòng</label>
-        </b-col>
-        <b-col cols="2">
-          <label label-for="cbWorkingForm">Hình thức làm việc</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cbWorkingForm" :disabled="save">
-            <option v-for="item in dataWorkingForm" :key="item.id" :value="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="cboTypeContract">Loại hợp đồng</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboTypeContract" :disabled="save">
-            <option v-for="item in dataTypeContract" :key="item.id" :value="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtContractNumber">Số hợp đồng</label>
-        </b-col>
-        <b-col cols="2">
-          <input id="txtContractNumber" type="text" value="13434324324" :disabled="save">
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtEffectDate">Ngày hiệu lực</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtEffectDate"
-            lang="en"
-            v-show="!save"
-            format="DD-MM-YYYY"
-            :clearable="false"
-            placeholder="Select Day"
-          ></date-picker>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtExpiryDate">Ngày hết hạn</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtExpiryDate"
-            lang="en"
-            v-show="!save"
-            format="DD-MM-YYYY"
-            :clearable="false"
-            placeholder="Select Day"
-          ></date-picker>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="1">
-          <label label-for="txtMorningStart">Sáng bắt đầu</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtMorningStart"
-            lang="en"
-            type="time"
-            v-show="!save"
-            format="HH:mm"
-            :clearable="false"
-            placeholder="Select Time"
-          ></date-picker>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtMorningFinish">Sáng kết thúc</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtMorningFinish"
-            lang="en"
-            type="time"
-            v-show="!save"
-            format="HH:mm"
-            :clearable="false"
-            placeholder="Select Time"
-          ></date-picker>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtAfternoonStart">Chiều bắt đầu</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtAfternoonStart"
-            lang="en"
-            type="time"
-            v-show="!save"
-            format="HH:mm"
-            :clearable="false"
-            placeholder="Select Time"
-          ></date-picker>
-        </b-col>
-        <b-col cols="1">
-          <label label-for="txtAfternoonFinish">Chiều kết thúc</label>
-        </b-col>
-        <b-col cols="2">
-          <date-picker
-            id="txtAfternoonFinish"
-            lang="en"
-            type="time"
-            v-show="!save"
-            format="HH:mm"
-            :clearable="false"
-            placeholder="Select Time"
-          ></date-picker>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col cols="2">
-          <button
-            class="btn btn-primary"
-            type="button"
-            @click="ShowWageOld"
-            :disabled="save"
-          >Hồ sơ lương</button>
-        </b-col>
-        <b-col>
-          <div v-show="showDeleteWage">
-            <label id="lbWageRecord" ref="lbWageRecord"></label>
-            <button @click="ClearWageOld" class="btn btn-danger" type="button">Xóa</button>
+   <b-card class="card-de2" id="newconttract" v-show="!showWageRecord">
+     <div slot="header">
+       <strong>Thêm mới hợp đồng</strong>
+     </div>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Mã nhân viên</label>
+           <div class="input-popup">
+            <Autocomplete
+              :items="items"
+              :isAsync="true"
+              ref="autocompleteEmployeeContract"
+              :isDisplayFull="false"
+              AutocompleteChangeEvent="AutocompleteEmployeeContractChange"
+              AutocompleteSelected="AutocompleteEmployeeContractSelected"
+            ></Autocomplete>
+            <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </b-btn>
+           </div>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Họ tên</label>
+           <b-form-input type="text" id="" readonly value="Hoàng Văn Hoà" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tổ chức</label>
+           <b-form-input type="text" id="" readonly value="Tinh Vân" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Nhóm chức danh</label>
+           <b-form-input type="text" id="" readonly value="Chức danh nhân viên" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Chức danh</label>
+           <b-form-input type="text" id="" readonly value="Trưởng phòng" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Hình thức làm việc</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Loại hợp đồng</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Số hợp đồng</label>
+           <b-form-input type="text" id="" value="13434324324" :disabled="save"></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Ngày hiệu lực</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
           </div>
-        </b-col>
-      </b-row>
-
-      <b-row class="mt-3">
-        <b-col cols="1">
-          <label label-for="cboActflg">Tình trạng</label>
-        </b-col>
-        <b-col cols="2">
-          <select id="cboActflg" ref="cboActflg" v-on:change="changeActflg" :disabled="save">
-            <option v-for="item in dataStatus" :key="item.id" :value="item.id">{{item.name}}</option>
-          </select>
-        </b-col>
-      </b-row>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Ngày hết hạn</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+     </b-row>
+     <b-row>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Sáng bắt đầu</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Sáng kết thúc</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+     </b-row>
+     <b-row>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Chiều bắt đầu</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Chiều kết thúc</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+     </b-row>
+     <b-row>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Hồ sơ lương</label>
+          <div class="form-box-control">
+           <b-input-group class="pt-0 pr-0 pl-0 pb-0">
+             <!-- Attach Left button -->
+             <b-input-group-prepend>
+               <b-button variant="primary" @click="ShowWageOld" :disabled="save">
+                 <i class="fa fa-search"></i> Chọn hồ sơ
+               </b-button>
+             </b-input-group-prepend>
+             <div class="show-del" v-show="showDeleteWage">
+               <label id="lbWageRecord" ref="lbWageRecord"></label>
+               <i @click="ClearWageOld" class="icon- cui-circle-x icons font-2xl"></i>
+             </div>
+           </b-input-group>
+          </div>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="ip6">Tình trạng</label>
+          <div class="form-box-control">
+            <b-form-select
+              size="lg"
+              :plain="true"
+              id=""
+              :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+              value="Please select">
+            </b-form-select>
+          </div>
+        </b-form-group>
+      </b-col>
+     </b-row>
+     <div slot="footer">
+       <b-button
+         id="btnSubmit"
+         class="mr-2 btn-pill"
+         type="submit"
+         :disabled="save"
+         variant="primary"
+         @click="onSubmit"
+         v-show="!showWageRecord">
+         <i class="cui-circle-check icons icon-"></i> Lưu
+       </b-button>
+       <b-button
+         id="btnSaveAndContinue"
+         :disabled="save"
+         type="button"
+         variant="success"
+         v-show="!showWageRecord"
+         v-if="displayContinueButton"
+         @click="onSaveAndContinue"
+         class="mr-2 btn-pill"
+       ><i class="cui-task icons icon-"></i> Tiếp tục</b-button>
+       <b-button
+         id="btnEdit"
+         type="button"
+         :disabled="save"
+         variant="danger"
+         @click="onEdit"
+         v-show="showWageRecord"
+         class="mr-2 btn-pill"
+       ><i class="cui-task icons icon-"></i> Trở lại</b-button>
+       <b-button
+         id="btnSaveWageRecord"
+         :disabled="save"
+         type="button"
+         variant="success"
+         v-show="showWageRecord"
+         @click="onSaveWageRecord"
+         class="mr-2 btn-pill"
+       ><i class="cui-circle-check icons icon-"></i> Lưu</b-button>
+     </div>
+   </b-card>
+   <b-card class="card-de2"  id="newwagerecord" v-show="showWageRecord">
+     <div slot="header">
+       <strong>Thêm mới hợp đồng</strong>
+     </div>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Mã nhân viên</label>
+           <b-form-input type="text" id="" readonly value="1234" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Họ tên</label>
+           <b-form-input type="text" id="" readonly value="Hoàng Văn Hoà" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tổ chức</label>
+           <b-form-input type="text" id="" readonly value="Tinh Vân" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Nhóm chức danh</label>
+           <b-form-input type="text" id="" readonly value="Chức danh nhân viên" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Chức danh</label>
+           <b-form-input type="text" id="" readonly value="TTrưởng phòng" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Loại quyết định</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Số quyết định</label>
+           <b-form-input type="text" id="" value="" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Số hợp đồng</label>
+           <b-form-input type="text" id="" readonly value="123456" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="">Ngày hiệu lực</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+      <b-col sm="6">
+        <b-form-group>
+          <label for="">Ngày hết hạn</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+      </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Đối tượng bảo hiểm</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Thang bảng lương</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Ngạch lương</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Bậc lương</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id=""
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Lương cơ bản</label>
+           <b-form-input type="text" id="" value="" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">% hưởng lương</label>
+           <b-form-input type="text" id="" value="" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tổng hưởng lương</label>
+           <b-form-input type="text" id="" readonly value="100000" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <!-- <b-row class="mt-3">
+       <button
+         id="cboShowAll"
+         :disabled="save"
+         type="button"
+         class="btn btn-primary btn-custom"
+         @click="changeShow"
+       >Phụ cấp</button>
+     </b-row> -->
+     <b-row>
+       <!-- <b-col cols="12" v-show="showWage" id="WageRecord"> -->
+       <b-col sm="12" id="WageRecord">
+        <b-form-group>
+         <label for="">Thông tin phụ cấp</label>
+         <div class="tbl-de">
+          <v-client-table :columns="columns" :data="data" :options="options" ref="tblWageRecord" class="table-custom tbl-nosearch">
+            <template slot="selected" slot-scope="props">
+              <input
+                type="checkbox"
+                v-model="props.row.selected"
+                v-on:change="CheckCheckBox(props.row)"
+                :disabled="save"
+              >
+            </template>
+            <template slot="effectDate" slot-scope="props">
+              <date-picker
+                lang="en"
+                v-model="props.row.effectDate"
+                @change="closeDatepicker(props.row)"
+                v-show="!save"
+                format="DD-MM-YYYY"
+                :clearable="false"
+                placeholder="Select Day"
+              ></date-picker>
+            </template>
+            <template slot="expireDate" slot-scope="props">
+              <date-picker
+                lang="en"
+                v-model="props.row.expireDate"
+                @change="closeDatepicker(props.row)"
+                v-show="!save"
+                format="DD-MM-YYYY"
+                :clearable="false"
+                placeholder="Select Day"
+              ></date-picker>
+            </template>
+            <template slot="isInsurrance" slot-scope="props">
+              <input
+                type="checkbox"
+                v-model="props.row.isInsurrance"
+                v-on:change="CheckboxInsurrance(props.row)"
+                :disabled="save"
+              >
+            </template>
+            <template slot="amount" slot-scope="props">
+              <input
+                type="text"
+                v-model="props.row.amount"
+                :ref="props.row.id+'*amount'"
+                @change="focusOut1(props.row)"
+                :disabled="save"
+              >
+            </template>
+            <template slot="allowanceId" slot-scope="props">
+              <select
+                v-model="props.row.allowanceId"
+                v-on:change="ChangeAllowance(props.row)"
+                :disabled="save"
+              >
+                <option v-for="or in dataAllownance" :value="or.id" :key="or.id">{{or.name}}</option>
+              </select>
+            </template>
+            <div slot="act" slot-scope="props">
+              <button
+                id="btnAdd"
+                class="btn btn-primary btn-custom"
+                :disabled="save"
+                type="button"
+                @click="Addrow(props.row)"
+                v-bind:ref="props.row.id+'*showEdit'"
+              >
+                <span class="fa fa-plus"/>
+              </button>
+              <button
+                id="btnDenny"
+                class="btn btn-danger btn-custom"
+                :disabled="save"
+                type="button"
+                @click="Deleterow(props.row)"
+                v-bind:ref="props.row.id+'*denny'"
+              >
+                <span class="fa fa-close"/>
+              </button>
+            </div>
+          </v-client-table>
+         </div>
+        </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tổng phụ cấp</label>
+           <b-form-input type="text" id="" readonly value="500,0000" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tổng thu nhập</label>
+           <b-form-input type="text" id="" readonly value="1000,000.00" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Tình trạng</label>
+           <div class="form-box-control">
+             <b-form-select
+               size="lg"
+               :plain="true"
+               id="cboActive"
+               v-on:change="changeAppect"
+               :disabled="save"
+               ref="cboActive"
+               :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+               value="Please select">
+             </b-form-select>
+           </div>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <!-- <b-row v-show="show"> -->
+     <b-row>
+       <b-col sm="6">
+        <b-form-group>
+          <label for="">Ngày ký</label>
+          <div class="form-box-control">
+            <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+          </div>
+        </b-form-group>
+       </b-col>
+       <b-col sm="6">
+        <b-form-group>
+          <label for="">Người ký</label>
+          <div class="input-popup">
+           <Autocomplete
+             :items="items"
+             :isAsync="true"
+             ref="autocompleteEmployeeContract"
+             :isDisplayFull="false"
+             AutocompleteChangeEvent="AutocompleteEmployeeContractChange"
+             AutocompleteSelected="AutocompleteEmployeeContractSelected"
+           ></Autocomplete>
+           <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
+             <i class="fa fa-search" aria-hidden="true"></i>
+           </b-btn>
+          </div>
+        </b-form-group>
+       </b-col>
+     </b-row>
+     <b-row>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Chức danh</label>
+           <b-form-input type="text" id="" readonly value="Trưởng phòng" placeholder=""></b-form-input>
+         </b-form-group>
+       </b-col>
+       <b-col sm="6">
+         <b-form-group>
+           <label for="">Ghi chú</label>
+           <b-form-textarea
+             id="textarea1"
+             placeholder=""
+             :rows="3"
+             :max-rows="6">
+           </b-form-textarea>
+         </b-form-group>
+       </b-col>
+     </b-row>
+     <div slot="footer">
+       <b-button
+         id="btnSubmit"
+         type="button"
+         :disabled="save"
+         variant="primary"
+         @click="onSubmit"
+         v-show="!showWageRecord"
+         class="mr-2 btn-pill"
+       ><i class="cui-circle-check icons icon-"></i> Lưu</b-button>
+       <b-button
+         id="btnSaveAndContinue"
+         class="mr-2 btn-pill"
+         :disabled="save"
+         type="button"
+         variant="success"
+         v-show="!showWageRecord"
+         v-if="displayContinueButton"
+         @click="onSaveAndContinue"
+       ><i class="cui-task icons icon-"></i> Tiếp tục</b-button>
+       <b-button
+         id="btnEdit"
+         class="mr-2 btn-pill"
+         type="button"
+         :disabled="save"
+         variant="danger"
+         @click="onEdit"
+         v-show="showWageRecord"
+       ><i class="cui-arrow-left icons icon-"></i> Trở lại</b-button>
+       <b-button
+         id="btnSaveWageRecord"
+         class="mr-2 btn-pill"
+         :disabled="save"
+         type="button"
+         variant="primary"
+         v-show="showWageRecord"
+         @click="onSaveWageRecord"
+       ><i class="cui-circle-check icons icon-"></i> Lưu</b-button>
+     </div>
+   </b-card>
+    <!-- <div id="newconttract" v-show="!showWageRecord"> -->
+    <div>
       <b-row v-show="checked">
         <b-col cols="1">
           <label label-for="txtSignDate">Ngày ký</label>
@@ -262,7 +690,7 @@
         </v-client-table>
       </b-modal>
     </div>
-    <div id="newwagerecord" v-show="showWageRecord">
+    <!-- <div id="newwagerecord" v-show="showWageRecord">
       <b-row class="mt-3">
         <b-col cols="1">
           <label label-for="lbEmployeeCode">Mã nhân viên</label>
@@ -533,7 +961,6 @@
             </b-col>
             <b-col cols="1">Người ký</b-col>
             <b-col cols="2">
-              <!-- <label ref="lbSigner"></label> -->
               <Autocomplete
                 :items="itemsSignerWage"
                 :isAsync="true"
@@ -560,8 +987,8 @@
           </b-row>
         </b-col>
       </b-row>
-    </div>
-    <b-row>
+    </div> -->
+    <!-- <b-row>
       <b-col cols="3">
         <b-button
           id="btnSubmit"
@@ -595,9 +1022,9 @@
           variant="success"
           v-show="showWageRecord"
           @click="onSaveWageRecord"
-        >Lưu</b-button>
+        >Lưu1</b-button>
       </b-col>
-    </b-row>
+    </b-row> -->
     <b-modal
       id="showPopUpManager"
       ref="showPopUpManager"

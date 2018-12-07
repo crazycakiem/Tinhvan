@@ -6,11 +6,11 @@
           <div class="panel-title-de1">
             <div>
               <h4>Quản lý hợp đồng</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="AddContract">
+              <b-button class="btn-pill mr-1" variant="default" @click="AddContract">
                 Thêm mới
                 <i class="icon-plus"></i>
               </b-button>
-              <b-button class="btn-pill" variant="default" size="sm">
+              <b-button class="btn-pill" variant="default">
                 <i class="icon-magnifier icons"></i> Tìm kiếm
               </b-button>
             </div>
