@@ -41,7 +41,7 @@ export default {
         },
         {
           name: 'Lịch sử đơn vị',
-          url: '/tochuc/lichsudonvi',
+          url: '/tochuc/lichsutochuc',
           icon: 'icon-doc'
         }
       ]

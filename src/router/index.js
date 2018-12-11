@@ -75,6 +75,7 @@ const User = () => import('@/views/users/User')
 const Organization = () => import('@/views/org/Organization')
 const Themtochuc = () => import('@/views/tochuc/Themtochuc')
 const Chucdanhchodonvi = () => import('@/views/org/Chucdanhchodonvi')
+const OrganizationHistory = () => import('@/views/tochuc/OrganizationHistory')
 //category
 const Salary = () => import('@/views/category/Salary')
 
@@ -132,6 +133,11 @@ export default new Router({
               path: '/tochuc/thietlapchucdanhchodonvi',
               name: 'Thiết lập chức danh cho đơn vị',
               component: Chucdanhchodonvi
+            },
+            {
+              path: '/tochuc/lichsutochuc',
+              name: 'Lịch sử tổ chức',
+              component: OrganizationHistory
             }
           ]
         },
