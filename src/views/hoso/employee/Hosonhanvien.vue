@@ -17,6 +17,32 @@
               >
                 <i class="icon-pencil"></i> Edit
               </b-button>
+              <b-button
+                class="btn-pill mr-1"
+                variant="default"
+                @click="ExtenEmployee"
+                v-if="checkButton"
+              >
+                <i class="icon-pencil"></i> Làm hồ sơ lương
+              </b-button>
+              <b-button
+                class="btn-pill mr-1"
+                variant="default"
+                @click="ExtenEmployee"
+                v-if="checkButton"
+              >
+                <i class="icon-pencil"></i> Làm hợp đồng
+              </b-button>
+              <b-button
+                class="btn-pill mr-1"
+                variant="default"
+                @click="ExtenEmployee"
+                v-if="checkButton"
+              >
+                <i class="icon-pencil"></i> Cho nghỉ việc
+              </b-button>
+            </div>
+            <div class="ml-auto">
               <b-button class="btn-pill mr-1" variant="default" @click="showBasic">
                 <i class="fa fa-filter"></i> Tìm kiếm
               </b-button>
@@ -25,33 +51,26 @@
                   <i class="icon-options"></i>
                 </template>
                 <b-dropdown-item @click="showAdvance">
-                 <i class="fa fa-filter"></i> Tìm kiếm nâng cao
+                  <i class="cui-print icons"></i> Print
                 </b-dropdown-item>
                 <b-dropdown-item>
-                 <i class="fa fa-file-text-o"></i> Làm hợp đồng
-                </b-dropdown-item>
-                <b-dropdown-item>
-                 <i class="fa fa-file-text-o"></i> Làm hồ sơ lương
-                </b-dropdown-item>
-                <b-dropdown-item>
-                 <i class="icon icon-user-unfollow"></i> Nghỉ việc
+                  <i class="fa fa-file-text-o"></i> Export
                 </b-dropdown-item>
               </b-dropdown>
-            </div>
-            <div class="ml-auto">
-              <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
+              <!-- <b-button class="btn-pill btn-outline ml-1" variant="outline-default" size="sm">
                 Print
                 <i class="cui-print icons"></i>
               </b-button>
               <b-button class="btn-pill ml-1" variant="outline-default" size="sm">
                 Export
                 <i class="icon-arrow-down-circle icons"></i>
-              </b-button>
+              </b-button>-->
             </div>
           </div>
           <div class="filter-box show-filter-box">
-            <div v-show="showbasic" class="basic-box">
-              <div class="card">
+            <div class="basic-box" v-show="showSearch">
+              <input type="checkbox" v-model="search" @click="ChangeSearch"> Tìm kiếm nâng cao
+              <div class="card" v-show="showbasic">
                 <div class="card-body">
                   <h4 class="title-box">Tìm kiếm cơ bản</h4>
                   <div class="check-items">
@@ -93,9 +112,7 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div v-show="showadvance" class="advanve-box">
-              <div class="card">
+              <div class="card" v-show="showadvance">
                 <div class="card-body">
                   <h4 class="title-box">Tìm kiếm nâng cao</h4>
                   <div class="form-row">
@@ -206,6 +223,7 @@
                 </div>
               </div>
             </div>
+            <div v-show="showadvance" class="advanve-box"></div>
           </div>
           <div class="tbl-de">
             <v-client-table
@@ -721,11 +739,13 @@ export default {
       showExt: false,
       model: [],
       dateModel: [],
+      showSearch: false,
       content: [],
       checked: false,
       showbasic: false,
       checkButton: false,
       sortKey: "",
+      search: false,
       searchData: [],
       TieuChiLoc: "",
       dataColumn: [],
@@ -795,7 +815,15 @@ export default {
       console.log(this.showadvance);
     },
     showBasic() {
-      this.showbasic = !this.showbasic;
+      this.showSearch = !this.showSearch;
+      if (this.showSearch) {
+        this.showbasic = true;
+        this.showadvance = false;
+      }
+    },
+    ChangeSearch() {
+      this.showbasic = false;
+      this.showadvance = true;
     },
     onChangeTieuChi() {
       debugger;
