@@ -10,6 +10,10 @@
                 Thêm mới
                 <i class="icon-plus"></i>
               </b-button>
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="OnThutuc">
+                Thủ tục
+                <i class="icon-plus"></i>
+              </b-button>
               <b-button class="btn-pill" variant="default" size="sm">
                 <i class="icon-magnifier icons"></i> Tìm kiếm
               </b-button>
@@ -61,6 +65,11 @@
           <div v-show="showAdd">
             <NewTerminate></NewTerminate>
           </div>
+
+          <div class="tbl-de" v-show="showTableThutuc"></div>
+          <div v-show="showThutuc">
+            <Thutuc></Thutuc>
+          </div>
         </b-card>
       </b-col>
     </b-row>
@@ -71,13 +80,16 @@
 <script>
 import { shuffleArray } from "@/shared/utils";
 import NewTerminate from "./NewTerminate.vue";
+import Thutuc from "./Thutuc.vue";
 export default {
   name: "quanlyhosoluong",
-  components: { NewTerminate },
+  components: { NewTerminate, Thutuc },
   data: () => {
     return {
       showTable: true,
+      showTableThutuc: true,
       showAdd: false,
+      showThutuc: false,
       dataTable: [
         {
           selected: false,
@@ -187,6 +199,15 @@ export default {
     OnAdd() {
       this.showAdd = !this.showAdd;
       if (this.showAdd) {
+        this.showTable = false;
+      } else {
+        this.showTable = true;
+      }
+    },
+
+    OnThutuc() {
+      this.showThutuc = !this.showThutuc;
+      if (this.showThutuc) {
         this.showTable = false;
       } else {
         this.showTable = true;

@@ -6,7 +6,7 @@
           <div class="panel-title-de1">
             <div>
               <h4>Quản lý điều chuyển</h4>
-              <b-button class="btn-pill mr-1" variant="default" size="sm">
+              <b-button class="btn-pill mr-1" variant="default" size="sm" @click="OnAdd">
                 Thêm mới
                 <i class="icon-plus"></i>
               </b-button>
@@ -25,13 +25,13 @@
               </b-button>
             </div>
           </div>
-          <div class="tbl-de">
+          <div class="tbl-de" v-show="showTable">
             <v-client-table
               class="table-custom tbl-nosearch"
-              ref="tblChangeInfo"
+              ref="tblWageRecords"
               :columns="columns"
               :options="options"
-              :data="dataChangeInfo"
+              :data="dataDieuChuyen"
             >
               <template slot="selected" slot-scope="props">
                 <input
@@ -41,28 +41,19 @@
                   @click="CheckCheckBox(props.row)"
                 >
               </template>
-              <template slot="id" slot-scope="props">
-                <label>{{props.row.id}}</label>
-              </template>
-              <template slot="titleId" slot-scope="props">
-                <label>{{props.row.titleId}}</label>
-              </template>
-              <template slot="orgId" slot-scope="props">
-                <label>{{props.row.orgId}}</label>
-              </template>
-              <template slot="decisionNo" slot-scope="props">
-                <label>{{props.row.decisionNo}}</label>
-              </template>
-              <template slot="name" slot-scope="props">
-                <label>{{props.row.name}}</label>
-              </template>
-              <template slot="decisionTypeId" slot-scope="props">
-                <label>{{props.row.decisionTypeId}}</label>
-              </template>
-              <template slot="statusId" slot-scope="props">
-                <label>{{props.row.statusId}}</label>
-              </template>
+              <template slot="employeeCode" slot-scope="props">{{props.row.employeeCode}}</template>
+              <template slot="decisionNo" slot-scope="props">{{props.row.decisionNo}}</template>
+              <template slot="orgId" slot-scope="props">{{props.row.orgId}}</template>
+              <template slot="titleId" slot-scope="props">{{props.row.name}}</template>
+              <template slot="fullname" slot-scope="props">{{props.row.fullname}}</template>
+              <template slot="description" slot-scope="props">{{props.row.description}}</template>
+              <template slot="effectDate" slot-scope="props">{{(props.row.effectDate)}}</template>
+              <template slot="expireDate" slot-scope="props">{{(props.row.expireDate)}}</template>
+              <template slot="statusId" slot-scope="props">{{(props.row.statusId)}}</template>
             </v-client-table>
+          </div>
+          <div v-show="showAdd">
+            <NewChangeInfo3b></NewChangeInfo3b>
           </div>
         </b-card>
       </b-col>
@@ -73,63 +64,32 @@
 
 <script>
 import { shuffleArray } from "@/shared/utils";
+import NewChangeInfo3b from "./NewChangeInfo3b.vue";
 export default {
   name: "quanlydieuchuyen",
-  components: {},
+  components: { NewChangeInfo3b },
   data: () => {
     return {
+      showTable: true,
+      showAdd: false,
+      dataDieuChuyen: [{}],
       columns: [
         "selected",
-        "decisionNo",
-        "decisionTypeId",
-        "name",
+        "employeeCode",
+        "fullname",
         "orgId",
         "titleId",
+        "decisionNo",
+        "effectDate",
+        "expireDate",
         "statusId"
-      ],
-      dataChangeInfo: [
-        {
-          selected: false,
-          decisionNo: "N01",
-          decisionTypeId: "Quyet dinh",
-          name: "Hooàng Văn Hòa",
-          orgId: "Tinh van couluting",
-          titleId: "Trưởng phòng",
-          statusId: "phê duyệt"
-        },
-        {
-          selected: false,
-          decisionNo: "N01",
-          decisionTypeId: "Quyet dinh",
-          name: "Hooàng Văn Hòa",
-          orgId: "Tinh van couluting",
-          titleId: "Trưởng phòng",
-          statusId: "phê duyệt"
-        },
-        {
-          selected: false,
-          decisionNo: "N01",
-          decisionTypeId: "Quyet dinh",
-          name: "Hooàng Văn Hòa",
-          orgId: "Tinh van couluting",
-          titleId: "Trưởng phòng",
-          statusId: "phê duyệt"
-        },
-        {
-          selected: false,
-          decisionNo: "N01",
-          decisionTypeId: "Quyet dinh",
-          name: "Hooàng Văn Hòa",
-          orgId: "Tinh van couluting",
-          titleId: "Trưởng phòng",
-          statusId: "phê duyệt"
-        }
       ],
       options: {
         filterable: true,
         sortable: [
           "decisionNo",
-          "decisionTypeId",
+          "effectDate",
+          "expireDate",
           "orgId",
           "titleId",
           "statusId"
@@ -152,11 +112,14 @@ export default {
               ref: "selectAllCheckbox"
             });
           },
+          employeeCode: function(h) {
+            return "EmployeeCode";
+          },
+          fullname: function(h) {
+            return "FullName";
+          },
           decisionNo: function(h) {
             return "NumberDecision";
-          },
-          decisionTypeId: function(h) {
-            return "TypeDecision";
           },
           name: function(h) {
             return "Name";
@@ -167,12 +130,31 @@ export default {
           titleId: function(h) {
             return "Title";
           },
+          effectDate: function(h) {
+            return "EffectDate";
+          },
+          expireDate: function(h) {
+            return "ExpiryDate";
+          },
+          typecontract: function(h) {
+            return "TypeContract";
+          },
           statusId: function(h) {
             return "Actflg";
           }
         }
       }
     };
+  },
+  methods: {
+    OnAdd() {
+      this.showAdd = !this.showAdd;
+      if (this.showAdd) {
+        this.showTable = false;
+      } else {
+        this.showTable = true;
+      }
+    }
   }
 };
 </script>
