@@ -1,650 +1,765 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2">
-        <div class="img-fluid">
+      <div class="col-md-2 left-col-pro">
+       <div class="block-link-pro">
+        <div class="img-fluid avt-block">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCjxXK9Q7T1pM8Tik7tuthiF0IafU0VcPhCyav0_iTQmgdfaNUjA"
           >
         </div>
         <!--Hồ sơ nhân viên-->
-        <div>
+        <div class="list-function">
           <ul>
-            <li @click="showEditExtension('HS')">Hồ sơ nhân viên</li>
-            <li @click="showEditExtension('GCNT')">Gia cảnh người thân</li>
-            <li @click="showEditExtension('QTCT')">Quá trình công tác</li>
-            <li @click="showEditExtension('QTL')">Quá trình lương</li>
-            <li @click="showEditExtension('QTHD')">Quá trình hợp đồng</li>
+            <li @click="showEditExtension('HS')"><span class="label">Hồ sơ nhân viên</span></li>
+            <hr>
+            <li @click="showEditExtension('GCNT')" class="active"><span class="label">Gia cảnh người thân</span></li>
+            <hr>
+            <li @click="showEditExtension('QTCT')"><span class="label">Quá trình công tác</span></li>
+            <hr>
+            <li @click="showEditExtension('QTL')"><span class="label">Quá trình lương</span></li>
+            <hr>
+            <li @click="showEditExtension('QTHD')"><span class="label">Quá trình hợp đồng</span></li>
           </ul>
         </div>
+       </div>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-10 right-col-pro">
+       <div class="block-main-pro">
         <b-collapse id="showHS" v-model="showHS">
-          <b-form>
+         <b-form>
+          <b-card class="card-de2">
+           <div slot="header">
+             <strong @click="showHSBS('Code')">Hồ sơ nhân viên</strong>
+           </div>
+           <div class="mform" v-if="showCode">
             <b-row>
-              <b-col cols="4">
-                <b-button id="btnEdit" type="button" variant="primary" @click="onEdit">Lưu</b-button>
-                <!-- <b-button id="btnSaveEmployeeFile" type="button" variant="success" @click="onSaveEmployeeFile">{{  ('SubmitAndContinue')}}</b-button>
-                <b-button id="btnResetEdit" type="button" variant="danger" @click="onResetEdit">{{  ('Reset')}}</b-button>-->
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="txtOrg">Tổ chức</label>
+                  <div class="input-popup">
+                   <b-form-input readonly type="text" id="txtOrg" ref="txtOrg" placeholder=""></b-form-input>
+                   <b-btn id="btnShowOrg" @click="showOrg">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                   </b-btn>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mã nhân viên</label>
+                  <b-form-input type="text" id="ip3" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Họ</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
               </b-col>
             </b-row>
-          </b-form>
-          <div>
-            <h4 @click="showHSBS('Code')">Hồ sơ nhân viên</h4>
-            <b-form class="mform" v-if="showCode">
-              <b-row class="mt-3 mb-2">
-                <b-col cols="1">
-                  <label label-for="txtParent">Tổ chức</label>
-                </b-col>
-                <b-col cols="2">
-                  <!-- <label v-if="EmployeeUpdate.organization!=null">{{EmployeeUpdate.organization.name}}</label> -->
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtEmployeeCode">Mã nhân viên</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtEmployeeCode" type="text">
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtFirstName">Họ</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtFirstName" type="text">
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtLastName">Tên</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtLastName" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="1">
-                  <label label-for="txtSwipeCode">Mã quẹt thẻ</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtSwipeCode" type="text" ref="parent">
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtBirthDay">Ngày sinh</label>
-                </b-col>
-                <b-col cols="3">
-                  <date-picker id="txtBirthDay" lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-                </b-col>
-                <b-col cols="2">
-                  <label label-for="txtManager">Người quản lý</label>
-                </b-col>
-                <b-col cols="3">
-                  <Autocomplete
-                    :items="items"
-                    :isAsync="false"
-                    ref="autocomplete"
-                    :isDisplayFull="false"
-                  ></Autocomplete>
-                  <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </b-btn>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="1">
-                  <label label-for="cboGender">Giới tính</label>
-                </b-col>
-                <b-col cols="2">
-                  <select id="cboGender">
-                    <option v-for="item in dataGender" :key="item.id" :value="item.id">{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">
-                  <label label-for="cboTitle">Chức danh</label>
-                </b-col>
-                <b-col cols="2">
-                  <label
-                    id="lbTitle"
-                    v-for="item in dataTitle"
-                    :key="item.titleId"
-                    v-if="EmployeeUpdate.titleId==item.titleId"
-                  >{{item.title.name}}</label>
-                </b-col>
-                <b-col cols="2">
-                  <label label-for="cboObject">Dối tượng nhân viên</label>
-                </b-col>
-                <b-col cols="2">
-                  <select id="cboObject">
-                    <option v-for="oj in dataEmployeeObject" :key="oj.id" :value="oj.id">{{oj.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="1">
-                  <label label-for="txtID">Chứng minh thư</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtID" type="text">
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtDateID">Ngày cấp</label>
-                </b-col>
-                <b-col cols="3">
-                  <date-picker id="txtDateID" lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="txtPlaceID">Nơi cấp</label>
-                </b-col>
-                <b-col cols="2">
-                  <input id="txtPlaceID" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">
-                  <label label-for="cboNationality">Quốc tịch</label>
-                </b-col>
-                <b-col cols="2">
-                  <select id="cboNationality" v-on:change="changeNationlity">
-                    <option v-for="item in dataNation" :key="item.id" :value="item.id">{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="cboEthnic">Dân tộc</label>
-                </b-col>
-                <b-col cols="2">
-                  <select id="cboEthnic">
-                    <option v-for="item in dataEthnic" :key="item.id" :value="item.id">{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="1">
-                  <label label-for="cboReligion">Tôn giáo</label>
-                </b-col>
-                <b-col cols="2">
-                  <select id="cboReligion">
-                    <option
-                      :value="item.id"
-                      v-for="item in dataReligion"
-                      :key="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">Nơi sinh</b-col>
-                <b-col cols="10">
-                  <textarea id="txtNoiSinh" cols="100"></textarea>
-                </b-col>
-                <b-col cols="2">Địa chỉ thường trú</b-col>
-                <b-col cols="10">
-                  <textarea id="txtDiaChiThuongTru" cols="100"></textarea>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">Thành phó</b-col>
-                <b-col cols="2">
-                  <select id="cboPerCity" v-on:change="changePerCity">
-                    <option
-                      v-for="item in dataPerCity"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Quận</b-col>
-                <b-col cols="2">
-                  <select id="cboPerDistrict" v-on:change="changePerDistrict">
-                    <option
-                      v-for="item in dataPerDistrict"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Huyện</b-col>
-                <b-col cols="2">
-                  <select id="cboPerWard">
-                    <option
-                      v-for="item in dataPerWard"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">Địa chỉ tạm trú</b-col>
-                <b-col cols="10">
-                  <textarea id="txtDiaChiTamTru" cols="100"></textarea>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">Thành phố</b-col>
-                <b-col cols="2">
-                  <select id="cboTempCity" v-on:change="changeTempCity">
-                    <option
-                      v-for="item in dataTempCity"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Quận</b-col>
-                <b-col cols="2">
-                  <select id="cboTempDistrict" v-on:change="changeTempDistrict">
-                    <option
-                      v-for="item in dataTempDistrict"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Huyện</b-col>
-                <b-col cols="2">
-                  <select id="cboTempWard">
-                    <option
-                      v-for="item in dataTempWard"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col cols="2">Ngày vào công ty</b-col>
-                <b-col cols="2"></b-col>
-                <b-col cols="2">Ngày vào tập đoàn</b-col>
-                <b-col cols="2"></b-col>
-                <b-col cols="2">Trạng thái làm việc</b-col>
-                <b-col cols="2"></b-col>
-              </b-row>
-            </b-form>
-          </div>
-          <div>
-            <h4 @click="showHSBS('Email')">Thông tin Email</h4>
-            <b-form class="mform mb-3" v-if="showEmail">
-              <b-row class="mb-3 mt-3">
-                <b-col cols="2">mail công ty</b-col>
-                <b-col cols="2">
-                  <input id="txtEmailCongTy" type="text">
-                </b-col>
-                <b-col cols="2">Mail cá nhân</b-col>
-                <b-col cols="2">
-                  <input id="txtEmailCaNhan" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">Điện thoại cá nhân 1</b-col>
-                <b-col cols="2">
-                  <input id="txtSdtDd1" type="text">
-                </b-col>
-                <b-col cols="3">Điện thoại cá nhân 2</b-col>
-                <b-col cols="2">
-                  <input id="txtSdtDd2" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">
-                  <input id="cboCDP" type="checkbox">
-                  &nbsp;Công đoàn phí
-                </b-col>
-                <b-col cols="2">Ngày vào công đoàn</b-col>
-                <b-col cols="2">
-                  <date-picker
-                    id="txtNgayVaoCongDoan"
-                    lang="en"
-                    format="DD-MM-YYYY"
-                    :clearable="false"
-                  ></date-picker>
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="2">Chức vụ</b-col>
-                <b-col cols="2">
-                  <input id="txtChucVu" type="text">
-                </b-col>
-                <b-col cols="2">Nơi vào công đoàn</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiVao" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">
-                  <input id="cboCDP" type="checkbox">
-                  &nbsp; Đảng phí
-                </b-col>
-                <b-col cols="2">Ngày vào đảng</b-col>
-                <b-col cols="2">
-                  <date-picker id="txtNgayVaoDang" lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Chức vụ</b-col>
-                <b-col cols="2">
-                  <input id="txtChucVuDang" type="text">
-                </b-col>
-                <b-col cols="2">Nơi vào đảng</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiVaoDang" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Tên trường</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataTruongDaiHoc"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Trình độ chuyên môn</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataTrinhDoChuyenMon"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Diễn giải</b-col>
-                <b-col cols="2">
-                  <input type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Trình độ văn hóa</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataTrinhDoVanHoa"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Trình độ học vấn</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataTrinhDoHocVan"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Hình thức đào tạo</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataHinhThucDaoTao"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-            </b-form>
-          </div>
-          <div>
-            <h4 @click="showHSBS('TK')">Thông tin tài khoản</h4>
-            <b-form class="mform mb-3" v-if="showEmail">
-              <b-row class="mb-3 mt-3">
-                <b-col cols="2">Mail công ty</b-col>
-                <b-col cols="2">
-                  <input id="txtEmailCongTy" type="text">
-                </b-col>
-                <b-col cols="2">Mail cá nhân</b-col>
-                <b-col cols="2">
-                  <input id="txtEmailCaNhan" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">Số điện thoại 1</b-col>
-                <b-col cols="2">
-                  <input id="txtSdtDd1" type="text">
-                </b-col>
-                <b-col cols="3">Số điện thoại 2</b-col>
-                <b-col cols="2">
-                  <input id="txtSdtDd2" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">
-                  <input id="cboCDP" type="checkbox">&nbsp;Công đoàn phí
-                </b-col>
-                <b-col cols="2">Ngày vào công đoàn</b-col>
-                <b-col cols="2">
-                  <date-picker
-                    id="txtNgayVaoCongDoan"
-                    lang="en"
-                    format="DD-MM-YYYY"
-                    :clearable="false"
-                  ></date-picker>
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="2">Chức vụ</b-col>
-                <b-col cols="2">
-                  <input id="txtChucVu" type="text">
-                </b-col>
-                <b-col cols="2">Nơi vào</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiVao" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="3">
-                  <input id="cboCDP" type="checkbox">&nbsp; Đảng phí
-                </b-col>
-                <b-col cols="2">Ngày vào Đảng</b-col>
-                <b-col cols="2">
-                  <date-picker id="txtNgayVaoDang" lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Chúc vụ đảng</b-col>
-                <b-col cols="2">
-                  <input id="txtChucVuDang" type="text">
-                </b-col>
-                <b-col cols="2">Nơi vào đảng</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiVaoDang" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Tên trường</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option v-for="item in dataTruongDaiHoc" :key="item.id" :value="item.id"></option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Chuyên môn</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option v-for="item in dataTrinhDoChuyenMon" :key="item.id" :value="item.id"></option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Diễn giải</b-col>
-                <b-col cols="2">
-                  <input type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="2">Trình độ văn hóa</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option v-for="item in dataTrinhDoVanHoa" :key="item.id" :value="item.id"></option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Trình độ học vấn</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option v-for="item in dataTrinhDoHocVan" :key="item.id" :value="item.id"></option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Hình thức đào tạo</b-col>
-                <b-col cols="2">
-                  <select>
-                    <option
-                      v-for="item in dataHinhThucDaoTao"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-            </b-form>
-          </div>
-
-          <div>
-            <h4 @click="showHSBS('TK')">Thông tin tài khoản</h4>
-            <b-form class="mform mb-3" v-if="showTK">
-              <b-row class="mb-3 mt-3">
-                <b-col cols="2">Số tài khoản ngân hàng</b-col>
-                <b-col cols="2">
-                  <input id="txtSoTK" type="text">
-                </b-col>
-                <b-col cols="2">Mã số thuế</b-col>
-                <b-col cols="2">
-                  <input id="txtMaSoThue" type="text">
-                </b-col>
-              </b-row>
-              <b-row class="mb-3">
-                <b-col cols="2">Ngân hàng</b-col>
-                <b-col cols="2">
-                  <select id="cboNganHang" v-on:change="changeBank()">
-                    <option v-for="item in dataBank" :key="item.id" :value="item.id">{{item.name}}</option>
-                  </select>
-                </b-col>
-                <b-col cols="2">Chi nhánh ngân hàng</b-col>
-                <b-col cols="2">
-                  <select id="cboChiNhanh">
-                    <option
-                      v-for="item in dataBankBranch"
-                      :key="item.id"
-                      :value="item.id"
-                    >{{item.name}}</option>
-                  </select>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1">Visa</b-col>
-                <b-col cols="2">
-                  <input id="txtViSa" type="text">
-                </b-col>
-                <b-col cols="1">Nơi cấp</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiCapViSa" type="text">
-                </b-col>
-                <b-col cols="1">Ngày cấp</b-col>
-                <b-col cols="2">
-                  <input id="txtNgayCapViSa" type="text">
-                </b-col>
-                <b-col cols="1">Ngày hết hạn</b-col>
-                <b-col cols="2">
-                  <input id="txtNgayHetHanViSa" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1">Giấy phép lao động</b-col>
-                <b-col cols="2">
-                  <input id="txtGiayPhepLapDong" type="text">
-                </b-col>
-                <b-col cols="1">Nơi cấp</b-col>
-                <b-col cols="2">
-                  <input id="txtNoiCapGiayPhepLapDong" type="text">
-                </b-col>
-                <b-col cols="1">Từ ngày</b-col>
-                <b-col cols="2">
-                  <input id="txtNgayCapGiayPhepLaoDong" type="text">
-                </b-col>
-                <b-col cols="1">Đến Ngày</b-col>
-                <b-col cols="2">
-                  <input id="txtNgayHetHanGiayPhepLaoDong" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1">Ngành nghề</b-col>
-                <b-col cols="2">
-                  <input id="txtNganhNghe" type="text">
-                </b-col>
-                <b-col cols="1">Người liên hệ</b-col>
-                <b-col cols="2">
-                  <input id="txtNguoiLienHe" type="text">
-                </b-col>
-                <b-col cols="1">Số điện thoại</b-col>
-                <b-col cols="2">
-                  <input id="txtSDTNguoiLienHe" type="text">
-                </b-col>
-              </b-row>
-            </b-form>
-          </div>
-          <div>
-            <h4 @click="showHSBS('SK')">Thông tin sức khỏe</h4>
-            <b-form class="mform" v-if="showSK">
-              <b-row>
-                <b-col cols="1">Chiều cao</b-col>
-                <b-col cols="2">
-                  <input id="txtChieuCao" type="text">
-                </b-col>
-                <b-col cols="1">Cân nặng</b-col>
-                <b-col cols="2">
-                  <input id="txtCanNang" type="text">
-                </b-col>
-                <b-col cols="1">Nhóm máu</b-col>
-                <b-col cols="2">
-                  <input id="txtNhomMau" type="text">
-                </b-col>
-                <b-col cols="1">Huyết áp</b-col>
-                <b-col cols="2">
-                  <input id="txtHuyetAp" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1">Tai mũi họng</b-col>
-                <b-col cols="2">
-                  <input id="txtTaiMuiHong" type="text">
-                </b-col>
-                <b-col cols="1">Răng hàm mặt</b-col>
-                <b-col cols="2">
-                  <input id="txtRangHamMat" type="text">
-                </b-col>
-                <b-col cols="1">Phổi và ngực</b-col>
-                <b-col cols="2">
-                  <input id="txtPhoiVaNguc" type="text">
-                </b-col>
-                <b-col cols="1">Tim</b-col>
-                <b-col cols="2">
-                  <input id="txtTim" type="text">
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col cols="1">Mắt trái</b-col>
-                <b-col cols="2">
-                  <input id="txtMatTrai" type="text">
-                </b-col>
-                <b-col cols="1">Mắt phải</b-col>
-                <b-col cols="2">
-                  <input id="txtMatPhai" type="text">
-                </b-col>
-                <b-col cols="1">Viêm gan B</b-col>
-                <b-col cols="2">
-                  <input id="txtViemGanB" type="text">
-                </b-col>
-                <b-col cols="1">Da và hoa liễu</b-col>
-                <b-col cols="2">
-                  <input id="txtDaVaHoaLieu" type="text">
-                </b-col>
-                <b-col cols="1">Loại SỨc khỏe</b-col>
-                <b-col cols="2">
-                  <input id="txtLoaiSucKhoe" type="text">
-                </b-col>
-                <b-col cols="1">Ghi chú</b-col>
-                <b-col cols="2">
-                  <input id="txtGhiChu" type="text">
-                </b-col>
-              </b-row>
-            </b-form>
-          </div>
-
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Tên</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="ip6">Ngày sinh</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="ip7">Người quản lý</label>
+                  <div class="input-popup">
+                   <Autocomplete :items="items" :isAsync="false" ref="autocomplete" :isDisplayFull="false"></Autocomplete>
+                   <b-btn id="btnShowPopUpManager" @click="ShowPopUpManager">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                   </b-btn>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Giới tính</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Chức danh</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Đối tượng nhân viên</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+             <b-col sm="4">
+               <b-form-group>
+                 <label for="">Số chứng minh thư</label>
+                 <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+               </b-form-group>
+             </b-col>
+             <b-col sm="4">
+               <b-form-group>
+                 <label for="">Ngày cấp</label>
+                 <div class="form-box-control">
+                   <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                 </div>
+               </b-form-group>
+             </b-col>
+             <b-col sm="4">
+               <b-form-group>
+                 <label for="">Nơi cấp</label>
+                 <div class="form-box-control">
+                   <b-form-select
+                     size="lg"
+                     :plain="true"
+                     id=""
+                     :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                     value="Please select">
+                   </b-form-select>
+                 </div>
+               </b-form-group>
+             </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Quốc tịch</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Dân tộc</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Tôn giáo</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="6">
+                <b-form-group>
+                  <label for="">Nơi sinh</label>
+                  <b-form-textarea
+                    id="textarea1"
+                    placeholder=""
+                    :rows="3"
+                    :max-rows="6">
+                  </b-form-textarea>
+                </b-form-group>
+              </b-col>
+              <b-col sm="6">
+                <b-form-group>
+                  <label for="">Địa chỉ thường trú</label>
+                  <b-form-textarea
+                    id="textarea1"
+                    placeholder=""
+                    :rows="3"
+                    :max-rows="6">
+                  </b-form-textarea>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Thành phố</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Quận</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Huyện</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="6">
+                <b-form-group>
+                  <label for="">Địa chỉ tạm trú</label>
+                  <b-form-textarea
+                    id="textarea1"
+                    placeholder=""
+                    :rows="3"
+                    :max-rows="6">
+                  </b-form-textarea>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Thành phố</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Quận</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Huyện</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+               <b-form-group>
+                 <label for="">Ngày vào công ty</label>
+                 <b-form-input type="text" id="" placeholder=""></b-form-input>
+               </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngày vào tập đoàn</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Trạng thái làm việc</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <div slot="footer">
+              <b-button id="btnEdit" type="button" variant="primary" @click="onEdit">Lưu</b-button>
+            </div>
+           </div>
+          </b-card>
+         </b-form>
+         <b-form>
+          <b-card class="card-de2">
+           <div slot="header">
+             <strong @click="showHSBS('Email')">Thông tin Email</strong>
+           </div>
+           <div class="mform" v-if="showEmail">
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mail công ty</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mail cá nhân</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Điện thoại cá nhân 1</label>
+                  <b-form-input type="text" id="" placeholder=""></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Điện thoại cá nhân 2</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                 <label for="">&nbsp;</label>
+                  <b-form-checkbox id="cboCDP1">Công đoàn phí</b-form-checkbox>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngày vào công đoàn</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Chức vụ</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Nơi vào công đoàn</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                 <label for="">&nbsp;</label>
+                  <b-form-checkbox stacked id="cboCDP">Đảng phí</b-form-checkbox>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngày vào đảng</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Chức vụ</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Nơi vào đảng</label>
+                  <b-form-input type="text" id="" placeholder="ex: 1234"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Tên trường</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Trình độ chuyên môn</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Diễn giải</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Trình độ văn hoá</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Trình độ học vấn</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Hình thức đào tạo</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+           </div>
+          </b-card>
+         </b-form>
+         <b-form>
+          <b-card class="card-de2">
+           <div slot="header">
+             <strong @click="showHSBS('TK')">Thông tin tài khoản</strong>
+           </div>
+           <div class="mform" v-if="showTK">
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Số chứng tài khoản ngân hàng</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mã số thuế</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngân hàng</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Chi nhánh ngân hàng</label>
+                  <div class="form-box-control">
+                    <b-form-select
+                      size="lg"
+                      :plain="true"
+                      id=""
+                      :options="['Please select','Option 1', 'Option 2', 'Option 3']"
+                      value="Please select">
+                    </b-form-select>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Visa</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Nơi cấp</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngày cấp</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngày hết hạn</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Giấy phép lao động</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Nơi cấp</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Từ ngày</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Đến ngày</label>
+                  <div class="form-box-control">
+                    <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+                  </div>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Ngành nghề</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Người liên hệ</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Số điện thoại</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+           </div>
+          </b-card>
+         </b-form>
+         <b-form>
+          <b-card class="card-de2">
+           <div slot="header">
+             <strong @click="showHSBS('SK')">Thông tin sức khỏe</strong>
+           </div>
+           <div class="mform" v-if="showSK">
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Chiều cao</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Cân nặng</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Nhóm máu</label>
+                  <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Huyết áp</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Tai mũi họng</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Răng hàm mặt</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Phổi và ngực</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Tim</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mắt trái</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Mắt phải</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Viêm gan B</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Da và hoa liễu</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col sm="4">
+                <b-form-group>
+                  <label for="">Loại sức khoẻ</label>
+                  <b-form-input type="text" id="" placeholder="ex: 2123"></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col sm="8">
+                <b-form-group>
+                  <label for="">Ghi chú</label>
+                  <b-form-textarea
+                    id="textarea1"
+                    placeholder=""
+                    :rows="3"
+                    :max-rows="6">
+                  </b-form-textarea>
+                </b-form-group>
+              </b-col>
+            </b-row>
+           </div>
+          </b-card>
+         </b-form>
           <!-- <div>
             <b-btn class="fa fa-circle" aria-hidden="true" @click="showHSBS('Code')"></b-btn>
             <b-btn class="fa fa-circle" aria-hidden="true" @click="showHSBS('Email')"></b-btn>
@@ -652,6 +767,7 @@
             <b-btn class="fa fa-circle" aria-hidden="true" @click="showHSBS('SK')"></b-btn>
           </div>-->
         </b-collapse>
+
 
         <b-collapse id="showGCNT" v-model="showGCNT">
           <EmployeeFamily :Id="Id" v-if="showGCNT"></EmployeeFamily>
@@ -665,6 +781,7 @@
         <b-collapse id="showQTHD" v-model="showQTHD">
           <EmployeeContractProcess :Id="Id" v-if="showQTHD"></EmployeeContractProcess>
         </b-collapse>
+       </div>
       </div>
     </div>
   </div>

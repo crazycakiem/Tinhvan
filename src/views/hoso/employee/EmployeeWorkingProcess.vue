@@ -1,29 +1,38 @@
 <template>
-  <div>
-    <v-client-table
-      class="table-custom"
-      ref="tblEmployeeWorkingProcess"
-      :data="dataEmployeeWorkingProcess"
-      :columns="columnsEmployeeWorkingProcess"
-      :options="optionsEmployeeWorkingProcess"
-    >
-      <template slot="decisionNum" slot-scope="props">
-        <label>{{props.row.decisionNo}}</label>
-      </template>
-      <template slot="effectDate" slot-scope="props">
-        <label>{{(props.row.effectDate)}}</label>
-      </template>
-      <template slot="expiryDate" slot-scope="props">
-        <label>{{(props.row.expireDate)}}</label>
-      </template>
-      <template slot="org" slot-scope="props">
-        <label>{{props.row.org}}</label>
-      </template>
-      <template slot="title" slot-scope="props">
-        <label>{{props.row.title}}</label>
-      </template>
-    </v-client-table>
-  </div>
+ <b-form>
+  <b-card class="card-de2">
+   <div slot="header">
+    <div class="d-flex">
+      <strong>Quá trình công tác</strong>
+    </div>
+   </div>
+   <div class="tbl-de">
+     <v-client-table
+       class="table-custom tbl-nosearch"
+       ref="tblEmployeeWorkingProcess"
+       :data="dataEmployeeWorkingProcess"
+       :columns="columnsEmployeeWorkingProcess"
+       :options="optionsEmployeeWorkingProcess"
+     >
+       <template slot="decisionNum" slot-scope="props">
+         <label>{{props.row.decisionNo}}</label>
+       </template>
+       <template slot="effectDate" slot-scope="props">
+         <label>{{(props.row.effectDate)}}</label>
+       </template>
+       <template slot="expiryDate" slot-scope="props">
+         <label>{{(props.row.expireDate)}}</label>
+       </template>
+       <template slot="org" slot-scope="props">
+         <label>{{props.row.org}}</label>
+       </template>
+       <template slot="title" slot-scope="props">
+         <label>{{props.row.title}}</label>
+       </template>
+     </v-client-table>
+   </div>
+  </b-card>
+ </b-form>
 </template>
 <script>
 import Vue from "vue";

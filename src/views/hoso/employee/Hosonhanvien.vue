@@ -44,7 +44,7 @@
             </div>
             <div class="ml-auto">
               <b-button class="btn-pill mr-1" variant="default" @click="showBasic">
-                <i class="fa fa-filter"></i> Tìm kiếm
+                <i class="fa fa-search"></i> Tìm kiếm
               </b-button>
               <b-dropdown id="ddown1" variant="viewMore" class="tv-drop-viewmore m-md-1" no-caret>
                 <template slot="button-content">
@@ -69,7 +69,6 @@
           </div>
           <div class="filter-box show-filter-box">
             <div class="basic-box" v-show="showSearch">
-              <input type="checkbox" v-model="search" @click="ChangeSearch"> Tìm kiếm nâng cao
               <div class="card" v-show="showbasic">
                 <div class="card-body">
                   <h4 class="title-box">Tìm kiếm cơ bản</h4>
@@ -100,16 +99,20 @@
                   </div>
                   <div>
                     <div class="form-group text-left mt-3">
+                     <div class="d-flex">
                       <button
                         id="btnSearch"
-                        class="btn btn-custom btn-success"
+                        class="btn btn-custom btn-success mr-3"
                         @click="Search($event)"
                       >
                         <i class="fa fa-search" aria-hidden="true"/>
                         <span>Tìm kiếm</span>
                       </button>
+                      <b-form-checkbox v-model="search" @change="ChangeSearch">Tìm kiếm nâng cao</b-form-checkbox>
+                     </div>
                     </div>
                   </div>
+
                 </div>
               </div>
               <div class="card" v-show="showadvance">

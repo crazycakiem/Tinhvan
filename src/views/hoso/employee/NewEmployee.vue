@@ -6,13 +6,13 @@
          <strong>Thêm mới nhân viên</strong>
        </div>
        <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="fileInput">Ảnh đại diện</label>
              <b-form-file id="fileInput" :plain="true"></b-form-file>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="txtOrg">Tổ chức</label>
              <div class="input-popup">
@@ -23,29 +23,27 @@
              </div>
            </b-form-group>
          </b-col>
-       </b-row>
-       <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="ip3">Mã nhân viên</label>
              <b-form-input type="text" id="ip3" placeholder="ex: 1234"></b-form-input>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+       </b-row>
+       <b-row>
+         <b-col sm="4">
            <b-form-group>
              <label for="ip4">Nickname</label>
              <b-form-input type="text" id="ip4" placeholder="ex: 1234"></b-form-input>
            </b-form-group>
          </b-col>
-       </b-row>
-       <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="ip5">Họ nhân viên</label>
              <b-form-input type="text" id="ip5" placeholder="ex: Nguyễn"></b-form-input>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="ip6">Tên nhân viên</label>
              <b-form-input type="text" id="ip6" placeholder="ex: Linh"></b-form-input>
@@ -53,7 +51,7 @@
          </b-col>
        </b-row>
        <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="ip7">Người quản lý</label>
              <div class="input-popup">
@@ -64,15 +62,13 @@
              </div>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="ip8">Mã quẹt thẻ</label>
              <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
            </b-form-group>
          </b-col>
-       </b-row>
-       <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="cboTitle">Chức danh</label>
              <div class="form-box-control">
@@ -93,17 +89,17 @@
              </div>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
-           <b-form-group>
-             <label for="ip6">Ngày sinh</label>
-             <div class="form-box-control">
-               <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
-             </div>
-           </b-form-group>
-         </b-col>
        </b-row>
        <b-row>
-         <b-col sm="6">
+        <b-col sm="4">
+          <b-form-group>
+            <label for="ip6">Ngày sinh</label>
+            <div class="form-box-control">
+              <date-picker lang="en" format="DD-MM-YYYY" :clearable="false"></date-picker>
+            </div>
+          </b-form-group>
+        </b-col>
+         <b-col sm="4">
            <b-form-group>
              <label for="">Giới tính</label>
              <div class="form-box-control">
@@ -117,7 +113,7 @@
              </div>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Đối tượng nhân viên</label>
              <div class="form-box-control">
@@ -133,13 +129,13 @@
          </b-col>
        </b-row>
        <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Số chứng minh thư</label>
              <b-form-input type="text" id="ip8" placeholder="ex: 2123"></b-form-input>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Ngày cấp</label>
              <div class="form-box-control">
@@ -147,9 +143,7 @@
              </div>
            </b-form-group>
          </b-col>
-       </b-row>
-       <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Nơi cấp</label>
              <div class="form-box-control">
@@ -163,7 +157,9 @@
              </div>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+       </b-row>
+       <b-row>
+         <b-col sm="4">
            <b-form-group>
              <label for="">Quốc tịch</label>
              <div class="form-box-control">
@@ -177,9 +173,7 @@
              </div>
            </b-form-group>
          </b-col>
-       </b-row>
-       <b-row>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Dân tộc</label>
              <div class="form-box-control">
@@ -193,7 +187,7 @@
              </div>
            </b-form-group>
          </b-col>
-         <b-col sm="6">
+         <b-col sm="4">
            <b-form-group>
              <label for="">Tôn giáo</label>
              <div class="form-box-control">

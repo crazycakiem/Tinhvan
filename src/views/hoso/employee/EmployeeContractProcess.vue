@@ -1,6 +1,14 @@
 <template>
     <div id="EmployeeContractProcess">
-        <v-client-table class="table-custom" ref="tblEmployeeContractProcess" :data="dataEmployeeContractProcess"
+     <b-form>
+      <b-card class="card-de2">
+       <div slot="header">
+        <div class="d-flex">
+          <strong>Quá trình hợp đồng</strong>
+        </div>
+       </div>
+       <div class="tbl-de">
+        <v-client-table class="table-custom tbl-nosearch" ref="tblEmployeeContractProcess" :data="dataEmployeeContractProcess"
          :columns="columnsEmployeeContractProcess" :options="optionsEmployeeContractProcess">
 
          <template  slot="contractNo" slot-scope="props">
@@ -19,6 +27,9 @@
               <label>{{(props.row.signDate)}}</label>
          </template>
         </v-client-table>
+       </div>
+      </b-card>
+     </b-form>
     </div>
 </template>
 <script>
