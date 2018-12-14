@@ -10,9 +10,14 @@
                 <i class="fa fa-filter"></i>
                 Tìm kiếm
               </b-button>
+              <b-button class="btn-pill mr-1" variant="default" @click="back">
+                Back
+                <i class="icon-plus"></i>
+              </b-button>
             </div>
           </div>
-          <div class="tbl-de">
+
+          <div class="tbl-de" v-show="showTable">
             <v-client-table
               ref="tblOrgHistory"
               :columns="columns"
@@ -70,6 +75,15 @@
             </v-client-table>
           </div>
 
+          <div v-show="showAdd">
+            <NewOrganizationHistory></NewOrganizationHistory>
+          </div>
+          <div v-show="showEdt">
+            <EditOrganizationHistory></EditOrganizationHistory>
+          </div>
+          <div v-show="showMer">
+            <MerOrganizationHistory></MerOrganizationHistory>
+          </div>
           <b-modal ref="employee" size="lg" title="Using Component Methods">
             <v-jstree
               :data="data"
@@ -622,15 +636,27 @@
   </div>
 </template>
 <script>
+import NewOrganizationHistory from "./NewOrganizationHistory.vue";
+import EditOrganizationHistory from "./EditOrganizationHistory.vue";
+import MerOrganizationHistory from "./MerOrganizationHistory.vue";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import VJstree from "vue-jstree";
 import _ from "lodash";
 export default {
-  name: "OrganizationHistory",
-  components: { VJstree },
+  // name: "OrganizationHistory",
+  components: {
+    VJstree,
+    NewOrganizationHistory,
+    EditOrganizationHistory,
+    MerOrganizationHistory
+  },
   data: () => {
     return {
+      showTable: true,
+      showAdd: false,
+      showEdt: false,
+      showMer: false,
       OrgID: "",
       Show: false,
       columns: [
@@ -1018,6 +1044,12 @@ export default {
     };
   },
   methods: {
+    back() {
+      this.showTable = true;
+      this.showAdd = false;
+      this.showEdt = false;
+      this.showMer = false;
+    },
     async created() {},
     display(evt) {
       switch (evt) {
@@ -1044,12 +1076,16 @@ export default {
       }
     },
     async rowclick(e) {
-      this.$refs.showDetailHistory.show();
+      // this.$refs.showDetailHistory.show();
       if (_.isEqual(e.row.type, 1)) {
         this.statusNew = true;
         this.statusEdit = false;
         this.statusMer = false;
         this.title = "AddNew";
+        this.showAdd = !this.showAdd;
+        if (this.showAdd) {
+          this.showTable = false;
+        }
         this.BusinessLicenseNumb = e.row.businessLicenseNumb;
         this.CodeNew = e.row.code;
         this.NameNew = e.row.name;
@@ -1066,6 +1102,10 @@ export default {
         this.statusEdit = true;
         this.statusMer = false;
         this.title = "Edit";
+        this.showEdt = !this.showEdt;
+        if (this.showEdt) {
+          this.showTable = false;
+        }
         if (!_.isNull(e.row.parent) && !_.isUndefined(e.row.parent)) {
           this.OrgParent = e.row.parent.name;
           this.OrgParentNew = e.row.parent.name;
@@ -1087,6 +1127,10 @@ export default {
         this.statusNew = false;
         this.statusEdit = false;
         this.statusMer = true;
+        this.showMer = !this.showMer;
+        if (this.showMer) {
+          this.showTable = false;
+        }
         this.title = "Merger";
         this.CodeNew = e.row.code;
         this.NameNew = e.row.name;
@@ -1103,6 +1147,10 @@ export default {
         this.statusNew = false;
         this.statusEdit = false;
         this.statusMer = true;
+        this.showMer = !this.showMer;
+        if (this.showMer) {
+          this.showTable = false;
+        }
         this.title = "Separa";
         this.BusinessLicenseNumb = e.row.businessLicenseNumb;
         this.CodeNew = e.row.code;
@@ -1123,6 +1171,10 @@ export default {
           this.title = "A";
         } else {
           this.title = "I";
+        }
+        this.showAdd = !this.showAdd;
+        if (this.showAdd) {
+          this.showTable = false;
         }
         this.BusinessLicenseNumb = e.row.businessLicenseNumb;
         this.CodeNew = e.row.code;

@@ -9,7 +9,7 @@
          <b-col sm="4">
            <b-form-group>
              <label for="fileInput">Ảnh đại diện</label>
-             <b-form-file id="fileInput" :plain="true"></b-form-file>
+             <b-form-file id="fileInput" :plain="true" @change="OnSelected"></b-form-file>
            </b-form-group>
          </b-col>
          <b-col sm="4">

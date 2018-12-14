@@ -1,61 +1,60 @@
 <template>
   <div id="EmployeeSalaryProcess">
-   <b-form>
-    <b-card class="card-de2">
-     <div slot="header">
-      <div class="d-flex">
-        <strong>Quá trình lương</strong>
-      </div>
-     </div>
-     <div class="tbl-de mt-3">
-      <v-client-table
-        class="table-custom tbl-nosearch ml-3 mr-3 mb-3"
-        :columns="columnsSalary"
-        :data="dataSalaryExten"
-        :options="optionsSalaryExten"
-        ref="tblWageRecordExten"
-        @row-click="rowWageRecoredExten"
-      >
-        <template slot="decisionNo" slot-scope="props">
-          <label>{{props.row.decisionNo}}</label>
-        </template>
-        <template slot="effectDate" slot-scope="props">
-          <label>{{(props.row.effectDate)}}</label>
-        </template>
-        <template slot="salaryBasic" slot-scope="props">
-          <label>{{(props.row.salaryBasic)}}</label>
-        </template>
-        <template slot="salaryPercent" slot-scope="props">
-          <label>{{props.row.salaryPercent}}</label>
-        </template>
-        <template slot="SalaryTotal" slot-scope="props">
-          <label>{{(props.row.salaryTotal)}}</label>
-        </template>
-      </v-client-table>
-     </div>
-     <div class="tbl-de mt-3">
-      <v-client-table
-        class="table-custom tbl-nosearch ml-3 mr-3 mb-3"
-        :columns="columnsAllowance"
-        :data="dataAllowanceExten"
-        :options="optionsAllownanceExten"
-        ref="tblAllowance"
-      >
-        <template slot="allowanceId" slot-scope="props">
-          <label
-            v-for="item in dataAllowanceList"
-            :key="item.id"
-            v-if="CheckCondition(props.row.allowanceId,item.id)"
-          >{{item.name}}</label>
-        </template>
-        <template slot="isInsurrance" slot-scope="props">
-          <input type="checkbox" v-model="props.row.isInsurrance" disabled>
-        </template>
-      </v-client-table>
-     </div>
-    </b-card>
-   </b-form>
-
+    <b-form>
+      <b-card class="card-de2">
+        <div slot="header">
+          <div class="d-flex">
+            <strong>Quá trình lương</strong>
+          </div>
+        </div>
+        <div class="tbl-de mt-3">
+          <v-client-table
+            class="table-custom tbl-nosearch ml-3 mr-3 mb-3"
+            :columns="columnsSalary"
+            :data="dataSalaryExten"
+            :options="optionsSalaryExten"
+            ref="tblWageRecordExten"
+            @row-click="rowWageRecoredExten"
+          >
+            <template slot="decisionNo" slot-scope="props">
+              <label>{{props.row.decisionNo}}</label>
+            </template>
+            <template slot="effectDate" slot-scope="props">
+              <label>{{(props.row.effectDate)}}</label>
+            </template>
+            <template slot="salaryBasic" slot-scope="props">
+              <label>{{(props.row.salaryBasic)}}</label>
+            </template>
+            <template slot="salaryPercent" slot-scope="props">
+              <label>{{props.row.salaryPercent}}</label>
+            </template>
+            <template slot="SalaryTotal" slot-scope="props">
+              <label>{{(props.row.salaryTotal)}}</label>
+            </template>
+          </v-client-table>
+        </div>
+        <div class="tbl-de mt-3">
+          <v-client-table
+            class="table-custom tbl-nosearch ml-3 mr-3 mb-3"
+            :columns="columnsAllowance"
+            :data="dataAllowanceExten"
+            :options="optionsAllownanceExten"
+            ref="tblAllowance"
+          >
+            <template slot="allowanceId" slot-scope="props">
+              <label
+                v-for="item in dataAllowanceList"
+                :key="item.id"
+                v-if="CheckCondition(props.row.allowanceId,item.id)"
+              >{{item.name}}</label>
+            </template>
+            <template slot="isInsurrance" slot-scope="props">
+              <input type="checkbox" v-model="props.row.isInsurrance" disabled>
+            </template>
+          </v-client-table>
+        </div>
+      </b-card>
+    </b-form>
   </div>
 </template>
 <script>
