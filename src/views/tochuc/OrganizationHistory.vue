@@ -12,7 +12,7 @@
               </b-button>
               <b-button class="btn-pill mr-1" variant="default" @click="back">
                 Back
-                <i class="icon-plus"></i>
+                <i class="fas fa-arrow-alt-circle-left"></i>
               </b-button>
             </div>
           </div>

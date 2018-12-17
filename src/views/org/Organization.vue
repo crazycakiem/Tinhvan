@@ -1,115 +1,167 @@
 <template>
- <b-row>
-   <b-col lg="12">
-     <b-card class="card-de1">
-      <div class="panel-title-de1">
-        <div>
-          <h4>Sơ đồ tổ chức</h4>
-          <b-button class="btn-pill mr-1" variant="default" size="sm" to="/tochuc/themtochuc">
-            Thêm mới tổ chức <i class="icon-plus"></i>
-          </b-button>
+  <b-row>
+    <b-col lg="12">
+      <b-card class="card-de1">
+        <div class="panel-title-de1">
+          <div>
+            <h4>Sơ đồ tổ chức</h4>
+            <b-button class="btn-pill mr-1" variant="default" size="sm" to="/tochuc/themtochuc">
+              Thêm mới tổ chức
+              <i class="icon-plus"></i>
+            </b-button>
+          </div>
         </div>
-      </div>
-      <div class="more-func">
-        <b-button id="btnMultiAppy" @click="MultiAppy" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-          <i class="fa fa-unlock" aria-hidden="true"></i>
-        </b-button>
-        <b-button id="btnMultiDenny" @click="MultiDenny" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-          <i class="fa fa-lock" aria-hidden="true"></i>
-        </b-button>
-        <b-button id="btnMergerOrg" @click="MergerOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-          <i class="fa fa-compress" aria-hidden="true"></i>
-        </b-button>
-        <b-button id="btnSeparaOrg" @click="SeparaOrg" v-if="checked" class="btn-pill mr-1" variant="outline-primary" size="sm">
-          <i class="fa fa-code-fork" aria-hidden="true"></i>
-        </b-button>
-        <b-form-checkbox id="chkShowAll" class="custom-checkbox-style1" @click="ShowAll($event)" v-model="Show">ShowAll</b-form-checkbox>
-      </div>
-      <div class="row">
+        <div class="inside-page" v-show="showTree">
+          <div class="more-func">
+            <b-button
+              id="btnMultiAppy"
+              @click="MultiAppy"
+              v-if="checked"
+              class="btn-pill mr-1"
+              variant="outline-primary"
+              size="sm"
+            >
+              <i class="fa fa-unlock" aria-hidden="true"></i>
+            </b-button>
+            <b-button
+              id="btnMultiDenny"
+              @click="MultiDenny"
+              v-if="checked"
+              class="btn-pill mr-1"
+              variant="outline-primary"
+              size="sm"
+            >
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </b-button>
+            <b-button
+              id="btnMergerOrg"
+              @click="MergerOrg"
+              v-if="checked"
+              class="btn-pill mr-1"
+              variant="outline-primary"
+              size="sm"
+            >
+              <i class="fa fa-compress" aria-hidden="true"></i>
+            </b-button>
+            <b-button
+              id="btnSeparaOrg"
+              @click="SeparaOrg"
+              v-if="checked"
+              class="btn-pill mr-1"
+              variant="outline-primary"
+              size="sm"
+            >
+              <i class="fa fa-code-fork" aria-hidden="true"></i>
+            </b-button>
+            <b-form-checkbox
+              id="chkShowAll"
+              class="custom-checkbox-style1"
+              @click="ShowAll($event)"
+              v-model="Show"
+            >ShowAll</b-form-checkbox>
+          </div>
+        <div class="row">
           <div class="col-md-6">
-           <v-jstree :data="data"
-                :item-events="itemEvents"
-                :show-checkbox="showcheckbox"
-                :multiple="multiple"
-                :collapse="collapse"
-                :allow-batch="batch"
-                :no-dots="nodots"
-                :whole-row="whole"
-                :text-field-name="txtparent"
-                :value-field-name="valueparent"
-                :children-field-name="txtchild"
-                @item-click="itemClick"
-                @item-toggle="itemToggle"
-                :size="size"
-                ref="tree"
-                class="tv-tree-st1">
-            <template scope="_">
-       <div style="display: inherit; width: 200px" @click.ctrl="customItemClickWithCtrl" @mouseover="mouseover(_.model)" @mouseout="mouseout" >
-         <i :class="_.vm.themeIconClasses" role="presentation" ></i>
-           <!-- <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
+            <v-jstree
+              :data="data"
+              :item-events="itemEvents"
+              :show-checkbox="showcheckbox"
+              :multiple="multiple"
+              :collapse="collapse"
+              :allow-batch="batch"
+              :no-dots="nodots"
+              :whole-row="whole"
+              :text-field-name="txtparent"
+              :value-field-name="valueparent"
+              :children-field-name="txtchild"
+              @item-click="itemClick"
+              @item-toggle="itemToggle"
+              :size="size"
+              ref="tree"
+              class="tv-tree-st1"
+            >
+              <template scope="_">
+                <div
+                  style="display: inherit; width: 200px"
+                  @click.ctrl="customItemClickWithCtrl"
+                  @mouseover="mouseover(_.model)"
+                  @mouseout="mouseout"
+                >
+                  <i :class="_.vm.themeIconClasses" role="presentation"></i>
+                  <!-- <div @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
                       {{_.model.text}}
-                  </div> -->
-                  <span  @click="CustomClick(_.vm, _.model, $event)" :class="_.model.status=='I' ?  'back' :'' " :id="_.model.id">
-                       {{_.model.text}}
-                  </span>
-                     <!-- {{_.model.text}} -->
-         <!-- <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button> -->
-       </div>
-     </template>
-      </v-jstree>
+                  </div>-->
+                  <span
+                    @click="CustomClick(_.vm, _.model, $event)"
+                    :class="_.model.status=='I' ?  'back' :'' "
+                    :id="_.model.id"
+                  >{{_.model.text}}</span>
+                  <!-- {{_.model.text}} -->
+                  <!-- <button style="border: 0px; background-color: transparent; cursor: pointer;" @click="customItemClick(_.vm, _.model, $event)"><i class="fa fa-remove"></i></button> -->
+                </div>
+              </template>
+            </v-jstree>
           </div>
-      <div class="col-md-6" v-show="showDetail">
-       <div class="show-detail-ro">
-        <div class="row">
-            <div class="col-md-6">
-                <label>Name</label>
+          <div class="col-md-6" v-show="showDetail">
+            <div class="show-detail-ro">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Name</label>
+                </div>
+                <div class="col-md-6">
+                  <label ref="lbName"></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Code</label>
+                </div>
+                <div class="col-md-6">
+                  <label ref="lbCode"></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Số phòng ban con</label>
+                </div>
+                <div class="col-md-6">
+                  <label ref="lbSumOrgChild"></label>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6">
-                <label ref="lbName"></label>
-            </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Code</label>
-            </div>
-            <div class="col-md-6">
-                <label ref="lbCode"></label>
-            </div>
         </div>
-        <div class="row">
-           <div class="col-md-6">
-               <label>Số phòng ban con</label>
-           </div>
-           <div class="col-md-6">
-               <label ref="lbSumOrgChild"></label>
-           </div>
-        </div>
-       </div>
-
-      </div>
-      </div>
-      <b-modal ref="myModalRef" size="lg" title="Using Component Methods" :hide-footer="true">
+        <b-modal ref="myModalRef" size="lg" title="Using Component Methods" :hide-footer="true">
           <div slot="modal-footer" class="float-right">
-              <b-button type="submit" id="btnSubmit" variant="primary" @click="onSubmit">Submit</b-button>
-              <b-button type="reset" id="btnReset" variant="danger" @click="onReset">Reset</b-button>
+            <b-button type="submit" id="btnSubmit" variant="primary" @click="onSubmit">Submit</b-button>
+            <b-button type="reset" id="btnReset" variant="danger" @click="onReset">Reset</b-button>
           </div>
-      </b-modal>
-     </b-card >
+        </b-modal>
+        <div v-show="showMergerOrg">
+          <MergerOrganization></MergerOrganization>
+        </div>
+      </b-card>
     </b-col>
-   </b-row>
+  </b-row>
 </template>
 <script>
 import Vue from "vue";
+export const bus = new Vue();
 import { Component, Prop } from "vue-property-decorator";
+import MergerOrganization from "./MergerOrganization.vue";
 import VJstree from "vue-jstree";
 import _ from "lodash";
 export default {
   name: "Organization",
   components: {
+    MergerOrganization,
     VJstree
   },
   data() {
     return {
+      showMergerOrg: false,
+      showTree:true,
       showDetail: false,
       OrgID: "",
       data: [
@@ -409,17 +461,28 @@ export default {
       this.$refs.myModalRef.show();
     },
     async MergerOrg() {
-      let arr = "";
-      this.$refs.tree.handleRecursionNodeChilds(this.$refs.tree, function(
-        node
-      ) {
-        if (!_.isUndefined(node.model)) {
-          if (node.model.selected) {
-            arr += node.model.id + "*";
-          }
-        }
-      });
-      window.location.href = "/mergerorganizations?Id=" + arr;
+      // let arr = "";
+      // let lis = [];
+      // this.$refs.tree.handleRecursionNodeChilds(this.$refs.tree, function(
+      //   node
+      // ) {
+      //   if (!_.isUndefined(node.model)) {
+      //     if (node.model.selected) {
+      //       arr += node.model.id + "*";
+      //       lis.push(node.model.id);
+      //     }
+      //   }
+      // });
+      // bus.$emit("GetListOrgMerger", lis);
+      this.showMergerOrg = true;
+      this.showTree = false;
+      // this.checkBack = true;
+      // this.Add = false;
+      // bus.$on("MergerOrganizationSuccess", data => {
+      //   this.showTree = true;
+      //   this.showMergerOrg = false;
+      //   this.checkBack = false;
+      // });
     },
     async SeparaOrg() {
       let arr = "";
