@@ -16,7 +16,7 @@ export default {
         },
         {
           name: 'Xem trực tiếp sơ đồ tổ chức',
-          url: 'link1',
+          url: '/tochuc/caysodotochuc',
           icon: 'icon-doc'
         },
         {
