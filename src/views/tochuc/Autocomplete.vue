@@ -27,7 +27,7 @@
 .autocomplete-results {
   position: absolute;
   background: rgb(255, 255, 255);
-  top: 37px;
+  top: 1px;
   box-shadow: 1px 1px 1px rgba(0,0,0,.12);
   padding: 10px;
   border-radius: 3px;
@@ -36,6 +36,7 @@
   max-height: 120px;
   overflow: auto;
   width: 100%;
+  z-index: 9;
 }
 
 .autocomplete-result {

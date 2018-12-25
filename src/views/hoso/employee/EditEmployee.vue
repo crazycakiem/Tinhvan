@@ -1,7 +1,7 @@
 <template>
-  <div class="container-fluid">
+  <div>
     <div class="row">
-      <div class="col-md-2 left-col-pro">
+      <div class="col-md-3 left-col-pro">
        <div class="block-link-pro">
         <div class="img-fluid avt-block">
           <img
@@ -24,7 +24,7 @@
         </div>
        </div>
       </div>
-      <div class="col-md-10 right-col-pro">
+      <div class="col-md-9 right-col-pro">
        <div class="block-main-pro">
         <b-collapse id="showHS" v-model="showHS">
          <b-form>

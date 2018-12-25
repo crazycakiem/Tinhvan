@@ -108,7 +108,10 @@
                         <i class="fa fa-search" aria-hidden="true"/>
                         <span>Tìm kiếm</span>
                       </button>
-                      <b-form-checkbox v-model="search" @change="ChangeSearch">Tìm kiếm nâng cao</b-form-checkbox>
+                      <div class="swi-box">
+                        <c-switch class="mx-1" color="primary" variant="pill" v-model="search" @change="ChangeSearch"/> <span>Tìm kiếm nâng cao</span>
+                      </div>
+                      <!-- <b-form-checkbox v-model="search" @change="ChangeSearch">Tìm kiếm nâng cao</b-form-checkbox> -->
                      </div>
                     </div>
                   </div>
@@ -275,6 +278,7 @@
 
 <script>
 import { shuffleArray } from "@/shared/utils";
+import { Switch as cSwitch } from '@coreui/vue'
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import _ from "lodash";
@@ -535,7 +539,8 @@ export default {
   components: {
     DatePicker,
     NewEmployee,
-    EditEmployee
+    EditEmployee,
+    cSwitch
   },
   data: () => {
     return {
